@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHARAL 2025 - Challenges in Holistic AI for Real-world Applications</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8fafc;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-placeholder {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+        
+        nav a:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-2px);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #0ea5e9 100%);
+            color: white;
+            padding: 6rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .hero .subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+        
+        .hero .conference-info {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-top: 2rem;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .hero .conference-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero .conference-info p {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Section Styles */
+        section {
+            padding: 4rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #1e3a8a;
+            font-weight: 700;
+        }
+        
+        /* About Section */
+        .about {
+            background: white;
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+        }
+        
+        .about-features {
+            display: grid;
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            border-left: 4px solid #3b82f6;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.15);
+        }
+        
+        .feature-card h4 {
+            color: #1e3a8a;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .feature-card ul {
+            list-style: none;
+        }
+        
+        .feature-card ul li {
+            padding: 0.3rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .feature-card ul li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #3b82f6;
+            font-weight: bold;
+        }
+        
+        /* Call for Papers */
+        .call-for-papers {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+        
+        .cfp-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .cfp-description {
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            line-height: 1.8;
+            color: #555;
+        }
+        
+        .topics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .topic-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .topic-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(59, 130, 246, 0.2);
+        }
+        
+        .topic-card h4 {
+            color: #1e3a8a;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+            color: white;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+        }
+        
+        /* Team Section */
+        .team {
+            background: white;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .team-member {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .team-member img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+            background: #d1d5db;
+        }
+        
+        .team-member h4 {
+            color: #1e3a8a;
+            margin-bottom: 0.5rem;
+        }
+        
+        .team-member .role {
+            color: #3b82f6;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .team-member .affiliation {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        /* Program Section */
+        .program {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+        
+        .program-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .schedule-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            border-left: 4px solid #3b82f6;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .schedule-time {
+            color: #3b82f6;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .schedule-title {
+            color: #1e3a8a;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .schedule-description {
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        /* Footer */
+        footer {
+            background: #1e3a8a;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            color: #93c5fd;
+        }
+        
+        .footer-section a {
+            color: #e2e8f0;
+            text-decoration: none;
+        }
+        
+        .footer-section a:hover {
+            color: #93c5fd;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .topics-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">
+                <div class="logo-placeholder">🤖</div>
+                CHARAL 2025
+            </div>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#cfp">Call for Papers</a></li>
+                <li><a href="#team">Team</a></li>
+                <li><a href="#program">Program</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>CHARAL 2025</h1>
+                <div class="subtitle">Challenges in Holistic AI for Real-world Applications and Learning Systems</div>
+                <p style="font-size: 1.2rem; margin-bottom: 2rem;">
+                    "From Algorithms and Models to Real-world AI Integration"
+                </p>
+                
+                <div class="conference-info">
+                    <h3>Workshop at MICAI 2025</h3>
+                    <p><strong>Date:</strong> TBD</p>
+                    <p><strong>Location:</strong> TBD</p>
+                    <p><strong>Format:</strong> Hybrid (In-person & Virtual)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">About CHARAL</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>As AI technologies mature, the focus is shifting from model development to their effective deployment in real-world systems. In domains such as robotics, manufacturing, healthcare, and intelligent infrastructure, integrating AI into production environments introduces unique challenges related to system design, latency, reliability, monitoring, and trust.</p>
+                    
+                    <p>The 1st CHARAL workshop at MICAI 2025 will provide a forum for researchers and practitioners to explore holistic approaches to engineering and operating AI systems that are robust, explainable, and adaptable in complex, real-world conditions.</p>
+                </div>
+                
+                <div class="about-features">
+                    <div class="feature-card">
+                        <h4>Systems Engineering for AI Deployment</h4>
+                        <ul>
+                            <li>Architectural patterns for scalable, maintainable AI systems</li>
+                            <li>Managing heterogeneous system constraints</li>
+                            <li>Fail-safe design and graceful degradation</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4>Monitoring & Observability</h4>
+                        <ul>
+                            <li>Instrumentation for tracking model behavior and drift</li>
+                            <li>Logging and explainability tools for audit</li>
+                            <li>Debugging and root cause analysis</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4>Trust & Safety</h4>
+                        <ul>
+                            <li>Uncertainty estimation in production</li>
+                            <li>Explainability under deployment constraints</li>
+                            <li>Adversarial robustness and safe fallbacks</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="cfp" class="call-for-papers">
+        <div class="container">
+            <h2 class="section-title">Call for Papers</h2>
+            <div class="cfp-content">
+                <p class="cfp-description">
+                    We invite researchers and practitioners to submit papers addressing the challenges of deploying AI systems in real-world environments. We welcome both theoretical contributions and practical case studies.
+                </p>
+                
+                <div class="topics-grid">
+                    <div class="topic-card">
+                        <h4>Systems Engineering for AI Deployment</h4>
+                        <p>Architectural patterns, system constraints management, fail-safe design, and graceful degradation in AI pipelines.</p>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <h4>Monitoring & Operational Feedback</h4>
+                        <p>Observability instrumentation, logging and tracing, debugging techniques, and performance feedback loops.</p>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <h4>Trust, Safety & Assurance</h4>
+                        <p>Uncertainty estimation, explainability methods, red-teaming, adversarial robustness, and evaluation metrics.</p>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <h4>Data-Centric AI in Production</h4>
+                        <p>Real-world data pipelines, feedback-driven collection, active learning, and weak supervision techniques.</p>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <h4>Foundation Models in Production</h4>
+                        <p>Adapting large models for latency-sensitive environments, robotics, and manufacturing systems.</p>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <h4>AI on Edge & Embedded Systems</h4>
+                        <p>Quantization, pruning, distillation, streaming inference, and federated updates for resource-constrained environments.</p>
+                    </div>
+                </div>
+                
+                <div style="background: white; padding: 2rem; border-radius: 15px; margin-bottom: 2rem;">
+                    <h3 style="color: #1e3a8a; margin-bottom: 1rem;">Important Dates</h3>
+                    <p><strong>Paper Submission Deadline:</strong> TBD</p>
+                    <p><strong>Notification of Acceptance:</strong> TBD</p>
+                    <p><strong>Camera-Ready Deadline:</strong> TBD</p>
+                    <p><strong>Workshop Date:</strong> TBD</p>
+                </div>
+                
+                <a href="#" class="cta-button">Submit Your Paper</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="team" class="team">
+        <div class="container">
+            <h2 class="section-title">Organizing Team</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <img src="" alt="Chair Photo" style="background: #d1d5db;">
+                    <h4>Workshop Chair Name</h4>
+                    <div class="role">Workshop Chair</div>
+                    <div class="affiliation">University/Organization</div>
+                </div>
+                
+                <div class="team-member">
+                    <img src="" alt="Co-Chair Photo" style="background: #d1d5db;">
+                    <h4>Co-Chair Name</h4>
+                    <div class="role">Co-Chair</div>
+                    <div class="affiliation">University/Organization</div>
+                </div>
+                
+                <div class="team-member">
+                    <img src="" alt="PC Member Photo" style="background: #d1d5db;">
+                    <h4>Program Committee Member</h4>
+                    <div class="role">Program Committee</div>
+                    <div class="affiliation">University/Organization</div>
+                </div>
+                
+                <div class="team-member">
+                    <img src="" alt="PC Member Photo" style="background: #d1d5db;">
+                    <h4>Program Committee Member</h4>
+                    <div class="role">Program Committee</div>
+                    <div class="affiliation">University/Organization</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="program" class="program">
+        <div class="container">
+            <h2 class="section-title">Program</h2>
+            <div class="program-content">
+                <div class="schedule-item">
+                    <div class="schedule-time">09:00 - 09:30</div>
+                    <div class="schedule-title">Opening & Welcome</div>
+                    <div class="schedule-description">Workshop introduction and overview of the day's activities</div>
+                </div>
+                
+                <div class="schedule-item">
+                    <div class="schedule-time">09:30 - 10:30</div>
+                    <div class="schedule-title">Keynote: Real-world AI Deployment Challenges</div>
+                    <div class="schedule-description">Distinguished speaker presentation on current challenges in deploying AI systems in production environments</div>
+                </div>
+                
+                <div class="schedule-item">
+                    <div class="schedule-time">10:30 - 11:00</div>
+                    <div class="schedule-title">Coffee Break</div>
+                    <div class="schedule-description">Networking and discussion</div>
+                </div>
+                
+                <div class="schedule-item">
+                    <div class="schedule-time">11:00 - 12:30</div>
+                    <div class="schedule-title">Session 1: Systems Engineering and Architecture</div>
+                    <div class="schedule-description">Paper presentations on architectural patterns, system constraints, and fail-safe design</div>
+                </div>
+                
+                <div class="schedule-item">
+                    <div class="schedule-time">12:30 - 14:00</div>
+                    <div class="schedule-title">Lunch Break</div>
+                    <div class="schedule-description">Lunch and networking</div>
+                </div>
+                
+                <div class="schedule-item">
+                    <div class="schedule-time">14:00 - 15:30</div>
+                    <div class="schedule-title">Session 2: Monitoring and Trust</div>
+                    <div class="schedule-description">Paper presentations on observability, safety, and assurance in deployed models</div>
+                </div>
+                
+                <div class="schedule-item">
+                    <div class="schedule-time">15:30 - 16:00</div>
+                    <div class="schedule-title">Coffee Break</div>
+                    <div class="schedule-description">Networking and discussion</div>
+                </div>
+                
+                <div class="schedule-item">
+                    <div class="schedule-time">16:00 - 17:00</div>
+                    <div class="schedule-title">Panel Discussion: Future of AI in Production</div>
+                    <div class="schedule-description">Expert panel discussing emerging trends and future challenges</div>
+                </div>
+                
+                <div class="schedule-item">
+                    <div class="schedule-time">17:00 - 17:30</div>
+                    <div class="schedule-title">Closing Remarks</div>
+                    <div class="schedule-description">Workshop summary and next steps</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>Email: charal2025@example.com</p>
+                    <p>Website: charal2025.github.io</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>MICAI 2025</h4>
+                    <p><a href="#">Main Conference</a></p>
+                    <p><a href="#">Registration</a></p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Follow Us</h4>
+                    <p><a href="#">Twitter</a></p>
+                    <p><a href="#">LinkedIn</a></p>
+                </div>
+            </div>
+            <p>&copy; 2025 CHARAL Workshop. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
