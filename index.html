@@ -347,9 +347,146 @@
             font-size: 0.9rem;
         }
         
+        /* Speakers Section */
+        .speakers {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+        
+        .speakers-gallery {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            background: white;
+        }
+        
+        .speakers-container {
+            display: flex;
+            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            height: 400px;
+        }
+        
+        .speaker-card {
+            flex: 0 0 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem 2rem;
+            text-align: center;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+        }
+        
+        .speaker-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: #64748b;
+            border: 4px solid #e2e8f0;
+            transition: all 0.3s ease;
+            object-fit: cover;
+        }
+        
+        .speaker-image.has-photo {
+            font-size: 0;
+            background: none;
+            border-color: #3b82f6;
+        }
+        
+        .speaker-image:hover {
+            transform: scale(1.05);
+            border-color: #3b82f6;
+        }
+        
+        .speaker-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1e3a8a;
+            margin-bottom: 0.5rem;
+        }
+        
+        .speaker-title {
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.6;
+            font-style: italic;
+        }
+        
+        .speaker-affiliation {
+            font-size: 0.9rem;
+            color: #3b82f6;
+            margin-top: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .speaker-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(59, 130, 246, 0.9);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .speaker-nav:hover {
+            background: rgba(30, 58, 138, 0.9);
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        .speaker-nav.prev {
+            left: 15px;
+        }
+        
+        .speaker-nav.next {
+            right: 15px;
+        }
+        
+        .speaker-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 2rem;
+        }
+        
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #cbd5e1;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .indicator.active {
+            background: #3b82f6;
+            transform: scale(1.2);
+        }
+        
+        .indicator:hover {
+            background: #64748b;
+        }
+        
         /* Program Section */
         .program {
-            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            background: white;
         }
         
         .program-content {
@@ -358,7 +495,7 @@
         }
         
         .schedule-item {
-            background: white;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
             padding: 2rem;
             border-radius: 15px;
             margin-bottom: 2rem;
@@ -507,7 +644,8 @@
                 <li><a href="#about">About</a></li>
                 <li><a href="#cfp">Call for Papers</a></li>
                 <li><a href="#team">Team</a></li>
-                <li><a href="#program">Program</a></li>
+                <li><a href="#speakers">Speakers</a></li>
+                <!-- <li><a href="#program">Program</a></li> -->
                 <li><a href="https://forms.gle/pSKBW6ELnHQNQ3hu8">Join</a></li>
             </ul>
         </nav>
@@ -705,6 +843,61 @@
         </div>
     </section>
 
+    <section id="speakers" class="speakers">
+        <div class="container">
+            <h2 class="section-title">Keynote Speakers</h2>
+            <div class="speakers-gallery">
+                <div class="speakers-container" id="speakersContainer">
+                    <div class="speaker-card">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face" alt="Dr. Alex Chen" class="speaker-image has-photo">
+                        <div class="speaker-name">Dr. Alex Chen</div>
+                        <div class="speaker-title">Keynote: "Real-world AI Deployment Challenges in Manufacturing"</div>
+                        <div class="speaker-affiliation">Stanford University & Tesla AI</div>
+                    </div>
+                    
+                    <div class="speaker-card">
+                        <img src="https://images.unsplash.com/photo-1494790108755-2616b612b47c?w=150&h=150&fit=crop&crop=face" alt="Prof. Maria Rodriguez" class="speaker-image has-photo">
+                        <div class="speaker-name">Prof. Maria Rodriguez</div>
+                        <div class="speaker-title">Panel Discussion: "Future of AI in Production - Safety and Trust"</div>
+                        <div class="speaker-affiliation">MIT Computer Science & AI Laboratory</div>
+                    </div>
+                    
+                    <div class="speaker-card">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face" alt="Dr. James Thompson" class="speaker-image has-photo">
+                        <div class="speaker-name">Dr. James Thompson</div>
+                        <div class="speaker-title">"Systems Engineering for Scalable AI: Lessons from Healthcare"</div>
+                        <div class="speaker-affiliation">Google DeepMind Health</div>
+                    </div>
+                    
+                    <div class="speaker-card">
+                        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&h=150&fit=crop&crop=face" alt="Dr. Sarah Kim" class="speaker-image has-photo">
+                        <div class="speaker-name">Dr. Sarah Kim</div>
+                        <div class="speaker-title">"Edge AI and Federated Learning in IoT Systems"</div>
+                        <div class="speaker-affiliation">NVIDIA Research & UC Berkeley</div>
+                    </div>
+                    
+                    <div class="speaker-card">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&h=150&fit=crop&crop=face" alt="Prof. David Anderson" class="speaker-image has-photo">
+                        <div class="speaker-name">Prof. David Anderson</div>
+                        <div class="speaker-title">"Monitoring and Observability in Production ML Systems"</div>
+                        <div class="speaker-affiliation">Carnegie Mellon University</div>
+                    </div>
+                </div>
+                
+                <button class="speaker-nav prev" onclick="previousSpeaker()">‹</button>
+                <button class="speaker-nav next" onclick="nextSpeaker()">›</button>
+            </div>
+            
+            <div class="speaker-indicators" id="speakerIndicators">
+                <div class="indicator active" onclick="goToSpeaker(0)"></div>
+                <div class="indicator" onclick="goToSpeaker(1)"></div>
+                <div class="indicator" onclick="goToSpeaker(2)"></div>
+                <div class="indicator" onclick="goToSpeaker(3)"></div>
+                <div class="indicator" onclick="goToSpeaker(4)"></div>
+            </div>
+        </div>
+    </section>
+
     <section id="program" class="program">
         <div class="container">
             <h2 class="section-title">Program</h2>
@@ -804,6 +997,67 @@
             <p>&copy; 2025 CHARAL Workshop. All rights reserved.</p>
         </div>
     </footer>
+
+    <script>
+        let currentSpeaker = 0;
+        const totalSpeakers = 5;
+        let autoRotateInterval;
+        
+        function showSpeaker(index) {
+            const container = document.getElementById('speakersContainer');
+            const indicators = document.querySelectorAll('.indicator');
+            
+            currentSpeaker = index;
+            container.style.transform = `translateX(-${index * 100}%)`;
+            
+            indicators.forEach((indicator, i) => {
+                indicator.classList.toggle('active', i === index);
+            });
+        }
+        
+        function nextSpeaker() {
+            const next = (currentSpeaker + 1) % totalSpeakers;
+            showSpeaker(next);
+            resetAutoRotate();
+        }
+        
+        function previousSpeaker() {
+            const prev = (currentSpeaker - 1 + totalSpeakers) % totalSpeakers;
+            showSpeaker(prev);
+            resetAutoRotate();
+        }
+        
+        function goToSpeaker(index) {
+            showSpeaker(index);
+            resetAutoRotate();
+        }
+        
+        function startAutoRotate() {
+            autoRotateInterval = setInterval(() => {
+                nextSpeaker();
+            }, 4000); // Rotate every 4 seconds
+        }
+        
+        function resetAutoRotate() {
+            clearInterval(autoRotateInterval);
+            startAutoRotate();
+        }
+        
+        // Start auto-rotation when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            startAutoRotate();
+            
+            // Pause auto-rotation when user hovers over the gallery
+            const gallery = document.querySelector('.speakers-gallery');
+            gallery.addEventListener('mouseenter', () => {
+                clearInterval(autoRotateInterval);
+            });
+            
+            gallery.addEventListener('mouseleave', () => {
+                startAutoRotate();
+            });
+        });
+    </script>
 
     
 </body>
