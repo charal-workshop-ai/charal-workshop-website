@@ -549,6 +549,47 @@
         .footer-section a:hover {
             color: #93c5fd;
         }
+
+        /* Date table styles */
+        /* Important Dates Table */
+        .dates-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            font-size: 1rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .dates-table thead {
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            color: white;
+            font-weight: bold;
+        }
+
+        .dates-table th,
+        .dates-table td {
+            padding: 1rem;
+            text-align: center;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .dates-table tbody tr:nth-child(even) {
+            background: #f9fafb;
+        }
+
+        .dates-table tbody tr:hover {
+            background: #eff6ff;
+            transition: background 0.3s ease;
+        }
+
+        .dates-table td:first-child {
+            font-weight: 600;
+            color: #1e3a8a;
+            text-align: left;
+        }
+
         
         /* Logo Gallery Styles */
         .logo-gallery {
@@ -759,8 +800,8 @@
                     <p><strong>Workshop Date:</strong> November 4th, 2025</p> -->
                     
                     <h2>Important Dates</h2>
-                    <table border="1" cellpadding="8" cellspacing="0" style="border-collapse: collapse; width: 100%; text-align: center;">
-                    <thead style="background-color: #f2f2f2;">
+                    <h2 class="section-title" style="font-size: 2rem; margin-bottom: 1.5rem;">Important Dates</h2>
+                    <table class="dates-table">
                         <tr>
                         <th>Event</th>
                         <th>Early-bird</th>
