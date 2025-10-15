@@ -1120,26 +1120,30 @@
         }
         
         function startAutoRotate() {
+            clearInterval(autoRotateInterval); // Always clear first to prevent multiple intervals
             autoRotateInterval = setInterval(() => {
                 nextSpeaker();
-            }, 4000); // Rotate every 4 seconds
+            }, 6500); // Rotate every 6.5 seconds
         }
-        
-        function resetAutoRotate() {
+
+        function stopAutoRotate() {
             clearInterval(autoRotateInterval);
-            startAutoRotate();
         }
-        
+
+        function resetAutoRotate() {
+            startAutoRotate(); // startAutoRotate now handles clearing internally
+        }
+
         // Start auto-rotation when page loads
         document.addEventListener('DOMContentLoaded', function() {
             startAutoRotate();
-            
+
             // Pause auto-rotation when user hovers over the gallery
             const gallery = document.querySelector('.speakers-gallery');
             gallery.addEventListener('mouseenter', () => {
-                clearInterval(autoRotateInterval);
+                stopAutoRotate();
             });
-            
+
             gallery.addEventListener('mouseleave', () => {
                 startAutoRotate();
             });
