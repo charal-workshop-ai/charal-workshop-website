@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHARAL 2025 - Challenges in Holistic AI for Real-world Applications</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8fafc;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .logo:hover {
+            opacity: 0.8;
+            transform: translateY(-1px);
+        }
+        
+        .logo-placeholder {
+            width: 120px;
+            height: 80px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .logo-image {
+            width: 120px;
+            height: 80px;
+            border-radius: 8px;
+            object-fit: contain; /* Keeps aspect ratio */
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+        
+        nav a:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-2px);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #0ea5e9 100%);
+            color: white;
+            padding: 6rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .hero .subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            font-weight: bold;
+            font-style: italic;
+        }
+        
+        .hero .conference-info {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-top: 2rem;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .hero .conference-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero .conference-info p {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Section Styles */
+        section {
+            padding: 4rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #1e3a8a;
+            font-weight: 700;
+        }
+        
+        /* About Section */
+        .about {
+            background: white;
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        .about-logo {
+            width: 300px;
+            height: auto;
+            margin-bottom: 2rem;
+            border-radius: 10px;
+            object-fit: contain;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+        }
+        
+        .about-features {
+            display: grid;
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            border-left: 4px solid #3b82f6;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.15);
+        }
+        
+        .feature-card h4 {
+            color: #1e3a8a;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .feature-card ul {
+            list-style: none;
+        }
+        
+        .feature-card ul li {
+            padding: 0.3rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .feature-card ul li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #3b82f6;
+            font-weight: bold;
+        }
+        
+        /* Call for Papers */
+        .call-for-papers {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+        
+        .cfp-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .cfp-description {
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            line-height: 1.8;
+            color: #555;
+            text-align: justify;
+        }
+        
+        .topics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .topic-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .topic-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(59, 130, 246, 0.2);
+        }
+        
+        .topic-card h4 {
+            color: #1e3a8a;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #b8b3a1 0%, #f0ebd8 100%);
+            color:#1d2d44;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+        }
+        
+        /* Team Section */
+        .team {
+            background: white;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .team-member {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .team-member img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+            background: #d1d5db;
+        }
+        
+        .team-member h4 {
+            color: #1e3a8a;
+            margin-bottom: 0.5rem;
+        }
+        
+        .team-member .role {
+            color: #3b82f6;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .team-member .affiliation {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        /* Speakers Section */
+        .speakers {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+        
+        .speakers-gallery {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            background: white;
+        }
+        
+        .speakers-container {
+            display: flex;
+            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            height: 400px;
+        }
+        
+        .speaker-card {
+            flex: 0 0 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem 2rem;
+            text-align: center;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+        }
+        
+        .speaker-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: #64748b;
+            border: 4px solid #e2e8f0;
+            transition: all 0.3s ease;
+            object-fit: cover;
+        }
+        
+        .speaker-image.has-photo {
+            font-size: 0;
+            background: none;
+            border-color: #3b82f6;
+        }
+        
+        .speaker-image:hover {
+            transform: scale(1.05);
+            border-color: #3b82f6;
+        }
+        
+        .speaker-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1e3a8a;
+            margin-bottom: 0.5rem;
+        }
+        
+        .speaker-title {
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.6;
+            font-style: italic;
+        }
+        
+        .speaker-affiliation {
+            font-size: 0.9rem;
+            color: #3b82f6;
+            margin-top: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .speaker-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(59, 130, 246, 0.9);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .speaker-nav:hover {
+            background: rgba(30, 58, 138, 0.9);
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        .speaker-nav.prev {
+            left: 15px;
+        }
+        
+        .speaker-nav.next {
+            right: 15px;
+        }
+        
+        .speaker-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 2rem;
+        }
+        
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #cbd5e1;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .indicator.active {
+            background: #3b82f6;
+            transform: scale(1.2);
+        }
+        
+        .indicator:hover {
+            background: #64748b;
+        }
+        
+        /* Program Section */
+        .program {
+            background: white;
+        }
+        
+        .program-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .schedule-item {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            border-left: 4px solid #3b82f6;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .schedule-time {
+            color: #3b82f6;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .schedule-title {
+            color: #1e3a8a;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .schedule-description {
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        /* Footer */
+        footer {
+            background: #1e3a8a;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            color: #93c5fd;
+        }
+        
+        .footer-section a {
+            color: #e2e8f0;
+            text-decoration: none;
+        }
+        
+        .footer-section a:hover {
+            color: #93c5fd;
+        }
+
+        /* Date table styles */
+        /* Important Dates Table */
+        .dates-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            font-size: 1rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .dates-table thead {
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            color: white;
+            font-weight: bold;
+        }
+
+        .dates-table th,
+        .dates-table td {
+            padding: 1rem;
+            text-align: center;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .dates-table tbody tr:nth-child(even) {
+            background: #f9fafb;
+        }
+
+        .dates-table tbody tr:hover {
+            background: #eff6ff;
+            transition: background 0.3s ease;
+        }
+
+        .dates-table td:first-child {
+            font-weight: 600;
+            color: #1e3a8a;
+            text-align: left;
+        }
+
+        
+        /* Logo Gallery Styles */
+        .logo-gallery {
+            margin-top: 1rem;
+            height: 120px;
+            overflow: hidden;
+            position: relative;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.1);
+            padding: 10px;
+        }
+        
+        .logo-carousel {
+            display: flex;
+            animation: rotateLogos 8s infinite;
+            height: 100%;
+        }
+        
+        .logo-item {
+            flex: 0 0 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+        
+        .partner-logo {
+            max-height: 100px;
+            max-width: 180px;
+            object-fit: contain;
+            /* filter: brightness(0) invert(1); */
+            opacity: 0.9;
+            transition: all 0.3s ease;
+        }
+        
+        .partner-logo:hover {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+        
+        @keyframes rotateLogos {
+            0%, 45% { transform: translateX(0%); }
+            50%, 95% { transform: translateX(-100%); }
+            100% { transform: translateX(0%); }
+        }
+        
+        /* Pause animation on hover for better user experience */
+        .logo-gallery:hover .logo-carousel {
+            animation-play-state: paused;
+        }
+        
+        /* Responsive adjustments for logo gallery */
+        @media (max-width: 768px) {
+            .logo-gallery {
+                height: 60px;
+            }
+            
+            .partner-logo {
+                max-height: 40px;
+                max-width: 120px;
+            }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .topics-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body id="top">
+    <header>
+        <nav class="container">
+            <a href="#top" class="logo">
+                <img src="/assets/images/logo-charal-2-b.png" alt="CHARAL Logo" class="logo-image">
+            </a>
+            <ul>
+                <li><a href="/">← CHARAL 2026</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#cfp">Call for Papers</a></li>
+                <li><a href="#team">Team</a></li>
+                <li><a href="#program">Program</a></li>
+                <li><a href="#speakers">Speakers</a></li>
+                <li><a href="https://forms.gle/pSKBW6ELnHQNQ3hu8">Join</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>CHARAL 2025</h1>
+                <div class="subtitle">Challenges in Holistic AI for Real-world Applications and Learning Systems</div>
+                <p style="font-size: 1.2rem; font-weight: bold; margin-bottom: 2rem;">
+                    "From Algorithms and Models to Real-world AI Integration"
+                </p>
+                
+                <div class="conference-info">
+                    <h3>Workshop at MICAI 2025</h3>
+                    <p><strong>Date:</strong> November 4th, 2025</p>
+                    <p><strong>Location:</strong> Guanajuato, Mexico. Centro de Investigación en Matemáticas (CIMAT)</p>
+                    <p><strong>Format:</strong> Hybrid (In-person & Virtual)</p>
+                </div>
+                <p></p>
+                <a href="https://forms.gle/pSKBW6ELnHQNQ3hu8" class="cta-button">Join our email list for updates!</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">About CHARAL</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <img src="/assets/images/logo-charal-2-b.png" alt="CHARAL Logo" class="about-logo">
+                    <p>As AI technologies mature, the focus is shifting from model development to their effective deployment in real-world systems. In domains such as robotics, manufacturing, healthcare, and intelligent infrastructure, integrating AI into production environments introduces unique challenges related to system design, latency, reliability, monitoring, and trust.</p>
+                    
+                    <p>The <strong>1st CHARAL workshop at <a href="https://micai.org/2025/">MICAI 2025</a></strong> will provide a forum for researchers and practitioners to explore holistic approaches to engineering and operating AI systems that are robust, explainable, and adaptable in complex, real-world conditions.</p>
+                </div>
+                
+                <div class="about-features">
+                    <div class="feature-card">
+                        <h4>Systems Engineering for AI Deployment</h4>
+                        <!-- <ul>
+                            <li>Architectural patterns for scalable, maintainable AI systems</li>
+                            <li>Managing heterogeneous system constraints</li>
+                            <li>Fail-safe design and graceful degradation</li>
+                        </ul> -->
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4>Monitoring & Observability</h4>
+                        <!-- <ul>
+                            <li>Instrumentation for tracking model behavior and drift</li>
+                            <li>Logging and explainability tools for audit</li>
+                            <li>Debugging and root cause analysis</li>
+                        </ul> -->
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4>Trust & Safety</h4>
+                        <!-- <ul>
+                            <li>Uncertainty estimation in production</li>
+                            <li>Explainability under deployment constraints</li>
+                            <li>Adversarial robustness and safe fallbacks</li>
+                        </ul> -->
+                    </div>
+
+                    <div class="feature-card">
+                        <h4>Data-Centric AI in Production</h4>
+                        <!-- <ul>
+                            <li>Uncertainty estimation in production</li>
+                            <li>Explainability under deployment constraints</li>
+                            <li>Adversarial robustness and safe fallbacks</li>
+                        </ul> -->
+                    </div>
+
+                    <div class="feature-card">
+                        <h4>Specialized Deployment Challenges (Foundational models, AI on Edge, Robotics)</h4>
+                        <!-- <ul>
+                            <li>Uncertainty estimation in production</li>
+                            <li>Explainability under deployment constraints</li>
+                            <li>Adversarial robustness and safe fallbacks</li>
+                        </ul> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="program" class="program">
+        <div class="container">
+            <h2 class="section-title">Workshop Program</h2>
+            <div class="program-content">
+                <p style="text-align: center; font-size: 1.1rem; color: #555; margin-bottom: 2rem;">
+                    <strong>Date:</strong> November 4th, 2025 | <strong>Time Zone:</strong> CST (UTC-6)
+                </p>
+
+                <table class="dates-table">
+                    <thead>
+                        <tr>
+                            <th style="text-align: left;">Time</th>
+                            <th style="text-align: left;">Session</th>
+                            <th style="text-align: left;">Title</th>
+                            <th style="text-align: left;">Presenter</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="text-align: left;">9:00 - 9:20</td>
+                            <td style="text-align: left;">Introduction</td>
+                            <td style="text-align: left;">Workshop introduction and its goals</td>
+                            <td style="text-align: left;">Chairs</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;">9:20 - 10:10</td>
+                            <td style="text-align: left;">Keynote Talk</td>
+                            <td style="text-align: left;">Uncertainty in Vision Language Models and Computer Vision</td>
+                            <td style="text-align: left;">Dr. Matias Valdenegro</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;">10:10 - 11:00</td>
+                            <td style="text-align: left;">Keynote Talk</td>
+                            <td style="text-align: left;">Deep Generative Modeling for Multimodal Human Trajectory Prediction</td>
+                            <td style="text-align: left;">Dr. Jean-Bernard Hayet</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;">11:00 - 11:20</td>
+                            <td style="text-align: left;">Spotlight Talk</td>
+                            <td style="text-align: left;">A Metamodelling Framework for Accelerated Energy Market Optimization using Active Learning</td>
+                            <td style="text-align: left;">TBA</td>
+                        </tr>
+                        <tr style="background-color: #fff3cd;">
+                            <td style="text-align: left;">11:20 - 11:30</td>
+                            <td colspan="3" style="text-align: center; font-weight: bold;">COFFEE BREAK</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;">11:30 - 11:40</td>
+                            <td style="text-align: left;">Lightning Talk</td>
+                            <td style="text-align: left;">On the Interpretation of Clip Limit in Contrast-Limited Adaptive Histogram Equalization</td>
+                            <td style="text-align: left;">TBA</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;">11:40 - 12:30</td>
+                            <td style="text-align: left;">Keynote Talk</td>
+                            <td style="text-align: left;">Challenges in Driving Perception: How to Solve It with Open-Source Solutions (Voxel 51)</td>
+                            <td style="text-align: left;">Paula Ramos, PhD</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;">12:30 - 12:50</td>
+                            <td style="text-align: left;">Spotlight Talk</td>
+                            <td style="text-align: left;">Track Almost Everything Underwater: Evaluating Visual Registration in Marine Robotics</td>
+                            <td style="text-align: left;">TBA</td>
+                        </tr>
+                        <tr style="background-color: #fff3cd;">
+                            <td style="text-align: left;">12:50 - 14:00</td>
+                            <td colspan="3" style="text-align: center; font-weight: bold;">LUNCH</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;">14:00 - 14:10</td>
+                            <td style="text-align: left;">Lightning Talk</td>
+                            <td style="text-align: left;">Adaptation of Pre-trained Neural Network Models for Inspection via Image Analysis</td>
+                            <td style="text-align: left;">TBA</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;">14:10 - 15:00</td>
+                            <td style="text-align: left;">Keynote Talk</td>
+                            <td style="text-align: left;">Early Detection of Diabetic Retinopathy</td>
+                            <td style="text-align: left;">Dr. Ulises Moya</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;">15:00 - 15:50</td>
+                            <td style="text-align: left;">Keynote Talk</td>
+                            <td style="text-align: left;">A Clinical Framework for Real-World Medical AI</td>
+                            <td style="text-align: left;">Diego Cesar Lerma Torres, M.D.</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;">15:50 - 16:10</td>
+                            <td style="text-align: left;">Spotlight Talk</td>
+                            <td style="text-align: left;">Drupelet: End-to-End Development of Mixed Binary/Ternary Neural Networks for Ultra Resource-Constrained Microcontrollers</td>
+                            <td style="text-align: left;">TBA</td>
+                        </tr>
+                        <tr style="background-color: #fff3cd;">
+                            <td style="text-align: left;">16:10 - 16:20</td>
+                            <td colspan="3" style="text-align: center; font-weight: bold;">COFFEE BREAK</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;">16:20 - 16:30</td>
+                            <td style="text-align: left;">Lightning Talk</td>
+                            <td style="text-align: left;">Agent Cards: A Documentation Standard for Operational AI Agents</td>
+                            <td style="text-align: left;">TBA</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;">16:30 - 17:20</td>
+                            <td style="text-align: left;">Keynote Talk</td>
+                            <td style="text-align: left;">Efficient Training of Large Language Models (LLMs)</td>
+                            <td style="text-align: left;">Omar U. Florez, PhD</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;">17:20 - 18:10</td>
+                            <td style="text-align: left;">Panel Discussion</td>
+                            <td style="text-align: left;">AI in the Wild, From Scholar/Lab Models to Living Systems</td>
+                            <td style="text-align: left;">Chairs & Young AI Leaders Mexico</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;">18:10 - 18:20</td>
+                            <td style="text-align: left;">Conclusion</td>
+                            <td style="text-align: left;">Closing remarks</td>
+                            <td style="text-align: left;">Chairs</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <section id="speakers" class="speakers">
+        <div class="container">
+            <h2 class="section-title">Keynote Speakers</h2>
+            <div class="speakers-gallery">
+                <div class="speakers-container" id="speakersContainer">
+                    <div class="speaker-card">
+                        <img src="/assets/images/speakers/omar-florez.png" alt="Omar U. Florez, PhD" class="speaker-image has-photo">
+                        <div class="speaker-name">Omar U. Florez, PhD</div>
+                        <div class="speaker-title">"Efficient Training of Large Language Models (LLMs)"</div>
+                        <div class="speaker-affiliation">National Center of Artificial Intelligence (CENIA), Chile</div>
+                    </div>
+
+                    <div class="speaker-card">
+                        <img src="/assets/images/speakers/paula-ramos.jpeg" alt="Paula Ramos, PhD" class="speaker-image has-photo">
+                        <div class="speaker-name">Paula Ramos, PhD</div>
+                        <div class="speaker-title">"Data-Centric AI and Open-Source Tooling for Safer, Trustworthy AI Integration"</div>
+                        <div class="speaker-affiliation"><a href="https://voxel51.com/">Voxel 51</a></div>
+                    </div>
+                    
+                    <div class="speaker-card">
+                        <img src="/assets/images/speakers/ulises-moya.jpeg" alt="Dr. Ulises Moya Sanchez" class="speaker-image has-photo">
+                        <div class="speaker-name">Dr. Ulises Moya Sanchez</div>
+                        <div class="speaker-title">"Implementing End-to-End AI Solutions in Jalisco’s Government"</div>
+                        <div class="speaker-affiliation">Director IA del Gobierno de Jalisco</div>
+                    </div>
+                    
+                    <div class="speaker-card">
+                        <img src="/assets/images/speakers/matias.jpg" alt="Dr. Matias Valdenegro" class="speaker-image has-photo">
+                        <div class="speaker-name">Dr. Matias Valdenegro</div>
+                        <div class="speaker-title">"Uncertainty in Vision Larnguage Models and Computer Vision"</div>
+                        <div class="speaker-affiliation">University of Groningen</div>
+                    </div>
+                    
+                    <div class="speaker-card">
+                        <img src="/assets/images/speakers/JeanBernardHayet.jpeg" alt="Dr. Jean-Bernard Hayet" class="speaker-image has-photo">
+                        <div class="speaker-name">Dr. Jean-Bernard Hayet</div>
+                        <div class="speaker-title">"Deep Generative Modeling for Multimodal Human Trajectory Prediction"</div>
+                        <div class="speaker-affiliation">Centro de Investigación en Matemáticas, A.C.</div>
+                    </div>
+                    
+                    <div class="speaker-card">
+                        <img src="/assets/images/speakers/diego-lerma.jpg" alt="Diego Cesar Lerma Torres, M.D." class="speaker-image has-photo">
+                        <div class="speaker-name">Diego Cesar Lerma Torres, M.D.</div>
+                        <div class="speaker-title">"A Clinical Framework for Real-World Medical AI"</div>
+                        <div class="speaker-affiliation"><a href="https://www.neuroglias.com/">Neuroglia Solutions</a></div>
+                    </div>
+                </div>
+                
+                <button class="speaker-nav prev" onclick="previousSpeaker()">‹</button>
+                <button class="speaker-nav next" onclick="nextSpeaker()">›</button>
+            </div>
+            
+            <div class="speaker-indicators" id="speakerIndicators">
+                <div class="indicator active" onclick="goToSpeaker(0)"></div>
+                <div class="indicator" onclick="goToSpeaker(1)"></div>
+                <div class="indicator" onclick="goToSpeaker(2)"></div>
+                <div class="indicator" onclick="goToSpeaker(3)"></div>
+                <div class="indicator" onclick="goToSpeaker(4)"></div>
+                <div class="indicator" onclick="goToSpeaker(5)"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="team" class="team">
+        <div class="container">
+            <h2 class="section-title">Organizing Team</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <img src="/assets/images/profile-arturogomezchavez.jpeg" alt="Chair Photo" style="background: #d1d5db;">
+                    <h4><a href="https://www.linkedin.com/in/gomezchavez-arturo/">Ing. Arturo Gomez Chavez</a></h4>
+                    <div class="role">Workshop Chair</div>
+                    <div class="affiliation">Constructor University Bremen</div>
+                </div>
+                
+                <div class="team-member">
+                    <img src="/assets/images/profile-emmanuelovalle.jpg" alt="Co-Chair Photo" style="background: #d1d5db;">
+                    <h4><a href="https://emmanuelovalle.netlify.app/">Dr. Emmanuel Ovalle-Magallanes</a></h4>
+                    <div class="role">Co-Chair</div>
+                    <div class="affiliation">Universidad de La Salle Bajio</div>
+                </div>
+                
+                <div class="team-member">
+                    <img src="/assets/images/profile-josemartinezcarranza.jpg" alt="PC Member Photo" style="background: #d1d5db;">
+                    <h4><a href="https://ccc.inaoep.mx/~carranza/">Dr. Jose Martinez Carranza</a></h4>
+                    <div class="role">Co-Chair</div>
+                    <div class="affiliation">Instituto Nacional de Astrofisica Optica y Electronica (INAOE)</div>
+                </div>
+                
+                <!-- <div class="team-member">
+                    <img src="" alt="PC Member Photo" style="background: #d1d5db;">
+                    <h4>Program Committee Member</h4>
+                    <div class="role">Program Committee</div>
+                    <div class="affiliation">University/Organization</div>
+                </div> -->
+            </div>
+            <!-- <h2 class="section-title">Program Committee (to be announced)</h2> -->
+            <!-- <p style="text-align: center; font-size: 1.1rem; color: #555;">Dr. Diego A. Mercado-Ravell (CINVESTAV)</p>
+            <p style="text-align: center; font-size: 1.1rem; color: #555;">MSc. Ivan Reyes-Amezcua (CINVESTAV)</p>
+            <p style="text-align: center; font-size: 1.1rem; color: #555;">Prof. Karinne Ramirez-Amaro (Chalmers University of Technology)</p>
+            <p style="text-align: center; font-size: 1.1rem; color: #555;">Dr. Matias Valdenegro Toro  (University of Groningen)</p>
+            <p style="text-align: center; font-size: 1.1rem; color: #555;">Dr. David Eduardo Pinto Avendaño (Benemérita universidad autónoma de Puebla)</p> -->
+        </div>
+    </section>
+
+     <section id="cfp" class="call-for-papers">
+        <div class="container">
+            <h2 class="section-title">Call for Papers</h2>
+            <div class="cfp-content">
+                <p class="cfp-description">
+                    We invite researchers and practitioners to submit papers addressing the challenges of deploying AI systems in real-world environments.
+                    We welcome both theoretical contributions and practical case studies. The technical paper should be written in English in 
+                    <a href="https://www.springer.com/gp/computer-science/lncs/conference-proceedings-guidelines">LNCS Springer style</a>,
+                    not exceeding 12 pages. The submissions must not contain author's names or affiliations.
+                </p>
+                <p class="cfp-description">
+                    The accepted papers will be published in the Springer LNAI Proceedings, and the author fee amount for presentation at MICAI conference and publication
+                    is $5,000 MXN (approximately $300 USD). Submission should be made through the CMT system at:
+                </p>
+                
+                <a href="https://cmt3.research.microsoft.com/User/Login?ReturnUrl=%2FMICAI2025" class="cta-button">Submit Your Paper</a>
+
+                <div style="background: white; padding: 2rem; border-radius: 15px; margin-bottom: 2rem;">
+
+                    <!-- <h3 style="color: #1e3a8a; margin-bottom: 1rem;">Important Dates</h3>
+                    <p><strong>Paper Submission Deadline:</strong> September 12th, 2025</p>
+                    <p><strong>Notification of Acceptance:</strong> September 18th, 2025</p>
+                    <p><strong>Camera-Ready Deadline:</strong> Ocotber 3rd, 2025</p>
+                    <p><strong>Workshop Date:</strong> November 4th, 2025</p> -->
+                    
+                    <h2 class="section-title" style="font-size: 2rem; margin-bottom: 1.5rem;">Important Dates</h2>
+                    <p>All deadlines are at 11:59 PM PST Time</p>
+                    <p>Submissions will be reviewed on a rolling basis to allow for authors to plan their registration and participation ahead.</p>
+                    <p><i>*Early bird submission allows for the author to <a href="https://micai.org/2025/registration/">register</a> to MICAI for early-bird pricing</i></p>
+                    <p><i>Any questions of inquiries, please send us an email to support@charal-workshop-ai.com</i></p>
+                    <table class="dates-table">
+                        <tr>
+                        <th></th>
+                        <td><strong>*EARLY BIRD</strong></td>
+                        <td><strong>REGULAR</strong></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                        <td><strong>Submission</strong></td>
+                        <td><strong><del>September 12th, 2025</del></strong></td>
+                        <td><strong><del>October 10th, 2025</del></strong></td>
+                        </tr>
+                        <tr>
+                        <td><strong>Acceptance Notification</strong></td>
+                        <!-- <td colspan="2">September 18, 2025</td> -->
+                        <td><strong><del>September 18th, 2025</del></strong></td>
+                        <td><strong><del>Ocotber 16th, 2025</del></strong></td>
+                        </tr>
+                        <tr>
+                        <td><strong>Camera-Ready Submission</strong></td>
+                        <td colspan="2"><strong><del>October 22th, 2025</del></strong></td>
+                        </tr>
+                        <tr style="background-color: #f9f9f9;">
+                        <td><strong>Workshop Date</strong></td>
+                        <td colspan="2"><strong>November 4th, 2025</strong></td>
+                        </tr>
+                    </tbody>
+                    </table>
+
+
+
+                </div>
+                
+                <div class="topics-grid">
+                    <div class="topic-card">
+                        <h4>Systems Engineering for AI Deployment</h4>
+                        <p>Architectural patterns, system constraints management, fail-safe design, and graceful degradation in AI pipelines.</p>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <h4>Monitoring, Observability & Operational Feedback</h4>
+                        <p>Observability instrumentation, logging and tracing, debugging techniques, and performance feedback loops.</p>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <h4>Trust, Safety & Assurance in Deployed Models</h4>
+                        <p>Uncertainty estimation, explainability methods, red-teaming, adversarial robustness, and evaluation metrics.</p>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <h4>Data-Centric AI in Production</h4>
+                        <p>Real-world data pipelines, feedback-driven collection, active learning, and weak supervision techniques.</p>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <h4>Foundation Models in Production</h4>
+                        <p>Adapting large models for latency-sensitive environments, robotics, and manufacturing systems.</p>
+                    </div>
+                    
+                    <div class="topic-card">
+                        <h4>AI on Edge & Embedded Systems</h4>
+                        <p>Quantization, pruning, distillation, streaming inference, and federated updates for resource-constrained environments.</p>
+                    </div>
+                </div>
+                
+                <!-- <div style="background: white; padding: 2rem; border-radius: 15px; margin-bottom: 2rem;">
+                    <h3 style="color: #1e3a8a; margin-bottom: 1rem;">Important Dates</h3>
+                    <p><strong>Paper Submission Deadline:</strong> August 17th, 2025</p>
+                    <p><strong>Notification of Acceptance:</strong> August 24th, 2025</p>
+                    <p><strong>Camera-Ready Deadline:</strong> August 31st, 2025</p>
+                    <p><strong>Workshop Date:</strong> November 3rd or 4th, 2025</p>
+                </div>
+                 -->
+            </div>
+        </div>
+    </section>
+
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Main Conference</h4>
+                    <p><a href="https://micai.org/2025/">MICAI 2025</a></p>
+                    <p><a href="https://micai.org/2025/registration/">Registration</a></p>
+                </div>
+                
+                <!-- <div class="footer-section">
+                    <h4>MICAI 2025</h4>
+                    <p><a href="https://micai.org/2025/">Main Conference</a></p>
+                    <p><a href="https://micai.org/2025/">Registration</a></p>
+                </div> -->
+                
+                <div class="footer-section">
+                    <h4>Conference Partners</h4>
+                    <div class="logo-gallery">
+                        <div class="logo-carousel">
+                            <div class="logo-item">
+                                <img src="/assets/images/logo_Micai2025_ByA.png" alt="MICAI 2025" class="partner-logo">
+                            </div>
+                            <div class="logo-item">
+                                <img src="/assets/images/logo_SMIA_blanco.png" alt="SMIA" class="partner-logo">
+                            </div>
+                            <!-- Add more logos here as needed -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p>&copy; 2025 CHARAL Workshop. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        let currentSpeaker = 0;
+        const totalSpeakers = 6; // Update this if you add more speakers
+        let autoRotateInterval;
+        
+        function showSpeaker(index) {
+            const container = document.getElementById('speakersContainer');
+            const indicators = document.querySelectorAll('.indicator');
+            
+            currentSpeaker = index;
+            container.style.transform = `translateX(-${index * 100}%)`;
+            
+            indicators.forEach((indicator, i) => {
+                indicator.classList.toggle('active', i === index);
+            });
+        }
+        
+        function nextSpeaker() {
+            const next = (currentSpeaker + 1) % totalSpeakers;
+            showSpeaker(next);
+            resetAutoRotate();
+        }
+        
+        function previousSpeaker() {
+            const prev = (currentSpeaker - 1 + totalSpeakers) % totalSpeakers;
+            showSpeaker(prev);
+            resetAutoRotate();
+        }
+        
+        function goToSpeaker(index) {
+            showSpeaker(index);
+            resetAutoRotate();
+        }
+        
+        function startAutoRotate() {
+            clearInterval(autoRotateInterval); // Always clear first to prevent multiple intervals
+            autoRotateInterval = setInterval(() => {
+                nextSpeaker();
+            }, 6500); // Rotate every 6.5 seconds
+        }
+
+        function stopAutoRotate() {
+            clearInterval(autoRotateInterval);
+        }
+
+        function resetAutoRotate() {
+            startAutoRotate(); // startAutoRotate now handles clearing internally
+        }
+
+        // Start auto-rotation when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            startAutoRotate();
+
+            // Pause auto-rotation when user hovers over the gallery
+            const gallery = document.querySelector('.speakers-gallery');
+            gallery.addEventListener('mouseenter', () => {
+                stopAutoRotate();
+            });
+
+            gallery.addEventListener('mouseleave', () => {
+                startAutoRotate();
+            });
+        });
+    </script>
+
+    
+</body>
+</html>
