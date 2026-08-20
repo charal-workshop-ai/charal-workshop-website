@@ -4,681 +4,1255 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CHARAL 2026 - Cognition First: The AI Augmented Learner Challenge</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
     <style>
+        :root {
+            --bg-dark: #050b14;
+            --bg-card: rgba(11, 25, 38, 0.65);
+            --bg-card-hover: rgba(18, 43, 62, 0.85);
+            --border-glow: rgba(120, 200, 170, 0.25);
+            --border-active: rgba(120, 200, 170, 0.6);
+            --accent-cyan: #78c8aa;
+            --accent-blue: #4ade80;
+            --accent-purple: #2dd4bf;
+            --accent-emerald: #10b981;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --font-heading: 'Space Grotesk', sans-serif;
+            --font-body: 'Plus Jakarta Sans', sans-serif;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: var(--font-body);
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
             line-height: 1.6;
-            color: #333;
-            background: #f8fafc;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Dynamic Canvas & Mesh Background */
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .ambient-glow {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(120, 200, 170, 0.15) 0%, rgba(45, 212, 191, 0.05) 50%, rgba(0,0,0,0) 70%);
+            pointer-events: none;
+            z-index: 0;
+            filter: blur(80px);
+            transition: transform 0.2s ease-out;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1240px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
         }
 
-        /* Header */
+        /* Header Navigation */
         header {
-            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
-            color: white;
-            padding: 1rem 0;
-            position: sticky;
+            position: fixed;
             top: 0;
+            left: 0;
+            right: 0;
             z-index: 100;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            background: rgba(7, 9, 19, 0.75);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.3s ease;
         }
 
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            height: 80px;
         }
 
         .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
             display: flex;
             align-items: center;
-            gap: 10px;
-            color: white;
+            gap: 12px;
             text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .logo:hover {
-            opacity: 0.8;
-            transform: translateY(-1px);
-        }
-
-        .logo-placeholder {
-            width: 120px;
-            height: 80px;
-            background: rgba(255,255,255,0.2);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
         }
 
         .logo-image {
-            width: 120px;
-            height: 80px;
-            border-radius: 8px;
-            object-fit: contain; /* Keeps aspect ratio */
+            height: 48px;
+            width: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 0 12px rgba(59, 130, 246, 0.4));
+        }
+
+        .logo-text {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 1.4rem;
+            letter-spacing: -0.02em;
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(255,255,255,0.3);
         }
 
         nav ul {
             list-style: none;
             display: flex;
             gap: 2rem;
+            align-items: center;
         }
 
         nav a {
-            color: white;
+            color: var(--text-secondary);
             text-decoration: none;
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.25s ease;
+            position: relative;
         }
 
         nav a:hover {
-            background: rgba(255,255,255,0.1);
-            transform: translateY(-2px);
+            color: var(--text-primary);
+            text-shadow: 0 0 10px rgba(255,255,255,0.3);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .nav-btn {
+            background: rgba(59, 130, 246, 0.15);
+            border: 1px solid rgba(59, 130, 246, 0.4);
+            color: #60a5fa !important;
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-weight: 600 !important;
+        }
+
+        .nav-btn:hover {
+            background: rgba(59, 130, 246, 0.3);
+            border-color: #60a5fa;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+        }
+
+        .nav-btn::after {
+            display: none !important;
         }
 
         /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #0ea5e9 100%);
-            color: white;
-            padding: 6rem 0;
+            padding: 180px 0 100px;
             text-align: center;
+            position: relative;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            background: rgba(16, 185, 129, 0.12);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 100px;
+            color: #4ade80;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.15);
+        }
+
+        .hero h1 {
+            font-family: var(--font-heading);
+            font-size: 4.2rem;
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+            margin-bottom: 20px;
+            color: #ffffff;
+            text-shadow: 0 0 40px rgba(120, 200, 170, 0.4);
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #78c8aa;
+            margin-bottom: 16px;
+            font-family: var(--font-heading);
+        }
+
+        .hero .quote {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            max-width: 720px;
+            margin: 0 auto 40px;
+            font-style: italic;
+        }
+
+        /* Futuristic Glass Cards */
+        .glass-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-glow);
+            border-radius: 20px;
+            padding: 32px;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
         }
 
-        .hero::before {
+        .glass-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
-            opacity: 0.3;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
         }
 
-        .hero-content {
-            position: relative;
-            z-index: 2;
+        .glass-card:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--border-active);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), 0 0 30px rgba(120, 200, 170, 0.15);
         }
 
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
+        /* Conference Info Card */
+        .conference-info-hero {
+            max-width: 800px;
+            margin: 0 auto 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 24px;
+            text-align: left;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+        }
+
+        .info-icon {
+            padding: 10px;
+            background: rgba(120, 200, 170, 0.15);
+            border-radius: 12px;
+            color: #78c8aa;
+            border: 1px solid rgba(120, 200, 170, 0.3);
+        }
+
+        .info-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .info-val {
+            font-size: 0.98rem;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        /* Buttons */
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #10b981 0%, #2dd4bf 100%);
+            color: #050b14;
+            padding: 16px 36px;
+            border-radius: 50px;
             font-weight: 700;
+            font-size: 1.05rem;
+            text-decoration: none;
+            box-shadow: 0 0 30px rgba(120, 200, 170, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
         }
 
-        .hero .subtitle {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-            font-weight: bold;
-            font-style: italic;
+        .cta-btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 0 45px rgba(120, 200, 170, 0.6);
+            border-color: rgba(255, 255, 255, 0.4);
         }
 
-        .hero .conference-info {
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-            padding: 2rem;
-            border-radius: 15px;
-            margin-top: 2rem;
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-
-        .hero .conference-info h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .hero .conference-info p {
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-        }
-
-        /* Section Styles */
+        /* Section Layouts */
         section {
-            padding: 4rem 0;
+            padding: 90px 0;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 60px;
         }
 
         .section-title {
-            text-align: center;
+            font-family: var(--font-heading);
             font-size: 2.5rem;
-            margin-bottom: 3rem;
-            color: #1e3a8a;
             font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 14px;
+            background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-desc {
+            color: var(--text-secondary);
+            font-size: 1.08rem;
         }
 
         /* About Section */
-        .about {
-            background: white;
-        }
-
-        .about-content {
+        .about-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 48px;
             align-items: center;
         }
 
-        .about-logo {
-            width: 300px;
-            height: auto;
-            margin-bottom: 2rem;
-            border-radius: 10px;
-            object-fit: contain;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
+        .about-image-wrapper {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        .about-text {
+        .about-image-wrapper::before {
+            content: '';
+            position: absolute;
+            width: 80%;
+            height: 80%;
+            background: radial-gradient(circle, var(--accent-purple) 0%, transparent 70%);
+            opacity: 0.3;
+            filter: blur(50px);
+            z-index: 0;
+        }
+
+        .about-logo {
+            width: 100%;
+            max-width: 380px;
+            height: auto;
+            border-radius: 20px;
+            position: relative;
+            z-index: 1;
+            filter: drop-shadow(0 20px 30px rgba(0,0,0,0.5));
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .about-text-content p {
+            color: var(--text-secondary);
             font-size: 1.1rem;
             line-height: 1.8;
-            color: #555;
+            margin-bottom: 20px;
         }
 
-        .about-features {
+        .highlight-box {
+            background: rgba(59, 130, 246, 0.08);
+            border-left: 4px solid var(--accent-cyan);
+            padding: 20px;
+            border-radius: 0 12px 12px 0;
+            color: #e2e8f0 !important;
+            font-weight: 500;
+        }
+
+        /* Tracks Grid */
+        .tracks-grid {
             display: grid;
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 32px;
         }
 
-        .feature-card {
-            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
-            padding: 2rem;
-            border-radius: 15px;
-            border-left: 4px solid #3b82f6;
-            transition: all 0.3s ease;
+        .track-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.15);
+        .track-badge {
+            align-self: flex-start;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 4px 12px;
+            border-radius: 20px;
+            background: rgba(6, 182, 212, 0.15);
+            color: var(--accent-cyan);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            margin-bottom: 20px;
         }
 
-        .feature-card h4 {
-            color: #1e3a8a;
-            margin-bottom: 1rem;
-            font-size: 1.2rem;
+        .track-card h3 {
+            font-family: var(--font-heading);
+            font-size: 1.6rem;
+            margin-bottom: 14px;
+            color: var(--text-primary);
         }
 
-        .feature-card ul {
-            list-style: none;
+        .track-card p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            line-height: 1.7;
         }
 
-        .feature-card ul li {
-            padding: 0.3rem 0;
-            padding-left: 1.5rem;
-            position: relative;
+        /* Presentation Pillars */
+        .pillars-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 48px;
         }
 
-        .feature-card ul li::before {
-            content: '→';
-            position: absolute;
-            left: 0;
-            color: #3b82f6;
-            font-weight: bold;
+        .pillar-card {
+            flex: 1 1 calc(33.333% - 24px);
+            max-width: 380px;
+            min-width: 260px;
+            text-align: left;
         }
 
-        /* Call for Papers */
-        .call-for-papers {
-            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        .pillar-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, rgba(120, 200, 170, 0.2), rgba(16, 185, 129, 0.2));
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #38bdf8;
+            margin-bottom: 16px;
         }
 
-        .cfp-content {
+        .pillar-card h4 {
+            font-family: var(--font-heading);
+            font-size: 1.15rem;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+
+        .pillar-card p {
+            color: var(--text-secondary);
+            font-size: 0.92rem;
+            line-height: 1.6;
+        }
+
+        .evaluation-banner {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(6, 182, 212, 0.1) 100%);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 20px;
+            padding: 36px;
+        }
+
+        .evaluation-banner h3 {
+            font-family: var(--font-heading);
+            color: var(--accent-emerald);
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .evaluation-banner p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+
+        .evaluation-banner p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Submission Grid */
+        .submission-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .sub-card {
+            border-top: 3px solid var(--accent-purple);
+        }
+
+        .sub-card h4 {
+            font-family: var(--font-heading);
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+
+        .sub-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Criteria Table */
+        .table-container {
+            overflow-x: auto;
             max-width: 800px;
             margin: 0 auto;
-            text-align: center;
+            border-radius: 16px;
+            border: 1px solid var(--border-glow);
+            background: var(--bg-card);
         }
 
-        .cfp-description {
-            font-size: 1.2rem;
-            margin-bottom: 3rem;
-            line-height: 1.8;
-            color: #555;
-            text-align: justify;
+        .cyber-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
         }
 
-        .topics-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
+        .cyber-table th, .cyber-table td {
+            padding: 18px 24px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
         }
 
-        .topic-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
+        .cyber-table th {
+            background: rgba(18, 24, 43, 0.9);
+            font-family: var(--font-heading);
+            color: #78c8aa;
+            font-weight: 700;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
-        .topic-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(59, 130, 246, 0.2);
+        .cyber-table td {
+            color: var(--text-secondary);
+            font-size: 1rem;
         }
 
-        .topic-card h4 {
-            color: #1e3a8a;
-            margin-bottom: 1rem;
-            font-size: 1.3rem;
+        .cyber-table tr:last-child td {
+            border-bottom: none;
         }
 
-        .cta-button {
+        .cyber-table tr:hover td {
+            background: rgba(120, 200, 170, 0.05);
+            color: var(--text-primary);
+        }
+
+        .badge-weight {
             display: inline-block;
-            background: linear-gradient(135deg, #b8b3a1 0%, #f0ebd8 100%);
-            color:#1d2d44;
-            padding: 1rem 2rem;
-            text-decoration: none;
-            border-radius: 50px;
+            padding: 4px 12px;
+            background: rgba(16, 185, 129, 0.2);
+            color: #4ade80;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        /* Awards Grid */
+        .awards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+        }
+
+        .award-card {
+            text-align: center;
+            border-top: 3px solid var(--accent-cyan);
+        }
+
+        .award-icon-box {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 16px;
+            background: rgba(6, 182, 212, 0.12);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-cyan);
+        }
+
+        .award-card h4 {
+            font-family: var(--font-heading);
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+
+        .award-card p {
+            color: var(--accent-cyan);
             font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+            font-size: 0.95rem;
         }
 
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
-        }
-
-        /* Team Section */
-        .team {
-            background: white;
-        }
-
-        .team-grid {
+        /* Chairs / Contact */
+        .chairs-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            gap: 32px;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
-        .team-member {
-            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-            padding: 2rem;
-            border-radius: 15px;
+        .chair-card {
             text-align: center;
-            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        .team-member:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-
-        .team-member img {
-            width: 100px;
-            height: 100px;
+        .chair-avatar {
+            width: 90px;
+            height: 90px;
             border-radius: 50%;
-            margin-bottom: 1rem;
-            background: #d1d5db;
+            background: linear-gradient(135deg, #1e293b, #334155);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #60a5fa;
+            margin-bottom: 16px;
+            border: 2px solid var(--border-glow);
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
         }
 
-        .team-member h4 {
-            color: #1e3a8a;
-            margin-bottom: 0.5rem;
+        .chair-card h4 {
+            font-family: var(--font-heading);
+            font-size: 1.3rem;
+            margin-bottom: 6px;
+            color: var(--text-primary);
         }
 
-        .team-member .role {
-            color: #3b82f6;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .team-member .affiliation {
-            color: #666;
+        .chair-role {
+            color: var(--accent-cyan);
             font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .chair-email {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: color 0.2s;
+        }
+
+        .chair-email:hover {
+            color: #60a5fa;
         }
 
         /* Footer */
         footer {
-            background: #1e3a8a;
-            color: white;
-            padding: 2rem 0;
-            text-align: center;
+            background: rgba(4, 6, 14, 0.95);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 60px 0 30px;
+            position: relative;
+            z-index: 2;
         }
 
-        .footer-content {
+        .footer-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
         }
 
-        .footer-section h4 {
-            margin-bottom: 1rem;
-            color: #93c5fd;
+        .footer-col h4 {
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            margin-bottom: 16px;
         }
 
-        .footer-section a {
-            color: #e2e8f0;
+        .footer-col a {
+            color: var(--text-secondary);
             text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+
         }
 
-        .footer-section a:hover {
-            color: #93c5fd;
+        .footer-col a:hover {
+            color: #60a5fa;
         }
 
-        /* Date table styles */
-        /* Important Dates / Criteria Table */
-        .dates-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 1rem;
-            font-size: 1rem;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-            border-radius: 12px;
-            overflow: hidden;
-        }
-
-        .dates-table thead {
-            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
-            color: white;
-            font-weight: bold;
-        }
-
-        .dates-table th,
-        .dates-table td {
-            padding: 1rem;
-            text-align: center;
-            border-bottom: 1px solid #e2e8f0;
-        }
-
-        .dates-table tbody tr:nth-child(even) {
-            background: #f9fafb;
-        }
-
-        .dates-table tbody tr:hover {
-            background: #eff6ff;
-            transition: background 0.3s ease;
-        }
-
-        .dates-table td:first-child {
-            font-weight: 600;
-            color: #1e3a8a;
-            text-align: left;
-        }
-
-
-        /* Partner logo */
-        .partner-logo {
-            max-height: 60px;
+        .partner-img {
+            max-height: 50px;
             max-width: 160px;
             object-fit: contain;
-            opacity: 0.9;
+            opacity: 0.85;
+            transition: opacity 0.3s;
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
+        .partner-img:hover {
+            opacity: 1;
+        }
+
+        .copyright {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Mobile Menu Responsive */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+
+        @media (max-width: 900px) {
             .hero h1 {
-                font-size: 2.5rem;
+                font-size: 3rem;
             }
 
-            .about-content {
+            .about-grid {
                 grid-template-columns: 1fr;
-                gap: 2rem;
             }
 
             nav ul {
-                flex-direction: column;
-                gap: 1rem;
+                display: none;
             }
 
-            .topics-grid {
-                grid-template-columns: 1fr;
+            .menu-toggle {
+                display: block;
+            }
+
+            nav.active ul {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                right: 0;
+                background: rgba(7, 9, 19, 0.95);
+                backdrop-filter: blur(20px);
+                padding: 20px;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
             }
         }
     </style>
 </head>
 <body id="top">
-    <!-- Open placeholders to confirm before this goes live: exact CHARAL 2026 workshop date/format at MICAI 2026
-         (MICAI 2026 runs Nov 2-6, 2026 at Tec de Monterrey, Campus Chihuahua; CHARAL is not yet listed among
-         MICAI's published 2026 workshops), the challenge submission-portal URL, and submission/review deadlines. -->
+
+    <!-- Interactive Mesh Canvas -->
+    <canvas id="bg-canvas"></canvas>
+    <div class="ambient-glow" id="glow-follower"></div>
+
+    <!-- Navigation Header -->
     <header>
         <nav class="container">
             <a href="#top" class="logo">
                 <img src="assets/images/logo-charal-2-b.png" alt="CHARAL Logo" class="logo-image">
+                <span class="logo-text">CHARAL 2026</span>
             </a>
-            <ul>
+            <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu">
+                <i data-lucide="menu"></i>
+            </button>
+            <ul id="nav-menu">
                 <li><a href="#about">About</a></li>
                 <li><a href="#tracks">Tracks</a></li>
+                <li><a href="#presentation">Evaluation</a></li>
                 <li><a href="#submission">Submission</a></li>
                 <li><a href="#awards">Awards</a></li>
                 <li><a href="#contact">Contact</a></li>
-                <li><a href="/archive/2025/">2025 Archive</a></li>
+                <li><a href="/archive/2025/" class="nav-btn">2025 Archive</a></li>
             </ul>
         </nav>
     </header>
 
+    <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <div class="hero-content">
-                <h1>CHARAL 2026</h1>
-                <div class="subtitle">Cognition First: The AI Augmented Learner Challenge</div>
-                <p style="font-size: 1.2rem; font-weight: bold; margin-bottom: 2rem;">
-                    "From detecting AI use to demanding higher-order critical thinking"
-                </p>
-
-                <div class="conference-info">
-                    <h3>Challenge at MICAI 2026</h3>
-                    <p><strong>Date:</strong> To be announced (MICAI 2026 takes place November 2–6, 2026)</p>
-                    <p><strong>Location:</strong> Tecnológico de Monterrey, Campus Chihuahua, Mexico</p>
-                    <p><strong>Format:</strong> To be announced</p>
-                </div>
-                <p></p>
-                <a href="#submission" class="cta-button">See how to submit a prototype</a>
+            <div class="badge">
+                <i data-lucide="sparkles" style="width: 14px; height: 14px;"></i>
+                Cognition First AI Challenge
             </div>
+            <h1>CHARAL 2026</h1>
+            <div class="subtitle">The AI Augmented Learner Challenge</div>
+            <p class="quote" style="margin-bottom: 20px;">
+                "From detecting AI use to demanding higher-order critical thinking"
+            </p>
+            <a href="https://www.alexandriamx.com/" target="_blank" style="text-decoration: none; margin-bottom: 60px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+                <span style="font-size: 0.95rem; color: #78c8aa; text-transform: uppercase; letter-spacing: 0.15em; font-weight: 700; text-shadow: 0 0 15px rgba(120,200,170,0.6);">Powered by Alexandr.ia AI Learning Systems</span>
+                <img src="assets/images/alexandria-logo.png" alt="Alexandr.ia Logo" style="height: 200px; filter: drop-shadow(0 0 30px rgba(120,200,170,0.45));">
+            </a>
+
+            <div class="glass-card conference-info-hero">
+                <div class="info-item">
+                    <div class="info-icon"><i data-lucide="award"></i></div>
+                    <div>
+                        <div class="info-label">Event Context</div>
+                        <div class="info-val">Challenge at MICAI 2026</div>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon"><i data-lucide="calendar"></i></div>
+                    <div>
+                        <div class="info-label">Date</div>
+                        <div class="info-val">Nov 2–6, 2026</div>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon"><i data-lucide="map-pin"></i></div>
+                    <div>
+                        <div class="info-label">Location</div>
+                        <div class="info-val">Tec de Monterrey, Campus Chihuahua</div>
+                    </div>
+                </div>
+            </div>
+
+            <a href="#submission" class="cta-btn">
+                <span>Submit a Prototype</span>
+                <i data-lucide="arrow-right"></i>
+            </a>
         </div>
     </section>
 
-    <section id="about" class="about">
+    <!-- About Section -->
+    <section id="about">
         <div class="container">
-            <h2 class="section-title">About the Challenge</h2>
-            <div class="about-content">
-                <div>
+            <div class="about-grid">
+                <div class="about-image-wrapper">
                     <img src="assets/images/logo-charal-2-b.png" alt="CHARAL Logo" class="about-logo">
                 </div>
-                <div class="about-text">
-                    <p>The Cognition First: The AI Augmented Learner Challenge Committee invites educators, researchers, faculty members, graduate and undergraduate students, innovators, entrepreneurs, and industry professionals to submit prototypes for presentation and evaluation during the challenge.</p>
-                    <p style="margin-top: 1.5rem;">This challenge aims to promote the design, build, and deployment of AI-powered systems and technical prototypes that evaluate and elevate human cognitive processing. Instead of treating AI as a shortcut, these systems must interact with, audit, and/or evaluate the learner or researcher to ensure that critical thinking and deep reasoning are actively increasing. The initiative seeks to shift the educational paradigm from detecting AI use to demanding higher-order critical thinking when AI is used, enforcing rigorous engineering standards and foundational data governance.</p>
+                <div class="about-text-content">
+                    <div class="badge">
+                        <i data-lucide="cpu" style="width: 14px; height: 14px;"></i>
+                        Mission &amp; Vision
+                    </div>
+                    <h2 class="section-title" style="text-align: left;">Elevating Human Cognition</h2>
+                    <p>
+                        The <strong>Cognition First: The AI Augmented Learner Challenge Committee</strong> invites educators, researchers, faculty members, students, innovators, and industry professionals to submit technical prototypes for evaluation.
+                    </p>
+                    <p class="highlight-box">
+                        Instead of treating AI as a shortcut, these systems must interact with, audit, and evaluate the learner or researcher to ensure that critical thinking and deep reasoning are actively increasing.
+                    </p>
+                    <p>
+                        Our initiative seeks to shift the educational paradigm from detecting AI use to demanding higher-order critical thinking when AI is used, enforcing rigorous engineering standards and foundational data governance.
+                    </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="tracks" class="call-for-papers">
+    <!-- Tracks Section -->
+    <section id="tracks">
         <div class="container">
-            <h2 class="section-title">Tracks</h2>
-            <div class="about-features" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); max-width: 1000px; margin: 0 auto;">
-                <div class="feature-card">
-                    <h4>Track 1 — AI Systems for Reviewers</h4>
-                    <p>AI systems that empower educators and research reviewers to evaluate the depth of human cognition, shifting focus from grading final outputs to auditing reasoning and synthesis.</p>
+            <div class="section-header">
+                <div class="badge">
+                    <i data-lucide="layers" style="width: 14px; height: 14px;"></i>
+                    Challenge Tracks
                 </div>
-                <div class="feature-card">
-                    <h4>Track 2 — AI Systems to Stimulate Cognition</h4>
-                    <p>AI systems that empower learners and researchers by challenging thinking in real-time, preventing passive AI reliance by demanding reflection, synthesis, and deep reasoning.</p>
+                <h2 class="section-title">Tracks of Innovation</h2>
+                <p class="section-desc">Choose the focus area that best aligns with your AI prototype's architecture.</p>
+            </div>
+
+            <div class="tracks-grid">
+                <div class="glass-card track-card">
+                    <div>
+                        <span class="track-badge">Track 1</span>
+                        <h3>AI Systems for Reviewers</h3>
+                        <p>AI systems that empower educators and research reviewers to evaluate the depth of human cognition, shifting focus from grading final outputs to auditing reasoning, synthesis, and thought methodology.</p>
+                    </div>
+                    <div style="margin-top: 24px; color: var(--accent-cyan); display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 0.9rem;">
+                        <span>Auditing &amp; Evaluation Focus</span>
+                        <i data-lucide="arrow-right" style="width: 16px; height: 16px;"></i>
+                    </div>
+                </div>
+
+                <div class="glass-card track-card">
+                    <div>
+                        <span class="track-badge" style="background: rgba(16, 185, 129, 0.15); color: #4ade80; border-color: rgba(16, 185, 129, 0.3);">Track 2</span>
+                        <h3>AI Systems to Stimulate Cognition</h3>
+                        <p>AI systems that empower learners and researchers by challenging thinking in real-time, preventing passive AI reliance by demanding reflection, synthesis, and deep reasoning during task execution.</p>
+                    </div>
+                    <div style="margin-top: 24px; color: #4ade80; display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 0.9rem;">
+                        <span>Active Learner Engagement</span>
+                        <i data-lucide="arrow-right" style="width: 16px; height: 16px;"></i>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="presentation" class="about">
+    <!-- Prototype Presentation & Evaluation -->
+    <section id="presentation">
         <div class="container">
-            <h2 class="section-title">Prototype Presentation &amp; Evaluation</h2>
-            <p style="max-width: 800px; margin: 0 auto 3rem; text-align: center; font-size: 1.1rem; color: #555; line-height: 1.8;">
-                Accepted participants will be invited to present a working prototype, demonstrator, or proof of concept during the challenge showcase sessions. Presentations should clearly communicate:
-            </p>
-            <div class="about-features" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); margin-bottom: 3rem;">
-                <div class="feature-card">
+            <div class="section-header">
+                <div class="badge">
+                    <i data-lucide="terminal" style="width: 14px; height: 14px;"></i>
+                    Requirements &amp; Protocol
+                </div>
+                <h2 class="section-title">Prototype Evaluation Framework</h2>
+                <p class="section-desc">Accepted participants present a working prototype during showcase sessions covering five critical dimensions.</p>
+            </div>
+
+            <div class="pillars-grid">
+                <div class="glass-card pillar-card">
+                    <div class="pillar-icon"><i data-lucide="users"></i></div>
                     <h4>Target User</h4>
-                    <p>Students, educators, researchers, thesis review boards, journal reviewers.</p>
+                    <p>Students, educators, researchers, thesis review boards, or journal reviewers.</p>
                 </div>
-                <div class="feature-card">
+                <div class="glass-card pillar-card">
+                    <div class="pillar-icon"><i data-lucide="brain"></i></div>
                     <h4>Cognitive Focus</h4>
-                    <p>How the system measures or stimulates deep reasoning, reflection, or source verification rather than passive AI reliance.</p>
+                    <p>Measures or stimulates deep reasoning, reflection, and source verification.</p>
                 </div>
-                <div class="feature-card">
-                    <h4>System Architecture</h4>
-                    <p>How underlying LLMs, agents, RAG pipelines, or reasoning architectures evaluate human thought process.</p>
+                <div class="glass-card pillar-card">
+                    <div class="pillar-icon"><i data-lucide="git-branch"></i></div>
+                    <h4>Architecture</h4>
+                    <p>LLMs, multi-agent frameworks, RAG pipelines, or reasoning engines.</p>
                 </div>
-                <div class="feature-card">
-                    <h4>Governance &amp; Integrity</h4>
-                    <p>How data privacy is maintained, guarding against automated grading bias, and ensuring human-in-the-loop oversight.</p>
+                <div class="glass-card pillar-card">
+                    <div class="pillar-icon"><i data-lucide="shield-check"></i></div>
+                    <h4>Governance</h4>
+                    <p>PII data privacy, bias mitigation, and human-in-the-loop oversight.</p>
                 </div>
-                <div class="feature-card">
-                    <h4>Technical Viability</h4>
-                    <p>Reproducibility, documentation, and readiness for academic deployment.</p>
+                <div class="glass-card pillar-card">
+                    <div class="pillar-icon"><i data-lucide="code"></i></div>
+                    <h4>Viability</h4>
+                    <p>Technical maturity, reproducibility, and readiness for academic deployment.</p>
                 </div>
             </div>
-            <div class="cfp-content">
-                <p class="cfp-description">
-                    As a distinctive feature of this challenge, accepted prototypes will participate in a formal user interaction evaluation process where judges and evaluators will directly interact with the systems, following a standardized protocol designed by <a href="https://www.alexandriamx.com/">Alexandr.ia AI Learning Systems</a>.
+
+            <div class="evaluation-banner">
+                <h3>
+                    <i data-lucide="flask-conical"></i>
+                    Formal User Interaction Protocol
+                </h3>
+                <p>
+                    As a distinctive feature of this challenge, accepted prototypes will participate in a formal user interaction evaluation process where judges and evaluators will directly interact with the systems, following a standardized protocol designed by <a href="https://www.alexandriamx.com/" target="_blank" style="color: #60a5fa; text-decoration: underline;">Alexandr.ia AI Learning Systems</a>.
                 </p>
-                <p class="cfp-description">
-                    As a provisionally planned distinction (pending final logistical confirmation), top-performing prototypes may receive access to a live sandbox environment hosted by Alexandr.ia AI Learning Systems to further test, validate, and scale their solutions.
-                </p>
-                <p class="cfp-description">
-                    Evaluation focuses on originality and innovation, relevance and pedagogical impact, AI &amp; ethical governance, prototype and technical maturity, and quality of presentation and documentation. Participants receive a summary report with aggregated evaluation results and recommendations for improvement.
+                <p>
+                    Top-performing prototypes may receive access to a live sandbox environment hosted by Alexandr.ia AI Learning Systems to test, validate, and scale their solutions. Every participant receives a detailed summary report with aggregated evaluation metrics.
                 </p>
             </div>
         </div>
     </section>
 
-    <section id="submission" class="call-for-papers">
+    <!-- Submission Section -->
+    <section id="submission">
         <div class="container">
-            <h2 class="section-title">Submission Requirements</h2>
-            <p style="max-width: 800px; margin: 0 auto 2rem; text-align: center; font-size: 1.1rem; color: #555;">
-                Authors must submit through the challenge portal, selecting the proper track, the following:
-            </p>
-            <div class="topics-grid">
-                <div class="topic-card">
-                    <h4>Functional System Prototype</h4>
-                    <p>A live, accessible web URL showcasing a working version of the application.</p>
+            <div class="section-header">
+                <div class="badge">
+                    <i data-lucide="file-up" style="width: 14px; height: 14px;"></i>
+                    Get Prepared
                 </div>
-                <div class="topic-card">
-                    <h4>GitHub Repository Codebase</h4>
-                    <p>Full source code containing the end-to-end stack, architecture diagram, and deployment instructions.</p>
+                <h2 class="section-title">Submission Requirements</h2>
+                <p class="section-desc">Ensure your submission package includes all mandatory artifacts before entering the challenge portal.</p>
+            </div>
+
+            <div class="submission-grid">
+                <div class="glass-card sub-card">
+                    <h4>1. Functional Prototype</h4>
+                    <p>A live, publicly accessible web URL showcasing a functional, working version of your application.</p>
                 </div>
-                <div class="topic-card">
-                    <h4>5-Minute Demo &amp; Pitch Deck</h4>
-                    <p>A 5-minute video demonstrating system functionality paired with a slide deck highlighting the core solution.</p>
+                <div class="glass-card sub-card">
+                    <h4>2. GitHub Codebase</h4>
+                    <p>Full source code repository containing end-to-end stack, architecture diagrams, and setup instructions.</p>
                 </div>
-                <div class="topic-card">
-                    <h4>System Prompt, Ethical &amp; Data Governance Document</h4>
-                    <p>A 3–5 page document detailing system prompts and few-shot prompts, guardrails and human-in-the-loop controls, PII privacy and bias mitigation, and human oversight and hallucination controls.</p>
+                <div class="glass-card sub-card">
+                    <h4>3. Demo &amp; Pitch Deck</h4>
+                    <p>A 5-minute video demonstrating system functionality paired with a concise slide deck highlighting your solution.</p>
+                </div>
+                <div class="glass-card sub-card">
+                    <h4>4. Governance Document</h4>
+                    <p>A 3–5 page PDF detailing prompts, guardrails, human-in-the-loop controls, PII privacy, and bias mitigation.</p>
                 </div>
             </div>
+
             <div style="text-align: center;">
-                <!-- TODO: replace with the live challenge submission portal link once available -->
-                <a href="#contact" class="cta-button">Submission portal — coming soon</a>
+                <a href="#contact" class="cta-btn" style="background: linear-gradient(135deg, #475569, #1e293b);">
+                    <i data-lucide="lock"></i>
+                    <span>Submission Portal — Coming Soon</span>
+                </a>
             </div>
         </div>
     </section>
 
-    <section id="review" class="about">
+    <!-- Review Process -->
+    <section id="review">
         <div class="container">
-            <h2 class="section-title">Review Process</h2>
-            <p style="max-width: 800px; margin: 0 auto 2rem; text-align: center; font-size: 1.1rem; color: #555;">
-                All submissions undergo peer review based on the following weighted criteria. Accepted submissions are included in the conference and scheduled for a live demonstration.
-            </p>
-            <table class="dates-table" style="max-width: 700px; margin: 0 auto;">
-                <thead>
-                    <tr>
-                        <th style="text-align: left;">Criterion</th>
-                        <th>Weight</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>Originality and Innovation</td><td>25%</td></tr>
-                    <tr><td>Relevance and Pedagogical Impact</td><td>25%</td></tr>
-                    <tr><td>AI &amp; Ethical Governance</td><td>20%</td></tr>
-                    <tr><td>Prototype and Technical Maturity</td><td>15%</td></tr>
-                    <tr><td>Quality of Presentation and Documentation</td><td>15%</td></tr>
-                </tbody>
-            </table>
+            <div class="section-header">
+                <div class="badge">
+                    <i data-lucide="check-square" style="width: 14px; height: 14px;"></i>
+                    Scoring Framework
+                </div>
+                <h2 class="section-title">Peer Review Criteria</h2>
+                <p class="section-desc">Submissions undergo rigorous peer review weighted across five core dimensions.</p>
+            </div>
+
+            <div class="table-container">
+                <table class="cyber-table">
+                    <thead>
+                        <tr>
+                            <th>Evaluation Criterion</th>
+                            <th style="text-align: right;">Weight</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Originality and Innovation</td>
+                            <td style="text-align: right;"><span class="badge-weight">25%</span></td>
+                        </tr>
+                        <tr>
+                            <td>Relevance and Pedagogical Impact</td>
+                            <td style="text-align: right;"><span class="badge-weight">25%</span></td>
+                        </tr>
+                        <tr>
+                            <td>AI &amp; Ethical Governance</td>
+                            <td style="text-align: right;"><span class="badge-weight">20%</span></td>
+                        </tr>
+                        <tr>
+                            <td>Prototype and Technical Maturity</td>
+                            <td style="text-align: right;"><span class="badge-weight">15%</span></td>
+                        </tr>
+                        <tr>
+                            <td>Quality of Presentation and Documentation</td>
+                            <td style="text-align: right;"><span class="badge-weight">15%</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </section>
 
-    <section id="awards" class="call-for-papers">
+    <!-- Awards Section -->
+    <section id="awards">
         <div class="container">
-            <h2 class="section-title">Awards</h2>
-            <div class="about-features" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));">
-                <div class="feature-card">
+            <div class="section-header">
+                <div class="badge">
+                    <i data-lucide="trophy" style="width: 14px; height: 14px;"></i>
+                    Recognition
+                </div>
+                <h2 class="section-title">Challenge Awards</h2>
+                <p class="section-desc">Distinction and recognition awarded to top-performing research prototypes.</p>
+            </div>
+
+            <div class="awards-grid">
+                <div class="glass-card award-card">
+                    <div class="award-icon-box"><i data-lucide="award"></i></div>
                     <h4>Track 1 Winner</h4>
                     <p>Best Reviewer Tool</p>
                 </div>
-                <div class="feature-card">
+                <div class="glass-card award-card">
+                    <div class="award-icon-box"><i data-lucide="award"></i></div>
                     <h4>Track 2 Winner</h4>
                     <p>Best Learning Companion</p>
                 </div>
-                <div class="feature-card">
-                    <h4>Best AI Governance &amp; Ethics</h4>
+                <div class="glass-card award-card">
+                    <div class="award-icon-box"><i data-lucide="shield"></i></div>
+                    <h4>Ethics Distinction</h4>
+                    <p>Best AI Governance</p>
                 </div>
-                <div class="feature-card">
-                    <h4>Best Social Impact</h4>
+                <div class="glass-card award-card">
+                    <div class="award-icon-box"><i data-lucide="heart"></i></div>
+                    <h4>Impact Distinction</h4>
+                    <p>Best Social Impact</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="contact" class="about">
+    <!-- Demo Showcase Chairs -->
+    <section id="contact">
         <div class="container">
-            <h2 class="section-title">Demo Showcase Chairs</h2>
-            <p style="max-width: 700px; margin: 0 auto 2rem; text-align: center; font-size: 1.05rem; color: #555;">
-                For inquiries regarding prototype submissions, evaluation procedures, or participation requirements, please contact:
-            </p>
-            <div class="team-grid" style="max-width: 700px; margin: 0 auto;">
-                <div class="team-member">
-                    <h4>Eugenio Salas Iturriaga</h4>
-                    <div class="role">Demo Showcase Chair</div>
-                    <div class="affiliation"><a href="mailto:eugenio@alexandriads.com">eugenio@alexandriads.com</a></div>
+            <div class="section-header">
+                <div class="badge">
+                    <i data-lucide="mail" style="width: 14px; height: 14px;"></i>
+                    Organization
                 </div>
-                <div class="team-member">
+                <h2 class="section-title">Demo Showcase Chairs</h2>
+                <p class="section-desc">Contact the showcase chairs for inquiries regarding prototype submissions and evaluation procedures.</p>
+            </div>
+
+            <div class="chairs-grid">
+                <div class="glass-card chair-card">
+                    <img src="assets/images/eugenio-photo.jpg" alt="Eugenio Salas Iturriaga" class="chair-avatar" style="object-fit: cover; object-position: center 15%;">
+                    <h4>Eugenio Salas Iturriaga</h4>
+                    <div class="chair-role">Demo Showcase Chair</div>
+                    <a href="mailto:eugenio@alexandriads.com" class="chair-email">
+                        <i data-lucide="mail" style="width: 16px; height: 16px;"></i>
+                        eugenio@alexandriads.com
+                    </a>
+                    <a href="https://www.linkedin.com/in/eugeniosalasi/" target="_blank" class="chair-email" style="margin-top: 8px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                        LinkedIn Profile
+                    </a>
+                </div>
+
+                <div class="glass-card chair-card">
+                    <img src="assets/images/arturo-photo.jpg" alt="Arturo Gomez Chavez, PhD" class="chair-avatar" style="object-fit: cover;">
                     <h4>Arturo Gomez Chavez, PhD</h4>
-                    <div class="role">Demo Showcase Chair</div>
-                    <div class="affiliation"><a href="mailto:arturo.gomez-chavez@explearn.io">arturo.gomez-chavez@explearn.io</a></div>
+                    <div class="chair-role">Demo Showcase Chair</div>
+                    <a href="mailto:arturo.gomez-chavez@explearn.io" class="chair-email">
+                        <i data-lucide="mail" style="width: 16px; height: 16px;"></i>
+                        arturo.gomez-chavez@explearn.io
+                    </a>
+                    <a href="https://www.linkedin.com/in/gomezchavez-arturo/" target="_blank" class="chair-email" style="margin-top: 8px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                        LinkedIn Profile
+                    </a>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Footer -->
     <footer>
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
+            <div class="footer-grid">
+                <div class="footer-col">
                     <h4>Main Conference</h4>
-                    <p><a href="https://micai.org/2026/">MICAI 2026</a></p>
+                    <p><a href="https://micai.org/2026/" target="_blank">MICAI 2026 Official Site</a></p>
                 </div>
-
-                <div class="footer-section">
+                <div class="footer-col">
                     <h4>Conference Partners</h4>
-                    <img src="assets/images/logo_SMIA_blanco.png" alt="SMIA" class="partner-logo">
+                    <div style="display: flex; align-items: center; gap: 40px; flex-wrap: wrap;">
+                        <img src="assets/images/logo_SMIA_blanco.png" alt="SMIA Logo" class="partner-img">
+                        <img src="assets/images/alexandria-logo.png" alt="Alexandr.ia Logo" class="partner-img" style="height: 75px; max-height: none;">
+                    </div>
                 </div>
-
-                <div class="footer-section">
+                <div class="footer-col">
                     <h4>Past Editions</h4>
                     <p><a href="/archive/2025/">CHARAL 2025 Archive</a></p>
                 </div>
             </div>
-            <p>&copy; 2026 CHARAL Workshop. All rights reserved.</p>
+            <div class="copyright">
+                &copy; 2026 CHARAL Workshop. All rights reserved. Cognition First AI Challenge.
+            </div>
         </div>
     </footer>
+
+    <!-- Interactive Scripts & Canvas Engine -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Canvas Particle Mesh Animation (Futuristic Dark Background)
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        });
+
+        const particles = [];
+        const particleCount = Math.min(Math.floor(width / 18), 70);
+
+        for (let i = 0; i < particleCount; i++) {
+            particles.push({
+                x: Math.random() * width,
+                y: Math.random() * height,
+                vx: (Math.random() - 0.5) * 0.4,
+                vy: (Math.random() - 0.5) * 0.4,
+                radius: Math.random() * 1.8 + 0.5,
+                alpha: Math.random() * 0.5 + 0.2
+            });
+        }
+
+        function drawMesh() {
+            ctx.clearRect(0, 0, width, height);
+
+            for (let i = 0; i < particles.length; i++) {
+                let p = particles[i];
+                p.x += p.vx;
+                p.y += p.vy;
+
+                if (p.x < 0 || p.x > width) p.vx *= -1;
+                if (p.y < 0 || p.y > height) p.vy *= -1;
+
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(120, 200, 170, ${p.alpha})`;
+                ctx.fill();
+
+                for (let j = i + 1; j < particles.length; j++) {
+                    let p2 = particles[j];
+                    let dist = Math.hypot(p.x - p2.x, p.y - p2.y);
+                    if (dist < 140) {
+                        ctx.beginPath();
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(p2.x, p2.y);
+                        ctx.strokeStyle = `rgba(45, 212, 191, ${0.15 * (1 - dist / 140)})`;
+                        ctx.lineWidth = 0.8;
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(drawMesh);
+        }
+        drawMesh();
+
+        // Glow mouse follower
+        const glow = document.getElementById('glow-follower');
+        window.addEventListener('mousemove', (e) => {
+            glow.style.transform = `translate(${e.clientX - 300}px, ${e.clientY - 300}px)`;
+        });
+
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menu-toggle');
+        const nav = document.querySelector('nav');
+        menuToggle.addEventListener('click', () => {
+            nav.classList.toggle('active');
+        });
+    </script>
 </body>
 </html>
