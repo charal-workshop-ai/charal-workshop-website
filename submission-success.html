@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submission Confirmed - CHARAL 2026</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        :root {
+            --bg-dark: #050b14;
+            --bg-card: rgba(11, 25, 38, 0.75);
+            --bg-card-hover: rgba(18, 43, 62, 0.9);
+            --border-glow: rgba(120, 200, 170, 0.25);
+            --border-active: rgba(120, 200, 170, 0.6);
+            --accent-cyan: #78c8aa;
+            --accent-blue: #4ade80;
+            --accent-purple: #2dd4bf;
+            --accent-emerald: #10b981;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --font-heading: 'Space Grotesk', sans-serif;
+            --font-body: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Dynamic Canvas & Mesh Background */
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .ambient-glow {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.2) 0%, rgba(45, 212, 191, 0.08) 50%, rgba(0,0,0,0) 70%);
+            pointer-events: none;
+            z-index: 0;
+            filter: blur(80px);
+            transition: transform 0.2s ease-out;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header Navigation */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            background: rgba(5, 11, 20, 0.85);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 18px 0;
+        }
+
+        nav.nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-image {
+            height: 36px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 12px rgba(120, 200, 170, 0.4));
+        }
+
+        .logo-text {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 1.4rem;
+            letter-spacing: -0.02em;
+            color: #ffffff;
+        }
+
+        /* Success Card Wrapper */
+        .success-wrapper {
+            padding: 60px 0 80px;
+        }
+
+        .glass-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-active);
+            border-radius: 24px;
+            padding: 48px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 40px rgba(16, 185, 129, 0.15);
+            text-align: center;
+        }
+
+        .success-icon-badge {
+            width: 84px;
+            height: 84px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(45, 212, 191, 0.3));
+            border: 2px solid var(--accent-emerald);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            color: var(--accent-emerald);
+            box-shadow: 0 0 30px rgba(16, 185, 129, 0.4);
+            animation: pulse-glow 2s infinite ease-in-out;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 30px rgba(16, 185, 129, 0.4); transform: scale(1); }
+            50% { box-shadow: 0 0 50px rgba(16, 185, 129, 0.7); transform: scale(1.05); }
+        }
+
+        .success-title {
+            font-family: var(--font-heading);
+            font-size: 2.6rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 12px;
+        }
+
+        .success-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 36px;
+        }
+
+        /* Summary Receipt Box */
+        .receipt-card {
+            background: rgba(5, 11, 20, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 28px;
+            text-align: left;
+            margin-bottom: 36px;
+        }
+
+        .receipt-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 16px;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.12);
+            margin-bottom: 20px;
+        }
+
+        .receipt-ref {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--accent-cyan);
+            letter-spacing: 0.05em;
+        }
+
+        .receipt-date {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .receipt-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+
+        .receipt-item-full {
+            grid-column: span 2;
+        }
+
+        .receipt-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 4px;
+        }
+
+        .receipt-value {
+            font-size: 1rem;
+            color: var(--text-primary);
+            font-weight: 600;
+            word-break: break-word;
+        }
+
+        .receipt-value a {
+            color: var(--accent-cyan);
+            text-decoration: underline;
+        }
+
+        /* Next Steps Timeline */
+        .next-steps {
+            text-align: left;
+            margin-bottom: 40px;
+        }
+
+        .next-steps-title {
+            font-family: var(--font-heading);
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .timeline {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .timeline-card {
+            background: rgba(5, 11, 20, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            padding: 16px;
+        }
+
+        .step-num {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--accent-emerald);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 6px;
+        }
+
+        .step-title {
+            font-family: var(--font-heading);
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .step-desc {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #10b981 0%, #2dd4bf 100%);
+            color: #050b14;
+            padding: 14px 28px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            text-decoration: none;
+            box-shadow: 0 0 25px rgba(120, 200, 170, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 35px rgba(120, 200, 170, 0.5);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-primary);
+            padding: 14px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--border-glow);
+            color: var(--accent-cyan);
+        }
+
+        /* Footer */
+        footer {
+            margin-top: auto;
+            background: rgba(4, 6, 14, 0.95);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 24px 0;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            position: relative;
+            z-index: 1;
+        }
+
+        @media (max-width: 768px) {
+            .receipt-grid, .timeline {
+                grid-template-columns: 1fr;
+            }
+            .receipt-item-full {
+                grid-column: span 1;
+            }
+            .glass-card {
+                padding: 28px;
+            }
+            .success-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Ambient Canvas Mesh Background -->
+    <canvas id="bg-canvas"></canvas>
+    <div class="ambient-glow" id="ambient-glow"></div>
+
+    <!-- Header Navigation -->
+    <header>
+        <nav class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="assets/images/logo-charal-2-b.png" alt="CHARAL Logo" class="logo-image">
+                <span class="logo-text">CHARAL 2026</span>
+            </a>
+            <a href="index.html" class="btn-secondary" style="padding: 8px 18px; font-size: 0.85rem;">
+                <i data-lucide="home" style="width: 14px; height: 14px;"></i>
+                Home
+            </a>
+        </nav>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="container success-wrapper">
+        <div class="glass-card">
+            
+            <!-- Success Animated Badge -->
+            <div class="success-icon-badge">
+                <i data-lucide="check-circle-2" style="width: 44px; height: 44px;"></i>
+            </div>
+
+            <h1 class="success-title">Submission Confirmed!</h1>
+            <p class="success-subtitle">
+                Thank you for submitting your prototype to the <strong>Cognition First: AI Augmented Learner Challenge</strong>.
+            </p>
+
+            <!-- Submission Summary Receipt Card -->
+            <div class="receipt-card">
+                <div class="receipt-header">
+                    <div>
+                        <div style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase;">Submission Reference</div>
+                        <div class="receipt-ref" id="rec-id">CH2026-PENDING</div>
+                    </div>
+                    <div class="receipt-date" id="rec-date">Nov 2026</div>
+                </div>
+
+                <div class="receipt-grid">
+                    <div>
+                        <div class="receipt-label">Prototype Title</div>
+                        <div class="receipt-value" id="rec-title">AI Cognitive Tutor</div>
+                    </div>
+                    <div>
+                        <div class="receipt-label">Selected Track</div>
+                        <div class="receipt-value" id="rec-track">Track 1</div>
+                    </div>
+                    <div>
+                        <div class="receipt-label">Team Lead / Submitter</div>
+                        <div class="receipt-value" id="rec-name">Jane Doe</div>
+                    </div>
+                    <div>
+                        <div class="receipt-label">Institution / Organization</div>
+                        <div class="receipt-value" id="rec-institution">Research Lab</div>
+                    </div>
+                    <div class="receipt-item-full">
+                        <div class="receipt-label">Live Demo URL</div>
+                        <div class="receipt-value" id="rec-demo">-</div>
+                    </div>
+                    <div class="receipt-item-full">
+                        <div class="receipt-label">GitHub Repository</div>
+                        <div class="receipt-value" id="rec-github">-</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Next Steps -->
+            <div class="next-steps">
+                <div class="next-steps-title">
+                    <i data-lucide="calendar" style="color: var(--accent-cyan); width: 20px; height: 20px;"></i>
+                    Next Steps &amp; Evaluation Timeline
+                </div>
+
+                <div class="timeline">
+                    <div class="timeline-card">
+                        <div class="step-num">Step 1 • Initial Audit</div>
+                        <div class="step-title">Technical Verification</div>
+                        <div class="step-desc">The showcase chairs audit your live URL, GitHub code, and governance documentation.</div>
+                    </div>
+                    <div class="timeline-card">
+                        <div class="step-num">Step 2 • Peer Review</div>
+                        <div class="step-title">5-Pillar Scoring</div>
+                        <div class="step-desc">Evaluated on User Focus, Cognitive Depth, Architecture, Governance &amp; Viability.</div>
+                    </div>
+                    <div class="timeline-card">
+                        <div class="step-num">Step 3 • Live Showcase</div>
+                        <div class="step-title">Nov 2–6, 2026</div>
+                        <div class="step-desc">Finalists present live at Tec de Monterrey, Campus Chihuahua (MICAI 2026).</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <a href="index.html" class="btn-primary">
+                    <i data-lucide="home" style="width: 18px; height: 18px;"></i>
+                    Return to Main Page
+                </a>
+                <a href="submit.html" class="btn-secondary">
+                    <i data-lucide="plus-circle" style="width: 18px; height: 18px;"></i>
+                    Submit Another Prototype
+                </a>
+                <button onclick="window.print()" class="btn-secondary">
+                    <i data-lucide="printer" style="width: 18px; height: 18px;"></i>
+                    Save Receipt
+                </button>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            &copy; 2026 CHARAL Workshop. All rights reserved. Cognition First AI Challenge.
+        </div>
+    </footer>
+
+    <!-- Interactive Canvas & Datapopulation Scripts -->
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Populate receipt from URL params or localStorage
+        const urlParams = new URLSearchParams(window.location.search);
+        const subId = urlParams.get('id');
+
+        let data = null;
+        try {
+            const savedData = localStorage.getItem('charal2026_latest_submission');
+            if (savedData) {
+                data = JSON.parse(savedData);
+            }
+        } catch (e) {
+            console.error(e);
+        }
+
+        if (data && (data.id === subId || !subId)) {
+            document.getElementById('rec-id').innerText = data.id || subId || 'CH2026-CONFIRMED';
+            document.getElementById('rec-date').innerText = data.timestamp || new Date().toLocaleString();
+            document.getElementById('rec-title').innerText = data.projectTitle || 'Submitted Prototype';
+            document.getElementById('rec-track').innerText = data.track || 'Track 1 / Track 2';
+            document.getElementById('rec-name').innerText = (data.fullName || 'Submitter') + ' (' + (data.email || '') + ')';
+            document.getElementById('rec-institution').innerText = data.institution || '-';
+            
+            if (data.demoUrl) {
+                document.getElementById('rec-demo').innerHTML = `<a href="${data.demoUrl}" target="_blank" rel="noopener">${data.demoUrl}</a>`;
+            }
+            if (data.githubUrl) {
+                document.getElementById('rec-github').innerHTML = `<a href="${data.githubUrl}" target="_blank" rel="noopener">${data.githubUrl}</a>`;
+            }
+        } else if (subId) {
+            document.getElementById('rec-id').innerText = subId;
+        }
+
+        // Particle Mesh Background Animation
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        let particles = [];
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * 0.4;
+                this.vy = (Math.random() - 0.5) * 0.4;
+                this.radius = Math.random() * 1.5 + 0.5;
+                this.alpha = Math.random() * 0.5 + 0.2;
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                if (this.x < 0) this.x = width;
+                if (this.x > width) this.x = 0;
+                if (this.y < 0) this.y = height;
+                if (this.y > height) this.y = 0;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(120, 200, 170, ${this.alpha})`;
+                ctx.fill();
+            }
+        }
+
+        for (let i = 0; i < 40; i++) {
+            particles.push(new Particle());
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+
+            for (let i = 0; i < particles.length; i++) {
+                let p = particles[i];
+                p.update();
+                p.draw();
+
+                for (let j = i + 1; j < particles.length; j++) {
+                    let p2 = particles[j];
+                    let dist = Math.hypot(p.x - p2.x, p.y - p2.y);
+                    if (dist < 140) {
+                        ctx.beginPath();
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(p2.x, p2.y);
+                        ctx.strokeStyle = `rgba(45, 212, 191, ${0.15 * (1 - dist / 140)})`;
+                        ctx.lineWidth = 0.8;
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animate);
+        }
+        animate();
+
+        // Mouse Parallax Glow
+        const ambientGlow = document.getElementById('ambient-glow');
+        window.addEventListener('mousemove', (e) => {
+            const x = e.clientX - 300;
+            const y = e.clientY - 300;
+            ambientGlow.style.transform = `translate(${x}px, ${y}px)`;
+        });
+    </script>
+</body>
+</html>

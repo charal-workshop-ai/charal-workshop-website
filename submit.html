@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Prototype - CHARAL 2026</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        :root {
+            --bg-dark: #050b14;
+            --bg-card: rgba(11, 25, 38, 0.75);
+            --bg-card-hover: rgba(18, 43, 62, 0.9);
+            --border-glow: rgba(120, 200, 170, 0.25);
+            --border-active: rgba(120, 200, 170, 0.6);
+            --accent-cyan: #78c8aa;
+            --accent-blue: #4ade80;
+            --accent-purple: #2dd4bf;
+            --accent-emerald: #10b981;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --font-heading: 'Space Grotesk', sans-serif;
+            --font-body: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Dynamic Canvas & Mesh Background */
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .ambient-glow {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(120, 200, 170, 0.15) 0%, rgba(45, 212, 191, 0.05) 50%, rgba(0,0,0,0) 70%);
+            pointer-events: none;
+            z-index: 0;
+            filter: blur(80px);
+            transition: transform 0.2s ease-out;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Navigation Header */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            background: rgba(5, 11, 20, 0.85);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 18px 0;
+        }
+
+        nav.nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-image {
+            height: 36px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 12px rgba(120, 200, 170, 0.4));
+        }
+
+        .logo-text {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 1.4rem;
+            letter-spacing: -0.02em;
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(255,255,255,0.3);
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.2s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent-cyan);
+            border-color: var(--border-glow);
+            background: rgba(120, 200, 170, 0.1);
+            transform: translateX(-3px);
+        }
+
+        /* Form Hero Header */
+        .form-header {
+            text-align: center;
+            padding: 60px 0 40px;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            background: rgba(16, 185, 129, 0.12);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 100px;
+            color: #4ade80;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.15);
+        }
+
+        .form-title {
+            font-family: var(--font-heading);
+            font-size: 3rem;
+            font-weight: 800;
+            line-height: 1.15;
+            color: #ffffff;
+            margin-bottom: 16px;
+        }
+
+        .form-subtitle {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        /* Glassmorphism Form Card */
+        .form-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-glow);
+            border-radius: 24px;
+            padding: 44px;
+            margin-bottom: 80px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .form-section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .form-section-header i {
+            color: var(--accent-cyan);
+        }
+
+        .form-section-title {
+            font-family: var(--font-heading);
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            margin-bottom: 36px;
+        }
+
+        .form-group-full {
+            grid-column: span 2;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        label .required {
+            color: #ef4444;
+            margin-left: 4px;
+        }
+
+        label .hint {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="url"],
+        select,
+        textarea {
+            width: 100%;
+            background: rgba(5, 11, 20, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 12px;
+            padding: 14px 18px;
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            transition: all 0.25 ease;
+            outline: none;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="url"]:focus,
+        select:focus,
+        textarea:focus {
+            border-color: var(--accent-cyan);
+            background: rgba(11, 25, 38, 0.85);
+            box-shadow: 0 0 15px rgba(120, 200, 170, 0.25);
+        }
+
+        select option {
+            background-color: #0b1926;
+            color: #ffffff;
+            padding: 10px;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* Radio Track selector */
+        .track-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .track-radio-card {
+            position: relative;
+            background: rgba(5, 11, 20, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 14px;
+            padding: 18px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .track-radio-card:hover {
+            border-color: var(--border-glow);
+            background: rgba(18, 43, 62, 0.6);
+        }
+
+        .track-radio-card input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .track-radio-card.active {
+            border-color: var(--accent-cyan);
+            background: rgba(120, 200, 170, 0.1);
+            box-shadow: 0 0 20px rgba(120, 200, 170, 0.2);
+        }
+
+        .track-badge-tag {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .track-radio-title {
+            font-family: var(--font-heading);
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .track-radio-desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        /* Submit CTA button */
+        .submit-btn-wrapper {
+            margin-top: 32px;
+            text-align: center;
+        }
+
+        .submit-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            width: 100%;
+            max-width: 400px;
+            background: linear-gradient(135deg, #10b981 0%, #2dd4bf 100%);
+            color: #050b14;
+            padding: 18px 36px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 0 30px rgba(120, 200, 170, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 45px rgba(120, 200, 170, 0.6);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: auto;
+            background: rgba(4, 6, 14, 0.95);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 24px 0;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            position: relative;
+            z-index: 1;
+        }
+
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            .form-group-full {
+                grid-column: span 1;
+            }
+            .track-options {
+                grid-template-columns: 1fr;
+            }
+            .form-card {
+                padding: 24px;
+            }
+            .form-title {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Ambient Mesh Background -->
+    <canvas id="bg-canvas"></canvas>
+    <div class="ambient-glow" id="ambient-glow"></div>
+
+    <!-- Header Navigation -->
+    <header>
+        <nav class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="assets/images/logo-charal-2-b.png" alt="CHARAL Logo" class="logo-image">
+                <span class="logo-text">CHARAL 2026</span>
+            </a>
+            <a href="index.html" class="back-link">
+                <i data-lucide="arrow-left" style="width: 16px; height: 16px;"></i>
+                Back to Challenge
+            </a>
+        </nav>
+    </header>
+
+    <!-- Main Container -->
+    <main class="container">
+
+        <!-- Form Hero Header -->
+        <div class="form-header">
+            <div class="badge">
+                <i data-lucide="file-up" style="width: 14px; height: 14px;"></i>
+                Prototype Submission Portal
+            </div>
+            <h1 class="form-title">Submit Your AI Prototype</h1>
+            <p class="form-subtitle">
+                Submit your solution for the <strong>Cognition First: AI Augmented Learner Challenge</strong>.
+                Fill out the required information below to register your entry for peer evaluation.
+            </p>
+        </div>
+
+        <!-- Submission Form Card -->
+        <div class="form-card">
+            <form id="prototype-form">
+
+                <!-- Section 1: Lead Submitter Information -->
+                <div class="form-section-header">
+                    <i data-lucide="user"></i>
+                    <h3 class="form-section-title">1. Submitter &amp; Team Lead Info</h3>
+                </div>
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="fullName">Full Name <span class="required">*</span></label>
+                        <input type="text" id="fullName" name="fullName" placeholder="e.g. Dr. Alex Morgan" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Institutional / Contact Email <span class="required">*</span></label>
+                        <input type="email" id="email" name="email" placeholder="alex.morgan@university.edu" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="institution">Institution / Organization <span class="required">*</span></label>
+                        <input type="text" id="institution" name="institution" placeholder="e.g. Stanford University / Tech Corp" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="role">Role / Position <span class="required">*</span></label>
+                        <select id="role" name="role" required>
+                            <option value="" disabled selected>Select your role...</option>
+                            <option value="Researcher / Professor">Researcher / Professor</option>
+                            <option value="Graduate / Student">Graduate / Undergraduate Student</option>
+                            <option value="EdTech Developer / Engineer">EdTech Developer / Engineer</option>
+                            <option value="Industry Innovator">Industry Innovator</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Section 2: Prototype Information & Track -->
+                <div class="form-section-header">
+                    <i data-lucide="layers"></i>
+                    <h3 class="form-section-title">2. Challenge Track &amp; Prototype Overview</h3>
+                </div>
+
+                <div class="form-grid">
+                    <div class="form-group-full">
+                        <label style="margin-bottom: 8px;">Select Challenge Track <span class="required">*</span></label>
+                        <div class="track-options">
+                            <div class="track-radio-card active" onclick="selectTrack('track1', this)">
+                                <input type="radio" id="track1" name="track" value="Track 1: AI Systems for Reviewers" checked>
+                                <span class="track-badge-tag">Track 1</span>
+                                <div class="track-radio-title">AI Systems for Reviewers</div>
+                                <div class="track-radio-desc">Evaluating human cognition, auditing thought methodology, and assisting reviewers.</div>
+                            </div>
+                            <div class="track-radio-card" onclick="selectTrack('track2', this)">
+                                <input type="radio" id="track2" name="track" value="Track 2: AI Systems to Stimulate Cognition">
+                                <span class="track-badge-tag">Track 2</span>
+                                <div class="track-radio-title">AI Systems to Stimulate Cognition</div>
+                                <div class="track-radio-desc">Empowering learners by demanding real-time reflection, synthesis, and deep reasoning.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group-full">
+                        <label for="projectTitle">Prototype Title <span class="required">*</span></label>
+                        <input type="text" id="projectTitle" name="projectTitle" placeholder="e.g. SocraticAI: Dialectic Reasoning Auditor" required>
+                    </div>
+
+                    <div class="form-group-full">
+                        <label for="abstract">Executive Abstract &amp; Cognitive Focus <span class="required">*</span> <span class="hint">Max 300 words</span></label>
+                        <textarea id="abstract" name="abstract" placeholder="Briefly describe how your system demands higher-order critical thinking and its underlying architecture..." required></textarea>
+                    </div>
+                </div>
+
+                <!-- Section 3: Artifacts & Links -->
+                <div class="form-section-header">
+                    <i data-lucide="link"></i>
+                    <h3 class="form-section-title">3. Submission Artifacts</h3>
+                </div>
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="demoUrl">Live Prototype Web URL <span class="required">*</span></label>
+                        <input type="url" id="demoUrl" name="demoUrl" placeholder="https://myprototype.demo.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="githubUrl">GitHub Repository URL <span class="required">*</span></label>
+                        <input type="url" id="githubUrl" name="githubUrl" placeholder="https://github.com/org/repository" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="videoUrl">Demo Video / Pitch Deck Link <span class="required">*</span></label>
+                        <input type="url" id="videoUrl" name="videoUrl" placeholder="https://youtube.com/watch?v=... or Loom/Drive" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="governanceUrl">Governance &amp; Guardrails PDF Link <span class="hint">(Optional)</span></label>
+                        <input type="url" id="governanceUrl" name="governanceUrl" placeholder="https://drive.google.com/file/d/...">
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="submit-btn-wrapper">
+                    <button type="submit" class="submit-btn" id="submit-btn">
+                        <span>Submit Prototype</span>
+                        <i data-lucide="arrow-right"></i>
+                    </button>
+                </div>
+
+            </form>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            &copy; 2026 CHARAL Workshop. All rights reserved. Cognition First AI Challenge.
+        </div>
+    </footer>
+
+    <!-- Interactive Canvas & Form Scripts -->
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Radio Track Selector Logic
+        function selectTrack(trackId, cardElement) {
+            document.querySelectorAll('.track-radio-card').forEach(card => card.classList.remove('active'));
+            cardElement.classList.add('active');
+            document.getElementById(trackId).checked = true;
+        }
+
+        // Particle Mesh Background Animation
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        let particles = [];
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * 0.4;
+                this.vy = (Math.random() - 0.5) * 0.4;
+                this.radius = Math.random() * 1.5 + 0.5;
+                this.alpha = Math.random() * 0.5 + 0.2;
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                if (this.x < 0) this.x = width;
+                if (this.x > width) this.x = 0;
+                if (this.y < 0) this.y = height;
+                if (this.y > height) this.y = 0;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(120, 200, 170, ${this.alpha})`;
+                ctx.fill();
+            }
+        }
+
+        for (let i = 0; i < 40; i++) {
+            particles.push(new Particle());
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+
+            for (let i = 0; i < particles.length; i++) {
+                let p = particles[i];
+                p.update();
+                p.draw();
+
+                for (let j = i + 1; j < particles.length; j++) {
+                    let p2 = particles[j];
+                    let dist = Math.hypot(p.x - p2.x, p.y - p2.y);
+                    if (dist < 140) {
+                        ctx.beginPath();
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(p2.x, p2.y);
+                        ctx.strokeStyle = `rgba(45, 212, 191, ${0.15 * (1 - dist / 140)})`;
+                        ctx.lineWidth = 0.8;
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animate);
+        }
+        animate();
+
+        // Mouse Parallax Glow
+        const ambientGlow = document.getElementById('ambient-glow');
+        window.addEventListener('mousemove', (e) => {
+            const x = e.clientX - 300;
+            const y = e.clientY - 300;
+            ambientGlow.style.transform = `translate(${x}px, ${y}px)`;
+        });
+
+        // Form Submit Handler & Redirect to Confirmation Page
+        const form = document.getElementById('prototype-form');
+        const submitBtn = document.getElementById('submit-btn');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Disable button & show spinner state
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `<span>Processing Submission...</span> <i data-lucide="loader" class="spin"></i>`;
+            lucide.createIcons();
+
+            // Collect Form Data
+            const formData = new FormData(form);
+            const submissionId = 'CH2026-' + Math.random().toString(36).substring(2, 8).toUpperCase();
+            
+            const submissionDetails = {
+                id: submissionId,
+                timestamp: new Date().toLocaleString(),
+                fullName: formData.get('fullName'),
+                email: formData.get('email'),
+                institution: formData.get('institution'),
+                role: formData.get('role'),
+                track: formData.get('track'),
+                projectTitle: formData.get('projectTitle'),
+                abstract: formData.get('abstract'),
+                demoUrl: formData.get('demoUrl'),
+                githubUrl: formData.get('githubUrl'),
+                videoUrl: formData.get('videoUrl'),
+                governanceUrl: formData.get('governanceUrl') || 'N/A'
+            };
+
+            // Save to localStorage
+            try {
+                let existingSubmissions = JSON.parse(localStorage.getItem('charal2026_submissions') || '[]');
+                existingSubmissions.unshift(submissionDetails);
+                localStorage.setItem('charal2026_submissions', JSON.stringify(existingSubmissions));
+                localStorage.setItem('charal2026_latest_submission', JSON.stringify(submissionDetails));
+            } catch (err) {
+                console.error("Storage error:", err);
+            }
+
+            // Redirect to Confirmation Page after 800ms
+            setTimeout(() => {
+                window.location.href = `submission-success.html?id=${submissionId}`;
+            }, 800);
+        });
+    </script>
+</body>
+</html>
