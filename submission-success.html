@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Submission Confirmed - CHARAL 2026</title>
+    <title>Registration Confirmed - CHARAL 2026</title>
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -395,45 +395,37 @@
                 <i data-lucide="check-circle-2" style="width: 44px; height: 44px;"></i>
             </div>
 
-            <h1 class="success-title">Submission Confirmed!</h1>
+            <h1 class="success-title">Registration Confirmed!</h1>
             <p class="success-subtitle">
-                Thank you for submitting your prototype to the <strong>Cognition First: AI Augmented Learner Challenge</strong>.
+                Thank you for registering for the <strong>Cognition First: AI Augmented Learner Challenge</strong>.
             </p>
 
             <!-- Submission Summary Receipt Card -->
             <div class="receipt-card">
                 <div class="receipt-header">
                     <div>
-                        <div style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase;">Submission Reference</div>
-                        <div class="receipt-ref" id="rec-id">CH2026-PENDING</div>
+                        <div style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase;">Registration Reference</div>
+                        <div class="receipt-ref" id="rec-id">REG2026-CONFIRMED</div>
                     </div>
                     <div class="receipt-date" id="rec-date">Nov 2026</div>
                 </div>
 
                 <div class="receipt-grid">
                     <div>
-                        <div class="receipt-label">Prototype Title</div>
-                        <div class="receipt-value" id="rec-title">AI Cognitive Tutor</div>
+                        <div class="receipt-label">Proposal / Project Title</div>
+                        <div class="receipt-value" id="rec-title">AI Cognitive Project</div>
                     </div>
                     <div>
                         <div class="receipt-label">Selected Track</div>
                         <div class="receipt-value" id="rec-track">Track 1</div>
                     </div>
                     <div>
-                        <div class="receipt-label">Team Lead / Submitter</div>
+                        <div class="receipt-label">Registrant Name &amp; Email</div>
                         <div class="receipt-value" id="rec-name">Jane Doe</div>
                     </div>
                     <div>
                         <div class="receipt-label">Institution / Organization</div>
                         <div class="receipt-value" id="rec-institution">Research Lab</div>
-                    </div>
-                    <div class="receipt-item-full">
-                        <div class="receipt-label">Live Demo URL</div>
-                        <div class="receipt-value" id="rec-demo">-</div>
-                    </div>
-                    <div class="receipt-item-full">
-                        <div class="receipt-label">GitHub Repository</div>
-                        <div class="receipt-value" id="rec-github">-</div>
                     </div>
                 </div>
             </div>
@@ -515,19 +507,12 @@
         }
 
         if (data && (data.id === subId || !subId)) {
-            document.getElementById('rec-id').innerText = data.id || subId || 'CH2026-CONFIRMED';
+            document.getElementById('rec-id').innerText = data.id || subId || 'REG2026-CONFIRMED';
             document.getElementById('rec-date').innerText = data.timestamp || new Date().toLocaleString();
-            document.getElementById('rec-title').innerText = data.projectTitle || 'Submitted Prototype';
+            document.getElementById('rec-title').innerText = data.projectTitle || 'Registered Proposal';
             document.getElementById('rec-track').innerText = data.track || 'Track 1 / Track 2';
-            document.getElementById('rec-name').innerText = (data.fullName || 'Submitter') + ' (' + (data.email || '') + ')';
+            document.getElementById('rec-name').innerText = (data.fullName || 'Registrant') + ' (' + (data.email || '') + ')';
             document.getElementById('rec-institution').innerText = data.institution || '-';
-            
-            if (data.demoUrl) {
-                document.getElementById('rec-demo').innerHTML = `<a href="${data.demoUrl}" target="_blank" rel="noopener">${data.demoUrl}</a>`;
-            }
-            if (data.githubUrl) {
-                document.getElementById('rec-github').innerHTML = `<a href="${data.githubUrl}" target="_blank" rel="noopener">${data.githubUrl}</a>`;
-            }
         } else if (subId) {
             document.getElementById('rec-id').innerText = subId;
         }
