@@ -270,12 +270,14 @@
 
         /* Conference Info Card */
         .conference-info-hero {
-            max-width: 800px;
-            margin: 0 auto 40px;
+            max-width: 940px;
+            margin: 32px auto 40px;
+            padding: 28px 36px;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 24px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
             text-align: left;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
         }
 
         .info-item {
@@ -827,16 +829,14 @@
                     <img src="assets/images/logo_SMIA_blanco.png" alt="SMIA Logo" style="height: 56px; object-fit: contain; filter: drop-shadow(0 0 15px rgba(255,255,255,0.4));">
                 </a>
             </div>
+            <!-- Title & Subtitle -->
             <h1>CHARAL 2026</h1>
             <div class="subtitle">The AI Augmented Learner Challenge</div>
-            <p class="quote" style="margin-bottom: 20px;">
+            <p class="quote" style="margin-bottom: 28px;">
                 "From detecting AI use to demanding higher-order critical thinking"
             </p>
-            <a href="https://www.alexandriamx.com/" target="_blank" style="text-decoration: none; margin-bottom: 60px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
-                <span style="font-size: 0.95rem; color: #78c8aa; text-transform: uppercase; letter-spacing: 0.15em; font-weight: 700; text-shadow: 0 0 15px rgba(120,200,170,0.6);">Powered by Alexandr.ia AI Learning Systems</span>
-                <img src="assets/images/alexandria-logo.png" alt="Alexandr.ia Logo" style="height: 200px; filter: drop-shadow(0 0 30px rgba(120,200,170,0.45));">
-            </a>
 
+            <!-- Event Context Info Card (Placed Higher Up) -->
             <div class="glass-card conference-info-hero">
                 <div class="info-item">
                     <div class="info-icon"><i data-lucide="award"></i></div>
@@ -861,9 +861,18 @@
                 </div>
             </div>
 
-            <a href="submit.html" class="cta-btn">
-                <span>Register Now</span>
-                <i data-lucide="arrow-right"></i>
+            <!-- CTA Button -->
+            <div style="margin-bottom: 48px;">
+                <a href="submit.html" class="cta-btn">
+                    <span>Register Now</span>
+                    <i data-lucide="arrow-right"></i>
+                </a>
+            </div>
+
+            <!-- Powered by Alexandr.ia AI Learning Systems -->
+            <a href="https://www.alexandriamx.com/" target="_blank" style="text-decoration: none; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+                <span style="font-size: 0.95rem; color: #78c8aa; text-transform: uppercase; letter-spacing: 0.15em; font-weight: 700; text-shadow: 0 0 15px rgba(120,200,170,0.6);">Powered by Alexandr.ia AI Learning Systems</span>
+                <img src="assets/images/alexandria-logo.png" alt="Alexandr.ia Logo" style="height: 180px; filter: drop-shadow(0 0 30px rgba(120,200,170,0.45));">
             </a>
         </div>
     </section>
