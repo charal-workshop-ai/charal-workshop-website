@@ -671,6 +671,14 @@
             ambientGlow.style.transform = `translate(${x}px, ${y}px)`;
         });
 
+        // =========================================================================
+        // GOOGLE SHEETS INTEGRATION
+        // To connect to Google Sheets:
+        // 1. Create a Google Sheet & Apps Script (instructions provided below)
+        // 2. Paste your Google Apps Script Web App Deployment URL here:
+        // =========================================================================
+        const GOOGLE_SCRIPT_URL = ""; // e.g. "https://script.google.com/macros/s/.../exec"
+
         // Form Submit Handler & Redirect to Confirmation Page
         const form = document.getElementById('prototype-form');
         const submitBtn = document.getElementById('submit-btn');
@@ -703,7 +711,7 @@
                 governanceUrl: formData.get('governanceUrl') || 'N/A'
             };
 
-            // Save to localStorage
+            // 1. Save to localStorage
             try {
                 let existingSubmissions = JSON.parse(localStorage.getItem('charal2026_submissions') || '[]');
                 existingSubmissions.unshift(submissionDetails);
@@ -713,10 +721,27 @@
                 console.error("Storage error:", err);
             }
 
-            // Redirect to Confirmation Page after 800ms
-            setTimeout(() => {
-                window.location.href = `submission-success.html?id=${submissionId}`;
-            }, 800);
+            // 2. Send to Google Sheets if Web App URL is provided
+            const sendToGoogleSheets = GOOGLE_SCRIPT_URL && !GOOGLE_SCRIPT_URL.includes("YOUR_GOOGLE_APPS_SCRIPT");
+            
+            if (sendToGoogleSheets) {
+                fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(submissionDetails)
+                }).then(() => {
+                    window.location.href = `submission-success.html?id=${submissionId}`;
+                }).catch(err => {
+                    console.error("Google Sheets Submission Error:", err);
+                    window.location.href = `submission-success.html?id=${submissionId}`;
+                });
+            } else {
+                // Redirect directly to Confirmation Page
+                setTimeout(() => {
+                    window.location.href = `submission-success.html?id=${submissionId}`;
+                }, 800);
+            }
         });
     </script>
 </body>
