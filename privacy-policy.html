@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Notice - CHARAL 2026</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Favicon (CHARAL Logo) -->
+    <link rel="icon" type="image/png" href="assets/images/logo-charal-2-b.png">
+    <link rel="shortcut icon" type="image/png" href="assets/images/logo-charal-2-b.png">
+    <link rel="apple-touch-icon" href="assets/images/logo-charal-2-b.png">
+
+    <style>
+        :root {
+            --bg-dark: #050b14;
+            --bg-card: rgba(11, 25, 38, 0.75);
+            --bg-card-hover: rgba(18, 43, 62, 0.85);
+            --border-glow: rgba(120, 200, 170, 0.25);
+            --border-active: rgba(120, 200, 170, 0.6);
+            --accent-cyan: #78c8aa;
+            --accent-blue: #4ade80;
+            --accent-purple: #2dd4bf;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --font-heading: 'Space Grotesk', sans-serif;
+            --font-body: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .ambient-glow {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(120, 200, 170, 0.08) 0%, rgba(45, 212, 191, 0.04) 40%, transparent 70%);
+            z-index: 0;
+            pointer-events: none;
+            filter: blur(60px);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header Navigation */
+        header {
+            padding: 24px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            background: rgba(5, 11, 20, 0.85);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-image {
+            height: 38px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .logo-text {
+            font-family: var(--font-heading);
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: -0.02em;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--accent-cyan);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .back-link:hover {
+            color: #ffffff;
+            transform: translateX(-3px);
+        }
+
+        /* Content Card */
+        .privacy-wrapper {
+            padding: 50px 0 80px;
+        }
+
+        .glass-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-glow);
+            border-radius: 24px;
+            padding: 48px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .privacy-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            background: rgba(120, 200, 170, 0.12);
+            border: 1px solid rgba(120, 200, 170, 0.3);
+            border-radius: 100px;
+            color: var(--accent-cyan);
+            font-size: 0.82rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .privacy-title {
+            font-family: var(--font-heading);
+            font-size: 2.4rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 12px;
+            line-height: 1.2;
+            text-shadow: 0 0 30px rgba(120, 200, 170, 0.3);
+        }
+
+        .privacy-subtitle {
+            font-size: 0.98rem;
+            color: var(--text-secondary);
+            margin-bottom: 36px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            font-style: italic;
+        }
+
+        .privacy-section {
+            margin-bottom: 36px;
+        }
+
+        .privacy-section h3 {
+            font-family: var(--font-heading);
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .privacy-section p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin-bottom: 14px;
+            line-height: 1.65;
+        }
+
+        .privacy-section ul {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 16px;
+        }
+
+        .privacy-section li {
+            font-size: 0.93rem;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+            padding-left: 24px;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .privacy-section li::before {
+            content: "•";
+            color: var(--accent-cyan);
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 8px;
+            top: -2px;
+        }
+
+        .contact-box {
+            background: rgba(120, 200, 170, 0.08);
+            border: 1px solid var(--border-glow);
+            border-radius: 16px;
+            padding: 20px 24px;
+            margin-top: 16px;
+            margin-bottom: 16px;
+        }
+
+        .contact-box p {
+            margin-bottom: 6px;
+            font-size: 0.92rem;
+        }
+
+        a {
+            color: var(--accent-cyan);
+            text-decoration: underline;
+            transition: color 0.2s;
+        }
+
+        a:hover {
+            color: #ffffff;
+        }
+
+        footer {
+            padding: 40px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        @media (max-width: 768px) {
+            .glass-card {
+                padding: 28px 20px;
+            }
+            .privacy-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Ambient Canvas Mesh Background -->
+    <canvas id="bg-canvas"></canvas>
+    <div class="ambient-glow"></div>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="assets/images/logo-charal-2-b.png" alt="CHARAL Logo" class="logo-image">
+                <span class="logo-text">CHARAL 2026</span>
+            </a>
+            <a href="index.html" class="back-link">
+                <i data-lucide="arrow-left" style="width: 16px; height: 16px;"></i>
+                Back to Challenge
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container privacy-wrapper">
+        <div class="glass-card">
+            
+            <div class="privacy-badge">
+                <i data-lucide="shield-check" style="width: 14px; height: 14px;"></i>
+                Legal &amp; Data Protection
+            </div>
+
+            <h1 class="privacy-title">Privacy Notice – CHARAL Challenge</h1>
+            <p class="privacy-subtitle">
+                Consolidated compliance under the Ley Federal de Protección de Datos Personales en Posesión de los Particulares (LFPDPPP - Mexico) and the General Data Protection Regulation (GDPR - European Union).
+            </p>
+
+            <!-- 1. Identity and Address -->
+            <div class="privacy-section">
+                <h3>1. Identity and Address of the Data Controller</h3>
+                <p>
+                    <strong>Alexandr.ia AI Learning Systems</strong> (the "Data Controller"), in coordination with the designated Demo Showcase Chairs (Eugenio Salas Iturriaga, <a href="mailto:eugenio@alexandriads.com">eugenio@alexandriads.com</a>, and Arturo Gómez-Chávez, <a href="mailto:arturo.gomez-chavez@explearn.io">arturo.gomez-chavez@explearn.io</a>), serves as the organizing and technical administrator for the CHARAL Challenge (hosted at <a href="https://charal-workshop-ai.com/" target="_blank">https://charal-workshop-ai.com/</a>), designates its official legal address at:
+                </p>
+                <div class="contact-box">
+                    <p><strong>Official Address:</strong> Paseo de la Luz 232, Paseos de Taxqueña, Coyoacán, C.P. 04250, Mexico City, CDMX, Mexico.</p>
+                    <p><strong>Official Contact Email:</strong> <a href="mailto:info@alexandriads.com">info@alexandriads.com</a></p>
+                    <p><strong>Demo Showcase Chairs:</strong> <a href="mailto:eugenio@alexandriads.com">eugenio@alexandriads.com</a>, <a href="mailto:arturo.gomez-chavez@explearn.io">arturo.gomez-chavez@explearn.io</a></p>
+                </div>
+            </div>
+
+            <!-- 2. Legal Bases -->
+            <div class="privacy-section">
+                <h3>2. Legal Bases for Processing</h3>
+                <p>In accordance with Article 6 of the GDPR and relevant provisions of the LFPDPPP, personal data is processed under the following legal bases:</p>
+                <ul>
+                    <li><strong>Consent:</strong> Voluntarily granted by the Data Subject upon submitting proposal forms, registering for the challenge, uploading project files, or consenting to secondary communications.</li>
+                    <li><strong>Performance of a Contract / Pre-contractual Steps:</strong> Necessary to administer participation, conduct peer reviews, facilitate live prototype evaluations, assign showcase presentation slots, and provision sandbox environments.</li>
+                    <li><strong>Legitimate Interest:</strong> Enforcing academic integrity, ensuring technical stability of evaluation platforms, preventing fraud, and producing aggregated research metrics.</li>
+                </ul>
+            </div>
+
+            <!-- 3. Personal Data Collected -->
+            <div class="privacy-section">
+                <h3>3. Personal Data Collected</h3>
+                <p>The Controller processes information submitted directly by participants, authors, and reviewers:</p>
+                <ul>
+                    <li><strong>Direct Registration &amp; Identification Data:</strong> Timestamp, unique applicant identifier (ID), Full Name, Email Address (personal or institutional), Academic or Professional Institution, Professional Role/Title, and Selected Track (Track 1: AI Systems for Reviewers; Track 2: AI Systems to Stimulate Cognition).</li>
+                    <li><strong>Proposal &amp; Academic Content:</strong> Proposal Title, Draft Abstract, and related metadata.</li>
+                    <li><strong>Prototype &amp; Technical Submissions:</strong> Functional system prototype URLs, public or private GitHub codebase repository links, architecture documentation, 5-minute video demos, slide decks, and System Prompt/Governance Principle documents (including human-in-the-loop controls and mitigation policies).</li>
+                    <li><strong>Live Interaction &amp; Sandbox Evaluation Records:</strong> Technical performance logs, judge evaluation scores, structured feedback protocols designed by Alexandr.ia AI Learning Systems, and usage telemetry if provisioned access to the Alexandr.ia live sandbox environment.</li>
+                    <li><strong>Exclusion of Sensitive Data:</strong> The Controller does not collect sensitive data (e.g., biometrics, health, political or religious beliefs). Participants must ensure their system prompts, datasets, and codebase submissions are stripped of personally identifiable test data.</li>
+                </ul>
+            </div>
+
+            <!-- 4. Purposes of Data Processing -->
+            <div class="privacy-section">
+                <h3>4. Purposes of Data Processing</h3>
+                <p><strong>Primary Purposes (Necessary for challenge operation):</strong></p>
+                <ul>
+                    <li>Administering registration, track allocation, and identity verification for challenge participants.</li>
+                    <li>Coordinating the 5-criterion peer review process (Originality, Relevance &amp; Pedagogical Impact, AI &amp; Ethical Governance, Prototype Maturity, and Documentation Quality).</li>
+                    <li>Organizing logistics for accepted prototype presentations, showcase sessions, and live standardized interaction evaluations.</li>
+                    <li>Facilitating access, technical validation, and testing within the Alexandr.ia AI Learning Systems live sandbox environment for eligible teams.</li>
+                    <li>Generating and distributing aggregated evaluation summary reports, peer review scores, and improvement recommendations to participants.</li>
+                    <li>Managing award determinations, showcase recognition, and publication logistics.</li>
+                </ul>
+                <p><strong>Secondary Purposes (Optional):</strong></p>
+                <ul>
+                    <li>Sending invitations to subsequent editions of the CHARAL Challenge, academic workshops, hackathons, or webinars co-organized by Alexandr.ia.</li>
+                    <li>Communicating platform updates regarding Alexandr.ia AI Learning Systems initiatives.</li>
+                </ul>
+                <p><em>Opt-Out Mechanism: You may opt out of secondary processing at any time without compromising your standing or participation in the challenge by writing to <a href="mailto:info@alexandriads.com">info@alexandriads.com</a>.</em></p>
+            </div>
+
+            <!-- 5. Data Transfers -->
+            <div class="privacy-section">
+                <h3>5. Data Transfers and Processors</h3>
+                <p>
+                    Submissions are stored and processed using secure cloud architectures (Google Cloud Platform, Firebase, and GitHub) primarily hosted in the United States and Mexico. Submissions will be accessible to designated peer reviewers, challenge judges, and showcase session organizers solely for evaluation purposes. The Controller does not sell, rent, or commercialize participant data.
+                </p>
+            </div>
+
+            <!-- 6. Retention and Data Governance -->
+            <div class="privacy-section">
+                <h3>6. Retention and Data Governance</h3>
+                <p>
+                    Identifiable submission data, evaluations, and author contact details will be retained throughout the challenge lifecycle and for up to 12 months following the showcase conclusion to coordinate post-event publications, sandbox trials, and certificates. Following this period, project records will be permanently deleted or irreversibly anonymized for longitudinal academic benchmarking.
+                </p>
+            </div>
+
+            <!-- 7. Rights of the Data Subject -->
+            <div class="privacy-section">
+                <h3>7. Rights of the Data Subject (ARCO &amp; GDPR)</h3>
+                <p>
+                    You may exercise your rights of <strong>Access, Rectification, Cancellation/Erasure, Objection, Restriction, or Portability</strong> by emailing <a href="mailto:info@alexandriads.com">info@alexandriads.com</a> with the subject line <em>"Data Subject Rights - CHARAL Challenge"</em>, specifying your request and attaching a valid government-issued ID. Requests are processed within statutory deadlines (20 business days under Mexican LFPDPPP; 30 calendar days under GDPR).
+                </p>
+            </div>
+
+            <!-- 8. Security, Inquiries, and Amendments -->
+            <div class="privacy-section">
+                <h3>8. Security, Inquiries, and Amendments</h3>
+                <p>
+                    The Controller enforces strict technical, organizational, and administrative controls over all challenge repositories and submission forms. For questions regarding submission handling or this notice, contact <a href="mailto:eugenio@alexandriads.com">eugenio@alexandriads.com</a> or <a href="mailto:info@alexandriads.com">info@alexandriads.com</a>. Any future amendments to this policy will be published on <a href="https://charal-workshop-ai.com/" target="_blank">https://charal-workshop-ai.com/</a>.
+                </p>
+                <p style="margin-top: 20px; font-size: 0.88rem; color: var(--text-muted);">
+                    <em>Last updated: August 2026.</em>
+                </p>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Fixed Bottom-Left MICAI 25 Years Badge -->
+    <a href="https://micai.org/2026/" target="_blank" title="MICAI 2026 Official Site" style="position: fixed; bottom: 24px; left: 24px; z-index: 999; display: flex; align-items: center; gap: 10px; padding: 10px 16px; border-radius: 14px; background: rgba(5, 11, 20, 0.8); border: 1px solid rgba(255,255,255,0.18); backdrop-filter: blur(12px); box-shadow: 0 10px 30px rgba(0,0,0,0.5); text-decoration: none; transition: transform 0.3s ease, border-color 0.3s ease;" onmouseover="this.style.transform='translateY(-3px) scale(1.03)'; this.style.borderColor='rgba(255,255,255,0.4)';" onmouseout="this.style.transform='none'; this.style.borderColor='rgba(255,255,255,0.18)';">
+        <img src="assets/images/logo-micai-25years.png" alt="MICAI 25 Years Logo" style="height: 38px; object-fit: contain; filter: drop-shadow(0 0 10px rgba(255,255,255,0.3));">
+    </a>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            &copy; 2026 CHARAL Workshop. All rights reserved. Cognition First AI Challenge. | <a href="privacy-policy.html">Privacy Notice</a>
+        </div>
+    </footer>
+
+    <!-- Interactive Scripts -->
+    <script>
+        lucide.createIcons();
+
+        // Canvas Particle Mesh Animation
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        });
+
+        const particles = [];
+        const particleCount = Math.min(Math.floor(width / 22), 55);
+
+        for (let i = 0; i < particleCount; i++) {
+            particles.push({
+                x: Math.random() * width,
+                y: Math.random() * height,
+                vx: (Math.random() - 0.5) * 0.3,
+                vy: (Math.random() - 0.5) * 0.3,
+                radius: Math.random() * 1.5 + 0.5,
+                alpha: Math.random() * 0.4 + 0.2
+            });
+        }
+
+        function drawMesh() {
+            ctx.clearRect(0, 0, width, height);
+
+            for (let i = 0; i < particles.length; i++) {
+                let p = particles[i];
+                p.x += p.vx;
+                p.y += p.vy;
+
+                if (p.x < 0 || p.x > width) p.vx *= -1;
+                if (p.y < 0 || p.y > height) p.vy *= -1;
+
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(120, 200, 170, ${p.alpha})`;
+                ctx.fill();
+
+                for (let j = i + 1; j < particles.length; j++) {
+                    let p2 = particles[j];
+                    let dist = Math.hypot(p.x - p2.x, p.y - p2.y);
+                    if (dist < 130) {
+                        ctx.beginPath();
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(p2.x, p2.y);
+                        ctx.strokeStyle = `rgba(45, 212, 191, ${0.12 * (1 - dist / 130)})`;
+                        ctx.lineWidth = 0.7;
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(drawMesh);
+        }
+        drawMesh();
+    </script>
+</body>
+</html>
