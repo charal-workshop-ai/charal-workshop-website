@@ -502,10 +502,10 @@
                     </div>
                 </div>
 
-                <!-- Section 2: Prototype Information & Track -->
+                <!-- Section 2: Challenge Track Selection -->
                 <div class="form-section-header">
                     <i data-lucide="layers"></i>
-                    <h3 class="form-section-title">2. Challenge Track &amp; Prototype Overview</h3>
+                    <h3 class="form-section-title">2. Challenge Track Selection</h3>
                 </div>
 
                 <div class="form-grid">
@@ -525,16 +525,6 @@
                                 <div class="track-radio-desc">Empowering learners by demanding real-time reflection, synthesis, and deep reasoning.</div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="form-group-full">
-                        <label for="projectTitle">Draft Prototype Title <span class="required">*</span></label>
-                        <input type="text" id="projectTitle" name="projectTitle" placeholder="e.g. SocraticAI: Dialectic Reasoning Auditor" required>
-                    </div>
-
-                    <div class="form-group-full">
-                        <label for="abstract">Draft Executive Abstract &amp; Cognitive Focus <span class="required">*</span> <span class="hint">Max 300 words</span></label>
-                        <textarea id="abstract" name="abstract" placeholder="Briefly describe a draft overview of how your system demands higher-order critical thinking and its underlying architecture..." required></textarea>
                     </div>
                 </div>
 
@@ -692,9 +682,7 @@
                 email: formData.get('email'),
                 institution: formData.get('institution'),
                 role: formData.get('role'),
-                track: formData.get('track'),
-                projectTitle: formData.get('projectTitle'),
-                abstract: formData.get('abstract')
+                track: formData.get('track')
             };
 
             // 1. Save to localStorage

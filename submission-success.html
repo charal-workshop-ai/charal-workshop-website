@@ -417,10 +417,6 @@
 
                 <div class="receipt-grid">
                     <div>
-                        <div class="receipt-label">Draft Prototype Title</div>
-                        <div class="receipt-value" id="rec-title">AI Cognitive Project</div>
-                    </div>
-                    <div>
                         <div class="receipt-label">Selected Track</div>
                         <div class="receipt-value" id="rec-track">Track 1</div>
                     </div>
@@ -536,7 +532,6 @@
         if (data && (data.id === subId || !subId)) {
             document.getElementById('rec-id').innerText = data.id || subId || 'REG2026-CONFIRMED';
             document.getElementById('rec-date').innerText = data.timestamp || new Date().toLocaleString();
-            document.getElementById('rec-title').innerText = data.projectTitle || 'Registered Proposal';
             document.getElementById('rec-track').innerText = data.track || 'Track 1 / Track 2';
             document.getElementById('rec-name').innerText = (data.fullName || 'Registrant') + ' (' + (data.email || '') + ')';
             document.getElementById('rec-institution').innerText = data.institution || '-';
