@@ -443,6 +443,55 @@
             border: 0;
         }
 
+        /* Timeline Section */
+        .timeline-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .timeline-card-main {
+            background: rgba(12, 18, 34, 0.85);
+            border: 1px solid var(--border-glow);
+            border-radius: 18px;
+            padding: 24px;
+            position: relative;
+            backdrop-filter: blur(14px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .timeline-card-main:hover {
+            transform: translateY(-4px);
+            border-color: rgba(120, 200, 170, 0.6);
+        }
+
+        .timeline-badge-tag {
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--accent-emerald);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 8px;
+            display: inline-block;
+        }
+
+        .timeline-title-text {
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .timeline-desc-text {
+            font-size: 0.92rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
         /* Tracks Grid */
         .tracks-grid {
             display: grid;
@@ -842,6 +891,7 @@
             </button>
             <ul id="nav-menu">
                 <li><a href="#about">About</a></li>
+                <li><a href="#timeline">Timeline</a></li>
                 <li><a href="#recording">Recording</a></li>
                 <li><a href="#tracks">Tracks</a></li>
                 <li><a href="#presentation">Evaluation</a></li>
@@ -892,10 +942,10 @@
                     </div>
                 </div>
                 <div class="info-item">
-                    <div class="info-icon"><i data-lucide="map-pin"></i></div>
+                    <div class="info-icon"><i data-lucide="globe"></i></div>
                     <div>
                         <div class="info-label">Location</div>
-                        <div class="info-val">Tec de Monterrey, Campus Chihuahua</div>
+                        <div class="info-val">Online Showcase · MICAI 2026</div>
                     </div>
                 </div>
             </div>
@@ -932,6 +982,58 @@
                     <p>
                         Our initiative seeks to shift the educational paradigm from detecting AI use to demanding higher-order critical thinking when AI is used, enforcing rigorous engineering standards and foundational data governance.
                     </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline & Important Dates Section -->
+    <section id="timeline" style="padding: 60px 0;">
+        <div class="container">
+            <div class="section-header">
+                <div class="badge">
+                    <i data-lucide="calendar" style="width: 14px; height: 14px;"></i>
+                    Important Dates &amp; Milestones
+                </div>
+                <h2 class="section-title">Challenge Timeline</h2>
+                <p class="section-desc">Key milestones from registration and workshops to evaluation and final online presentations.</p>
+            </div>
+
+            <div class="timeline-grid">
+                <div class="timeline-card-main">
+                    <span class="timeline-badge-tag">Step 1 • Sep 8</span>
+                    <div class="timeline-title-text">Intro Workshop</div>
+                    <div class="timeline-desc-text">Challenge Brief &amp; AI Governance overview.</div>
+                </div>
+
+                <div class="timeline-card-main">
+                    <span class="timeline-badge-tag">Step 2 • Sep 21</span>
+                    <div class="timeline-title-text">Open Submission</div>
+                    <div class="timeline-desc-text">Official submission portal opens for registered entries.</div>
+                </div>
+
+                <div class="timeline-card-main" style="border: 1px solid rgba(255, 107, 107, 0.4); background: rgba(255, 107, 107, 0.05);">
+                    <span class="timeline-badge-tag" style="color: #ff7676;">Step 3 • Oct 12</span>
+                    <div class="timeline-title-text">Lovable AI Workshop</div>
+                    <div class="timeline-desc-text">Special hands-on AI prototyping workshop hosted by Lovable.</div>
+                </div>
+
+                <div class="timeline-card-main">
+                    <span class="timeline-badge-tag">Step 4 • Technical Audit</span>
+                    <div class="timeline-title-text">Technical Verification</div>
+                    <div class="timeline-desc-text">Showcase chairs audit live URLs, GitHub code, and governance docs.</div>
+                </div>
+
+                <div class="timeline-card-main">
+                    <span class="timeline-badge-tag">Step 5 • Oct 30</span>
+                    <div class="timeline-title-text">Winners Selection</div>
+                    <div class="timeline-desc-text">Official selection and announcement of challenge winners and finalists.</div>
+                </div>
+
+                <div class="timeline-card-main" style="border: 1px solid rgba(120, 200, 170, 0.4); background: rgba(120, 200, 170, 0.05);">
+                    <span class="timeline-badge-tag" style="color: var(--accent-cyan);">Step 6 • Nov 2–6, 2026</span>
+                    <div class="timeline-title-text">MICAI 2026 · Online Final Showcase</div>
+                    <div class="timeline-desc-text">Live online presentations &amp; final showcase at MICAI 2026.</div>
                 </div>
             </div>
         </div>
