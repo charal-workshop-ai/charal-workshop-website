@@ -435,11 +435,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div class="form-group-full">
-                            <label for="projectIdea">How do you plan to use Lovable AI for your prototype? <span class="required">*</span></label>
-                            <textarea id="projectIdea" name="projectIdea" placeholder="Briefly describe your project idea and how Lovable AI credits will accelerate your prototype development..." required></textarea>
-                        </div>
                     </div>
 
                     <div class="form-group-full" style="margin-top: 24px; margin-bottom: 24px;">
@@ -494,8 +489,7 @@
                 email: formData.get('email'),
                 institution: formData.get('institution'),
                 role: formData.get('role'),
-                track: formData.get('track'),
-                projectIdea: formData.get('projectIdea')
+                track: formData.get('track')
             };
 
             const params = new URLSearchParams();
