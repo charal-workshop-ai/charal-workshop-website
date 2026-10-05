@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lovable AI Credits Registration | CHARAL 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --bg-dark: #050b14;
+            --bg-card: rgba(12, 18, 34, 0.75);
+            --border-glow: rgba(255, 255, 255, 0.12);
+            --accent-cyan: #78c8aa;
+            --accent-emerald: #10b981;
+            --accent-lovable: #ff6b6b;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --font-main: 'Plus Jakarta Sans', sans-serif;
+            --font-heading: 'Space Grotesk', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            font-family: var(--font-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Canvas Particle Background */
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .ambient-glow {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 107, 107, 0.12) 0%, rgba(120, 200, 170, 0.08) 50%, transparent 70%);
+            top: -200px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Navigation Header */
+        header {
+            padding: 24px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(5, 11, 20, 0.85);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 1.25rem;
+        }
+
+        .logo-image {
+            height: 38px;
+            object-fit: contain;
+        }
+
+        .back-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: var(--accent-cyan);
+        }
+
+        /* Form Layout */
+        main {
+            flex: 1;
+            padding: 48px 0 80px;
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            border-radius: 30px;
+            background: rgba(255, 107, 107, 0.12);
+            border: 1px solid rgba(255, 107, 107, 0.3);
+            color: #ff7676;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 16px;
+        }
+
+        .form-title {
+            font-family: var(--font-heading);
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .form-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            line-height: 1.6;
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        .lovable-sponsor-banner {
+            display: inline-flex;
+            align-items: center;
+            gap: 16px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 12px 28px;
+            border-radius: 16px;
+            margin-top: 20px;
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.25);
+        }
+
+        .lovable-sponsor-banner img {
+            height: 32px;
+            object-fit: contain;
+        }
+
+        /* Glassmorphism Card */
+        .form-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glow);
+            border-radius: 24px;
+            padding: 40px;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .form-group-full {
+            grid-column: span 2;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        label .required {
+            color: var(--accent-lovable);
+        }
+
+        input[type="text"],
+        input[type="email"],
+        select,
+        textarea {
+            width: 100%;
+            background: rgba(5, 11, 20, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            padding: 14px 18px;
+            color: #fff;
+            font-family: var(--font-main);
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: #ff7676;
+            box-shadow: 0 0 15px rgba(255, 107, 107, 0.3);
+            background: rgba(5, 11, 20, 0.85);
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        select option {
+            background: #090d16;
+            color: #fff;
+        }
+
+        .hint {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .track-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 4px;
+        }
+
+        .track-radio-card {
+            background: rgba(5, 11, 20, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 14px;
+            padding: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .track-radio-card:hover {
+            border-color: rgba(255, 107, 107, 0.4);
+            background: rgba(255, 107, 107, 0.05);
+        }
+
+        .track-radio-card.active {
+            border-color: #ff7676;
+            background: rgba(255, 107, 107, 0.1);
+        }
+
+        .track-radio-card input {
+            position: absolute;
+            opacity: 0;
+        }
+
+        .track-radio-title {
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-bottom: 4px;
+            color: #fff;
+        }
+
+        .track-radio-desc {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%);
+            color: #fff;
+            border: none;
+            padding: 16px 32px;
+            border-radius: 50px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            font-family: var(--font-heading);
+            cursor: pointer;
+            box-shadow: 0 0 30px rgba(255, 107, 107, 0.35);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 12px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 40px rgba(255, 107, 107, 0.55);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        footer {
+            padding: 30px 0;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            z-index: 2;
+        }
+
+        @media (max-width: 640px) {
+            .form-grid { grid-template-columns: 1fr; }
+            .form-group-full { grid-column: span 1; }
+            .track-options { grid-template-columns: 1fr; }
+            .form-card { padding: 24px; }
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="bg-canvas"></canvas>
+    <div class="ambient-glow"></div>
+
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">
+                <img src="assets/images/logo-charal-2-b.png" alt="CHARAL Logo" class="logo-image">
+                <span>CHARAL 2026</span>
+            </a>
+            <a href="index.html" class="back-link">
+                <i data-lucide="arrow-left"></i>
+                Back to Challenge
+            </a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="form-header">
+                <div class="badge">
+                    <i data-lucide="heart" style="width: 14px; height: 14px;"></i>
+                    Sponsor Credits Program
+                </div>
+                <h1 class="form-title">Lovable AI Credits Application</h1>
+                <p class="form-subtitle">
+                    Apply for free <strong>Lovable AI prototyping credits</strong> to build, iterate, and deploy your Cognition-First AI Challenge entry.
+                </p>
+                <div class="lovable-sponsor-banner">
+                    <span style="font-size: 0.85rem; font-weight: 700; color: #0f172a; text-transform: uppercase; letter-spacing: 0.05em;">Powered By</span>
+                    <img src="assets/images/logo-lovable.png" alt="Lovable Logo">
+                </div>
+            </div>
+
+            <div class="form-card">
+                <form id="lovable-credits-form">
+                    <input type="hidden" name="formType" value="Lovable Credits Application">
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="fullName">Full Name <span class="required">*</span></label>
+                            <input type="text" id="fullName" name="fullName" placeholder="e.g. Dr. Alex Morgan" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Institutional / Contact Email <span class="required">*</span></label>
+                            <input type="email" id="email" name="email" placeholder="alex.morgan@university.edu" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="institution">Institution / Organization <span class="required">*</span></label>
+                            <input type="text" id="institution" name="institution" placeholder="e.g. Tec de Monterrey / Research Lab" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="role">Role / Position <span class="required">*</span></label>
+                            <select id="role" name="role" required>
+                                <option value="" disabled selected>Select your role...</option>
+                                <option value="Researcher / Professor">Researcher / Professor</option>
+                                <option value="Graduate / Student">Graduate / Undergraduate Student</option>
+                                <option value="EdTech Developer / Engineer">EdTech Developer / Engineer</option>
+                                <option value="Industry Innovator">Industry Innovator</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group-full">
+                            <label style="margin-bottom: 8px;">Challenge Track Focus <span class="required">*</span></label>
+                            <div class="track-options">
+                                <div class="track-radio-card active" onclick="selectTrack('track1', this)">
+                                    <input type="radio" id="track1" name="track" value="Track 1: AI Systems for Reviewers" checked>
+                                    <div class="track-radio-title">Track 1: AI Systems for Reviewers</div>
+                                    <div class="track-radio-desc">Auditing human cognition and assisting educational / paper reviewers.</div>
+                                </div>
+                                <div class="track-radio-card" onclick="selectTrack('track2', this)">
+                                    <input type="radio" id="track2" name="track" value="Track 2: AI Systems to Stimulate Cognition">
+                                    <div class="track-radio-title">Track 2: AI Systems to Stimulate Cognition</div>
+                                    <div class="track-radio-desc">Demanding real-time reflection, synthesis, and critical thinking.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group-full">
+                            <label for="projectIdea">How do you plan to use Lovable AI for your prototype? <span class="required">*</span></label>
+                            <textarea id="projectIdea" name="projectIdea" placeholder="Briefly describe your project idea and how Lovable AI credits will accelerate your prototype development..." required></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group-full" style="margin-top: 24px; margin-bottom: 24px;">
+                        <label for="terms" style="display: flex; align-items: flex-start; gap: 12px; cursor: pointer; font-size: 0.9rem; color: var(--text-secondary); font-weight: 400; line-height: 1.5;">
+                            <input type="checkbox" id="terms" name="terms" required style="margin-top: 3px; accent-color: #ff7676; width: 18px; height: 18px; cursor: pointer; flex-shrink: 0;">
+                            <span>I accept the <a href="privacy-policy.html" target="_blank" style="color: #ff7676; text-decoration: underline;">Privacy Notice</a> and agree to use the requested Lovable AI credits for the CHARAL 2026 Challenge. <span class="required">*</span></span>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="submit-btn" id="submit-btn">
+                        <span>Submit Credits Application</span>
+                        <i data-lucide="arrow-right"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            &copy; 2026 CHARAL Workshop &amp; Lovable AI. All rights reserved. | <a href="privacy-policy.html" target="_blank" style="color: var(--accent-cyan);">Privacy Notice</a>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        function selectTrack(trackId, cardElement) {
+            document.querySelectorAll('.track-radio-card').forEach(card => card.classList.remove('active'));
+            cardElement.classList.add('active');
+            document.getElementById(trackId).checked = true;
+        }
+
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyjgnsed5HkestZ8NkcfU7OCqSTS7YsX3Y-au_sknomH-tcrNOzg1hFy5IYvCDmX_45Uw/exec";
+        const form = document.getElementById('lovable-credits-form');
+        const submitBtn = document.getElementById('submit-btn');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `<span>Processing Request...</span> <i data-lucide="loader" class="spin"></i>`;
+            lucide.createIcons();
+
+            const formData = new FormData(form);
+            const submissionId = 'LOV2026-' + Math.random().toString(36).substring(2, 8).toUpperCase();
+            
+            const submissionDetails = {
+                id: submissionId,
+                formType: 'Lovable Credits Application',
+                timestamp: new Date().toLocaleString(),
+                fullName: formData.get('fullName'),
+                email: formData.get('email'),
+                institution: formData.get('institution'),
+                role: formData.get('role'),
+                track: formData.get('track'),
+                projectIdea: formData.get('projectIdea')
+            };
+
+            const params = new URLSearchParams();
+            for (const key in submissionDetails) {
+                params.append(key, submissionDetails[key]);
+            }
+
+            fetch(GOOGLE_SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: params.toString()
+            }).then(() => {
+                alert('Your Lovable AI credits request has been submitted successfully! Check your email for further instructions.');
+                window.location.href = 'index.html';
+            }).catch(err => {
+                console.error("Google Sheets Error:", err);
+                alert('Request submitted! Check your email for confirmation.');
+                window.location.href = 'index.html';
+            });
+        });
+    </script>
+</body>
+</html>

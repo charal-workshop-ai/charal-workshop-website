@@ -453,13 +453,13 @@
         <!-- Form Hero Header -->
         <div class="form-header">
             <div class="badge">
-                <i data-lucide="user-check" style="width: 14px; height: 14px;"></i>
-                Registration Portal
+                <i data-lucide="file-up" style="width: 14px; height: 14px;"></i>
+                Official Submission Portal
             </div>
-            <h1 class="form-title">Register for CHARAL 2026</h1>
+            <h1 class="form-title">Prototype Submission Portal</h1>
             <p class="form-subtitle">
-                Register for the <strong>Cognition First: AI Augmented Learner Challenge</strong>.
-                Fill out the required information below to confirm your registration.
+                Submit your official entry package for the <strong>Cognition First: AI Augmented Learner Challenge</strong>.
+                Fill out the required information and provide all 4 mandatory project deliverables.
             </p>
         </div>
 
@@ -502,13 +502,23 @@
                     </div>
                 </div>
 
-                <!-- Section 2: Challenge Track Selection -->
-                <div class="form-section-header">
+                <!-- Section 2: Project Overview & Track Selection -->
+                <div class="form-section-header" style="margin-top: 32px;">
                     <i data-lucide="layers"></i>
-                    <h3 class="form-section-title">2. Challenge Track Selection</h3>
+                    <h3 class="form-section-title">2. Project Overview &amp; Track Selection</h3>
                 </div>
 
                 <div class="form-grid">
+                    <div class="form-group-full">
+                        <label for="projectTitle">Official Prototype Title <span class="required">*</span></label>
+                        <input type="text" id="projectTitle" name="projectTitle" placeholder="e.g. SocraticAI: Dialectic Reasoning Auditor" required>
+                    </div>
+
+                    <div class="form-group-full">
+                        <label for="abstract">Executive Abstract &amp; Cognitive Focus <span class="required">*</span> <span class="hint">Max 300 words</span></label>
+                        <textarea id="abstract" name="abstract" placeholder="Describe how your system demands higher-order critical thinking, active reflection, or reasoning auditing..." required></textarea>
+                    </div>
+
                     <div class="form-group-full">
                         <label style="margin-bottom: 8px;">Select Challenge Track <span class="required">*</span></label>
                         <div class="track-options">
@@ -528,18 +538,46 @@
                     </div>
                 </div>
 
+                <!-- Section 3: Mandatory Deliverable Artifacts -->
+                <div class="form-section-header" style="margin-top: 32px;">
+                    <i data-lucide="package-check"></i>
+                    <h3 class="form-section-title">3. Mandatory Deliverables</h3>
+                </div>
+
+                <div class="form-grid">
+                    <div class="form-group-full">
+                        <label for="liveUrl">1. Live Functional Prototype URL <span class="required">*</span></label>
+                        <input type="url" id="liveUrl" name="liveUrl" placeholder="https://your-prototype-demo.com" required>
+                    </div>
+
+                    <div class="form-group-full">
+                        <label for="githubUrl">2. GitHub Codebase Repository URL <span class="required">*</span></label>
+                        <input type="url" id="githubUrl" name="githubUrl" placeholder="https://github.com/username/your-repository" required>
+                    </div>
+
+                    <div class="form-group-full">
+                        <label for="demoUrl">3. Demo Video (5-min) &amp; Pitch Deck Link <span class="required">*</span></label>
+                        <input type="url" id="demoUrl" name="demoUrl" placeholder="https://youtube.com/watch?v=... or https://loom.com/share/..." required>
+                    </div>
+
+                    <div class="form-group-full">
+                        <label for="governanceUrl">4. AI Governance &amp; Ethics Document Link (PDF) <span class="required">*</span></label>
+                        <input type="url" id="governanceUrl" name="governanceUrl" placeholder="https://drive.google.com/... or PDF document link" required>
+                    </div>
+                </div>
+
                 <!-- Privacy Notice & Terms Checkbox -->
-                <div class="form-group-full" style="margin-top: 24px; margin-bottom: 24px;">
+                <div class="form-group-full" style="margin-top: 28px; margin-bottom: 24px;">
                     <label for="terms" style="display: flex; align-items: flex-start; gap: 12px; cursor: pointer; font-size: 0.9rem; color: var(--text-secondary); font-weight: 400; line-height: 1.5;">
                         <input type="checkbox" id="terms" name="terms" required style="margin-top: 3px; accent-color: var(--accent-cyan); width: 18px; height: 18px; cursor: pointer; flex-shrink: 0;">
-                        <span>I have read, understood, and accept the <a href="privacy-policy.html" target="_blank" style="color: var(--accent-cyan); text-decoration: underline;">Privacy Notice</a> and Terms &amp; Conditions for participation in CHARAL 2026. <span class="required">*</span></span>
+                        <span>I confirm that all provided links and artifacts are accurate and complete, and accept the <a href="privacy-policy.html" target="_blank" style="color: var(--accent-cyan); text-decoration: underline;">Privacy Notice</a> for CHARAL 2026. <span class="required">*</span></span>
                     </label>
                 </div>
 
                 <!-- Submit Button -->
                 <div class="submit-btn-wrapper">
                     <button type="submit" class="submit-btn" id="submit-btn">
-                        <span>Complete Registration</span>
+                        <span>Submit Final Prototype Package</span>
                         <i data-lucide="arrow-right"></i>
                     </button>
                 </div>
@@ -677,12 +715,19 @@
             
             const submissionDetails = {
                 id: submissionId,
+                formType: 'Official Prototype Submission',
                 timestamp: new Date().toLocaleString(),
                 fullName: formData.get('fullName'),
                 email: formData.get('email'),
                 institution: formData.get('institution'),
                 role: formData.get('role'),
-                track: formData.get('track')
+                projectTitle: formData.get('projectTitle'),
+                abstract: formData.get('abstract'),
+                track: formData.get('track'),
+                liveUrl: formData.get('liveUrl'),
+                githubUrl: formData.get('githubUrl'),
+                demoUrl: formData.get('demoUrl'),
+                governanceUrl: formData.get('governanceUrl')
             };
 
             // 1. Save to localStorage
