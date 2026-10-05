@@ -169,16 +169,19 @@
             display: inline-flex;
             align-items: center;
             gap: 16px;
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(12, 18, 34, 0.85);
+            border: 1px solid var(--border-glow);
             padding: 12px 28px;
             border-radius: 16px;
             margin-top: 20px;
-            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.25);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(14px);
         }
 
         .lovable-sponsor-banner img {
             height: 32px;
             object-fit: contain;
+            filter: drop-shadow(0 0 15px rgba(255, 107, 107, 0.4));
         }
 
         /* Glassmorphism Card */
@@ -380,8 +383,8 @@
                     Apply for free <strong>Lovable AI prototyping credits</strong> to build, iterate, and deploy your Cognition-First AI Challenge entry.
                 </p>
                 <div class="lovable-sponsor-banner">
-                    <span style="font-size: 0.85rem; font-weight: 700; color: #0f172a; text-transform: uppercase; letter-spacing: 0.05em;">Powered By</span>
-                    <img src="assets/images/logo-lovable.png" alt="Lovable Logo">
+                    <span style="font-size: 0.85rem; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em;">Powered By</span>
+                    <img src="assets/images/logo-lovable-white.png" alt="Lovable Logo">
                 </div>
             </div>
 
