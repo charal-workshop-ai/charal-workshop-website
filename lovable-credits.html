@@ -386,6 +386,18 @@
                     <span style="font-size: 0.85rem; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em;">Powered By</span>
                     <img src="assets/images/logo-lovable-white.png" alt="Lovable Logo">
                 </div>
+
+                <!-- Important Credit Policy Notice -->
+                <div style="background: rgba(255, 107, 107, 0.1); border: 1px solid rgba(255, 107, 107, 0.35); border-radius: 16px; padding: 18px 24px; margin-top: 24px; backdrop-filter: blur(12px); text-align: left;">
+                    <div style="display: flex; align-items: center; gap: 10px; color: #ff7676; font-weight: 700; font-size: 1rem; margin-bottom: 8px;">
+                        <i data-lucide="info" style="width: 20px; height: 20px;"></i>
+                        Credit Distribution Policy &amp; Timeline
+                    </div>
+                    <ul style="color: var(--text-secondary); font-size: 0.92rem; line-height: 1.6; margin-left: 20px; list-style-type: disc;">
+                        <li><strong>Dispatch Date:</strong> Promo credit codes will be sent via email on <strong>Tuesday, October 13 (Martes 13 de Octubre)</strong>.</li>
+                        <li><strong>Team Limit:</strong> Exactly <strong>1 code per team</strong> will be granted. If registering with a team, select "Team Registration" and provide your team members' email addresses below.</li>
+                    </ul>
+                </div>
             </div>
 
             <div class="form-card">
@@ -394,7 +406,7 @@
 
                     <div class="form-grid">
                         <div class="form-group">
-                            <label for="fullName">Full Name <span class="required">*</span></label>
+                            <label for="fullName">Lead Submitter Name <span class="required">*</span></label>
                             <input type="text" id="fullName" name="fullName" placeholder="e.g. Dr. Alex Morgan" required>
                         </div>
 
@@ -418,6 +430,27 @@
                                 <option value="Industry Innovator">Industry Innovator</option>
                                 <option value="Other">Other</option>
                             </select>
+                        </div>
+
+                        <!-- Team Registration Selection -->
+                        <div class="form-group-full">
+                            <label style="margin-bottom: 8px;">Registration Format <span class="required">*</span></label>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                                <label style="background: rgba(5, 11, 20, 0.6); border: 1px solid rgba(255,255,255,0.15); padding: 14px 18px; border-radius: 12px; cursor: pointer; display: flex; align-items: center; gap: 10px; color: #fff; font-weight: 600;">
+                                    <input type="radio" name="isTeam" value="Individual" checked onclick="toggleTeamFields(false)" style="accent-color: #ff7676; width: 18px; height: 18px;">
+                                    <span>Individual Entry</span>
+                                </label>
+                                <label style="background: rgba(5, 11, 20, 0.6); border: 1px solid rgba(255,255,255,0.15); padding: 14px 18px; border-radius: 12px; cursor: pointer; display: flex; align-items: center; gap: 10px; color: #fff; font-weight: 600;">
+                                    <input type="radio" name="isTeam" value="Team" onclick="toggleTeamFields(true)" style="accent-color: #ff7676; width: 18px; height: 18px;">
+                                    <span>Team Entry (1 Code / Team)</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Team Members Emails (shown when Team is selected) -->
+                        <div class="form-group-full" id="team-emails-container" style="display: none;">
+                            <label for="teamEmails">Team Members' Emails <span class="required">*</span> <span class="hint">(Separate multiple emails with commas)</span></label>
+                            <textarea id="teamEmails" name="teamEmails" placeholder="member1@university.edu, member2@university.edu..."></textarea>
                         </div>
 
                         <div class="form-group-full">
@@ -468,6 +501,19 @@
             document.getElementById(trackId).checked = true;
         }
 
+        function toggleTeamFields(isTeam) {
+            const container = document.getElementById('team-emails-container');
+            const teamInput = document.getElementById('teamEmails');
+            if (isTeam) {
+                container.style.display = 'block';
+                teamInput.required = true;
+            } else {
+                container.style.display = 'none';
+                teamInput.required = false;
+                teamInput.value = '';
+            }
+        }
+
         const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyjgnsed5HkestZ8NkcfU7OCqSTS7YsX3Y-au_sknomH-tcrNOzg1hFy5IYvCDmX_45Uw/exec";
         const form = document.getElementById('lovable-credits-form');
         const submitBtn = document.getElementById('submit-btn');
@@ -489,7 +535,9 @@
                 email: formData.get('email'),
                 institution: formData.get('institution'),
                 role: formData.get('role'),
-                track: formData.get('track')
+                track: formData.get('track'),
+                isTeam: formData.get('isTeam') || 'Individual',
+                teamEmails: formData.get('teamEmails') || 'N/A (Individual)'
             };
 
             const params = new URLSearchParams();
