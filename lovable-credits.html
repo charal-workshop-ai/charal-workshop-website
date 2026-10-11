@@ -382,6 +382,10 @@
                 <p class="form-subtitle">
                     Apply for free <strong>Lovable AI prototyping credits</strong> to build, iterate, and deploy your Cognition-First AI Challenge entry.
                 </p>
+                <div style="margin-top: 10px; display: inline-flex; align-items: center; gap: 8px; background: rgba(255, 107, 107, 0.15); border: 1px solid rgba(255, 107, 107, 0.4); border-radius: 30px; padding: 6px 18px; color: #ff8e53; font-weight: 600; font-size: 0.92rem;">
+                    <i data-lucide="bell" style="width: 16px; height: 16px;"></i>
+                    <span>Los créditos de Lovable se reparten el martes a los registrados (1 código por equipo)</span>
+                </div>
                 <div class="lovable-sponsor-banner">
                     <span style="font-size: 0.85rem; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em;">Powered By</span>
                     <img src="assets/images/logo-lovable-white.png" alt="Lovable Logo">
@@ -391,11 +395,11 @@
                 <div style="background: rgba(255, 107, 107, 0.1); border: 1px solid rgba(255, 107, 107, 0.35); border-radius: 16px; padding: 18px 24px; margin-top: 24px; backdrop-filter: blur(12px); text-align: left;">
                     <div style="display: flex; align-items: center; gap: 10px; color: #ff7676; font-weight: 700; font-size: 1rem; margin-bottom: 8px;">
                         <i data-lucide="info" style="width: 20px; height: 20px;"></i>
-                        Credit Distribution Policy &amp; Timeline
+                        Entrega de Créditos / Credit Distribution Policy
                     </div>
                     <ul style="color: var(--text-secondary); font-size: 0.92rem; line-height: 1.6; margin-left: 20px; list-style-type: disc;">
-                        <li><strong>Dispatch Date:</strong> Promo credit codes will be sent via email on <strong>Tuesday, October 13 (Martes 13 de Octubre)</strong>.</li>
-                        <li><strong>Team Limit:</strong> Exactly <strong>1 code per team</strong> will be granted. If registering with a team, select "Team Registration" and provide your team members' email addresses below.</li>
+                        <li><strong>Entrega / Distribution Date:</strong> Los créditos de Lovable se reparten el <strong>martes (Tuesday, Oct 13)</strong> a todos los participantes registrados.</li>
+                        <li><strong>Límite por equipo / Team Limit:</strong> Solo se enviará <strong>1 código por equipo</strong>. Si tu registro es en equipo, selecciona "Team Registration" e indica los correos de tus integrantes.</li>
                     </ul>
                 </div>
             </div>
@@ -551,11 +555,11 @@
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body: params.toString()
             }).then(() => {
-                alert('Your Lovable AI credits request has been submitted successfully! Check your email for further instructions.');
+                alert('¡Solicitud enviada con éxito! Recuerda que los créditos de Lovable se reparten el martes a los registrados. / Application submitted successfully! Lovable credits will be distributed on Tuesday to registered participants.');
                 window.location.href = 'index.html';
             }).catch(err => {
                 console.error("Google Sheets Error:", err);
-                alert('Request submitted! Check your email for confirmation.');
+                alert('¡Solicitud enviada con éxito! Recuerda que los créditos de Lovable se reparten el martes a los registrados. / Application submitted! Lovable credits will be distributed on Tuesday to registered participants.');
                 window.location.href = 'index.html';
             });
         });
