@@ -384,7 +384,7 @@
                 </p>
                 <div style="margin-top: 10px; display: inline-flex; align-items: center; gap: 8px; background: rgba(255, 107, 107, 0.15); border: 1px solid rgba(255, 107, 107, 0.4); border-radius: 30px; padding: 6px 18px; color: #ff8e53; font-weight: 600; font-size: 0.92rem;">
                     <i data-lucide="bell" style="width: 16px; height: 16px;"></i>
-                    <span>Lovable credits will be sent on Tuesday, October 13 to registered participants (1 code per team)</span>
+                    <span>Lovable credits are sent on demand to registered participants (1 code per team)</span>
                 </div>
                 <div class="lovable-sponsor-banner">
                     <span style="font-size: 0.85rem; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em;">Powered By</span>
@@ -398,7 +398,7 @@
                         Credit Distribution Policy &amp; Timeline
                     </div>
                     <ul style="color: var(--text-secondary); font-size: 0.92rem; line-height: 1.6; margin-left: 20px; list-style-type: disc;">
-                        <li><strong>Distribution Date:</strong> Lovable credit codes will be sent via email on <strong>Tuesday, October 13</strong> to all registered participants.</li>
+                        <li><strong>Distribution:</strong> Lovable credit codes are sent via email <strong>on demand</strong> to registered participants.</li>
                         <li><strong>Team Limit:</strong> Exactly <strong>1 code per team</strong> will be granted. If registering as a team, select "Team Registration" and provide your team members' email addresses below.</li>
                     </ul>
                 </div>
@@ -555,11 +555,11 @@
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body: params.toString()
             }).then(() => {
-                alert('Your Lovable AI credits application has been submitted successfully! Credit codes will be sent on Tuesday, October 13 to registered participants.');
+                alert('Your Lovable AI credits application has been submitted successfully! Credit codes are sent on demand to registered participants by email.');
                 window.location.href = 'index.html';
             }).catch(err => {
                 console.error("Google Sheets Error:", err);
-                alert('Your Lovable AI credits application has been submitted successfully! Credit codes will be sent on Tuesday, October 13 to registered participants.');
+                alert('Your Lovable AI credits application has been submitted successfully! Credit codes are sent on demand to registered participants by email.');
                 window.location.href = 'index.html';
             });
         });
