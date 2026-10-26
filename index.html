@@ -270,11 +270,11 @@
 
         /* Conference Info Card */
         .conference-info-hero {
-            max-width: 940px;
+            max-width: 1040px;
             margin: 20px auto 32px;
             padding: 24px 32px;
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 28px;
             text-align: left;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
@@ -849,6 +849,10 @@
         }
 
         @media (max-width: 900px) {
+            .conference-info-hero {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
             .event-card-grid {
                 grid-template-columns: 1fr;
                 gap: 28px;
@@ -948,9 +952,16 @@
                     </div>
                 </div>
                 <div class="info-item">
+                    <div class="info-icon"><i data-lucide="file-up"></i></div>
+                    <div>
+                        <div class="info-label">Submission Deadline</div>
+                        <div class="info-val">Oct 31, 2026</div>
+                    </div>
+                </div>
+                <div class="info-item">
                     <div class="info-icon"><i data-lucide="calendar"></i></div>
                     <div>
-                        <div class="info-label">Date</div>
+                        <div class="info-label">Event Date</div>
                         <div class="info-val">Nov 5, 2026</div>
                     </div>
                 </div>
