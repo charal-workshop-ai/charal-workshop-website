@@ -133,17 +133,18 @@
         nav ul {
             list-style: none;
             display: flex;
-            gap: 2rem;
+            gap: clamp(0.6rem, 1.2vw, 1.4rem);
             align-items: center;
         }
 
         nav a {
             color: var(--text-secondary);
             text-decoration: none;
-            font-size: 0.95rem;
+            font-size: 0.92rem;
             font-weight: 500;
             transition: all 0.25s ease;
             position: relative;
+            white-space: nowrap;
         }
 
         nav a:hover {
@@ -168,18 +169,26 @@
         }
 
         .nav-btn {
-            background: rgba(59, 130, 246, 0.15);
-            border: 1px solid rgba(59, 130, 246, 0.4);
-            color: #60a5fa !important;
-            padding: 8px 18px;
-            border-radius: 30px;
-            font-weight: 600 !important;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: var(--text-secondary) !important;
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 0.8rem !important;
+            font-weight: 500 !important;
+            transition: all 0.25s ease;
+            white-space: nowrap;
         }
 
         .nav-btn:hover {
-            background: rgba(59, 130, 246, 0.3);
-            border-color: #60a5fa;
-            box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+            background: rgba(59, 130, 246, 0.15);
+            border-color: rgba(96, 165, 250, 0.5);
+            color: #93c5fd !important;
+            box-shadow: 0 0 12px rgba(59, 130, 246, 0.25);
+            transform: translateY(-1px);
         }
 
         .nav-btn::after {
@@ -916,7 +925,12 @@
                 <li><a href="#awards">Awards</a></li>
                 <li><a href="#sponsors">Sponsors</a></li>
                 <li><a href="#contact">Contact</a></li>
-                <li><a href="/archive/2025/" class="nav-btn">2025 Archive</a></li>
+                <li>
+                    <a href="/archive/2025/" class="nav-btn" title="CHARAL 2025 Workshop Archive">
+                        <i data-lucide="archive" style="width: 12px; height: 12px; opacity: 0.8;"></i>
+                        <span>2025 Archive</span>
+                    </a>
+                </li>
             </ul>
         </nav>
     </header>
