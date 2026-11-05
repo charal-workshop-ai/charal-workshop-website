@@ -1,0 +1,21 @@
+% Closing Q&A (as in the PPT "Questions?" slide) + contacts
+\begin{frame}[plain]
+  \begin{tikzpicture}[remember picture, overlay]
+    \node[anchor=north, inner sep=0] (logo) at ([yshift=-10mm]current page.north)
+      {\includegraphics[height=24mm]{logo-charal-2-b}};
+    \node[below=3mm of logo, inner sep=0] (q) {\headingfont\Huge\color{white}Questions?};
+    \node[below=7mm of q, inner sep=0] (row) {%
+      \begin{minipage}[t]{56mm}\centering
+        \charalpill[lovableRed]{Q\&A: Lovable prototyping}\\[1.5mm]
+        {\footnotesize\color{charalMuted}Dino Osmanagić \textperiodcentered{} Lovable Ambassador}
+      \end{minipage}\hspace{6mm}%
+      \begin{minipage}[t]{62mm}\centering
+        \charalpill{Q\&A: The challenge}\\[1.5mm]
+        {\footnotesize\color{charalMuted}eugenio@alexandriads.com\\arturo.gomez-chavez@explearn.io}
+      \end{minipage}};
+    \node[anchor=south west, inner sep=0] (qr) at ([xshift=8mm, yshift=7mm]current page.south west)
+      {\charalqr{13mm}{https://charal-workshop-ai.com}};
+    \node[anchor=west, font=\scriptsize, text=charalMuted] at (qr.east)
+      {charal-workshop-ai.com};
+  \end{tikzpicture}
+\end{frame}

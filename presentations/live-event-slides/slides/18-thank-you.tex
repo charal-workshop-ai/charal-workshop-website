@@ -1,0 +1,23 @@
+% Closing: thank you + website and certificate QRs
+\begin{frame}[plain]
+  \begin{tikzpicture}[remember picture, overlay]
+    \node[anchor=north, inner sep=0] (logo) at ([yshift=-6mm]current page.north)
+      {\includegraphics[height=15mm]{logo-charal-2-b}};
+    \node[below=3mm of logo, inner sep=0] (t) {\headingfont\Huge\color{white}Thank you!};
+    \node[below=2mm of t, inner sep=0] (s)
+      {\small\color{charalMuted}Thanks for joining the CHARAL 2026 live event at MICAI 2026};
+    \node[below=5mm of s, inner sep=0] {%
+      \begin{minipage}[t]{50mm}\centering
+        \charalqr{22mm}{https://charal-workshop-ai.com}\\[2.5mm]
+        {\headingfont\small\color{charalMint}Challenge website}\\[0.3mm]
+        {\scriptsize\color{charalMuted}charal-workshop-ai.com}
+      \end{minipage}\hspace{14mm}%
+      \begin{minipage}[t]{50mm}\centering
+        \tikz\node[fill=white, rounded corners=1.5mm, inner sep=1.8mm]{\includegraphics[height=22mm]{certificate-qr}};\\[2.5mm]
+        {\headingfont\small\color{charalMint}Certificate of participation}\\[0.3mm]
+        {\scriptsize\color{charalMuted}vericert.pro/e/0oxap4od}
+      \end{minipage}};
+    \node[anchor=south, inner sep=0, align=center, font=\scriptsize, text=charalMuted] at ([yshift=4mm]current page.south)
+      {eugenio@alexandriads.com \textperiodcentered{} arturo.gomez-chavez@explearn.io};
+  \end{tikzpicture}
+\end{frame}

@@ -1,0 +1,115 @@
+% CHARAL 2026 Beamer theme
+% Styled after the "CHARAL Webinar.pptx" deck (dark teal gradient, mint accents,
+% alexandr.ia + CHARAL header logos) and the website's glass-card look.
+% Requires XeLaTeX or LuaLaTeX (fontspec + Inter).
+\ProvidesPackage{beamerthemecharal}
+
+\RequirePackage{fontspec}
+\RequirePackage{tikz}
+\RequirePackage[most]{tcolorbox}
+\RequirePackage{qrcode}
+\usetikzlibrary{positioning,calc}
+
+% ---------------------------------------------------------------- fonts
+\setsansfont{Inter}[
+  UprightFont=*-Regular, BoldFont=*-SemiBold,
+  ItalicFont=*-Italic, BoldItalicFont=*-SemiBoldItalic,
+  Extension=.otf]
+\newfontfamily\headingfont{InterDisplay}[
+  UprightFont=*-Bold, BoldFont=*-ExtraBold, Extension=.otf]
+\renewcommand{\familydefault}{\sfdefault}
+\hyphenpenalty=10000 \exhyphenpenalty=10000
+\AtBeginDocument{\raggedright}
+
+% ---------------------------------------------------------------- colors
+% PPT palette (slide XML) + website tokens (index.html :root)
+\definecolor{charalBg}{HTML}{0A4154}
+\definecolor{charalDeep}{HTML}{06283A}
+\definecolor{charalCard}{HTML}{0D3447}
+\definecolor{charalMint}{HTML}{91E4C7}
+\definecolor{charalMintLight}{HTML}{B2ECD7}
+\definecolor{charalText}{HTML}{E6F2EF}
+\definecolor{charalMuted}{HTML}{9CC3B9}
+\definecolor{charalEmerald}{HTML}{10B981}
+\definecolor{lovableRed}{HTML}{FF6B6B}
+\definecolor{lovableOrange}{HTML}{FF8E53}
+
+\setbeamercolor{normal text}{fg=charalText}
+\setbeamercolor{structure}{fg=charalMint}
+\setbeamercolor{frametitle}{fg=white}
+\setbeamercolor{item}{fg=charalMint}
+\setbeamercolor{footline}{fg=charalMuted}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{itemize items}{\color{charalMint}\raisebox{0.15ex}{\scriptsize$\blacktriangleright$}}
+\setbeamersize{text margin left=9mm, text margin right=9mm}
+
+% ---------------------------------------------------------------- paths
+\graphicspath{{images/}{../../assets/images/}}
+
+% ---------------------------------------------------------------- background
+\setbeamertemplate{background}{%
+  \begin{tikzpicture}[remember picture, overlay]
+    \node[anchor=south west, inner sep=0] at (current page.south west)
+      {\includegraphics[width=\paperwidth, height=\paperheight]{bg-gradient}};
+    \node[anchor=east, inner sep=0, opacity=0.55] at ([xshift=12mm]current page.east)
+      {\includegraphics[height=\paperheight]{bg-wave}};
+  \end{tikzpicture}}
+
+% ---------------------------------------------------------------- frame title
+% alexandr.ia logo left, CHARAL logo right, title centred (as in the PPT)
+\setbeamertemplate{frametitle}{%
+  \begin{tikzpicture}[remember picture, overlay]
+    \node[anchor=north west, inner sep=0] at ([xshift=5mm, yshift=-3.5mm]current page.north west)
+      {\includegraphics[height=7mm]{alexandria-logo-trim}};
+    \node[anchor=north east, inner sep=0] at ([xshift=-5mm, yshift=-3mm]current page.north east)
+      {\includegraphics[height=10mm]{logo-charal-2-b}};
+  \end{tikzpicture}%
+  \vskip2mm
+  \centering{\headingfont\Large\MakeUppercase{\insertframetitle}}\par
+  \ifx\insertframesubtitle\@empty\else
+    \vskip1mm{\small\color{charalMuted}\insertframesubtitle}\par
+  \fi}
+
+% ---------------------------------------------------------------- footline
+\setbeamertemplate{footline}{%
+  \hbox to\paperwidth{\hskip5mm\tiny\color{charalMuted}
+    CHARAL 2026 \textperiodcentered{} charal-workshop-ai.com\hfill
+    \insertframenumber\hskip5mm}\vskip3mm}
+
+% ---------------------------------------------------------------- components
+% Glass card: \begin{charalcard}[accent]{Title} ... \end{charalcard}
+\newtcolorbox{charalcard}[2][charalMint]{
+  enhanced, arc=2.5mm, boxrule=0.5pt,
+  colback=charalCard!85!black, colframe=#1!70!charalCard,
+  opacityback=0.85, coltext=charalText,
+  left=3mm, right=3mm, top=2mm, bottom=2.5mm,
+  fontupper=\footnotesize\raggedright,
+  title={\headingfont\small\MakeUppercase{#2}}, coltitle=#1,
+  attach title to upper, after title={\par\vskip1mm{\color{#1!60!charalCard}\rule{\linewidth}{0.4pt}}\par\vskip1.2mm}}
+
+% Number badge
+\newcommand{\charalnum}[2][charalMint]{%
+  \tikz[baseline=(n.base)]\node[anchor=center, circle, draw=#1, line width=0.6pt, inner sep=0pt,
+    minimum size=5.5mm, font=\headingfont\footnotesize, text=#1](n){#2};}
+
+% Pill label: \charalpill[color]{text}
+\newcommand{\charalpill}[2][charalMint]{%
+  \tikz[baseline=(p.base)]\node[anchor=center, rounded corners=1.6mm, fill=#1!22!charalCard, draw=#1,
+    line width=0.4pt, inner xsep=2mm, inner ysep=0.8mm, font=\scriptsize\bfseries, text=#1](p){#2};}
+
+% Circular photo: \charalphoto{file}{diameter}{vertical offset of image centre}
+\newcommand{\charalphoto}[3]{%
+  \tikz[baseline=(c.center)]{
+    \begin{scope}
+      \clip (0,0) circle (#2/2);
+      \node[anchor=center, inner sep=0] at (0,#3) {\includegraphics[width=#2]{#1}};
+    \end{scope}
+    \draw[charalMint, line width=0.8pt] (0,0) circle (#2/2);
+    \coordinate (c) at (0,0);}}
+
+% QR code on a white tile: \charalqr{size}{url}
+\newcommand{\charalqr}[2]{%
+  \tikz\node[anchor=center, fill=white, rounded corners=1.5mm, inner sep=1.8mm]{\color{black}\qrcode[height=#1]{#2}};}
+
+\newcommand{\hl}[1]{{\color{charalMint}\bfseries #1}}
+\newcommand{\lovable}[1]{{\color{lovableRed}\bfseries #1}}

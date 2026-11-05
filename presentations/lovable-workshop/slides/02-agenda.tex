@@ -1,0 +1,20 @@
+% Agenda for the ~1 h webinar
+\newcommand{\agendarow}[5][charalMint]{% [accent]{num}{title}{detail}{duration}
+  \begin{tcolorbox}[enhanced, arc=2mm, boxrule=0.5pt, colback=charalCard!85!black,
+      colframe=#1!55!charalCard, opacityback=0.85, left=3mm, right=3mm, top=1mm, bottom=1mm]
+    \charalnum[#1]{#2}\hspace{3mm}%
+    \begin{minipage}[c]{0.7\linewidth}
+      {\headingfont\small\color{white}#3}\\[-0.3mm]{\scriptsize\color{charalMuted}#4}
+    \end{minipage}\hfill\charalpill[#1]{#5}
+  \end{tcolorbox}\vspace{-1.6mm}}
+
+\begin{frame}{Agenda}
+  \vspace{-1mm}
+  \begin{center}\begin{minipage}{0.84\linewidth}
+    \agendarow{1}{The challenge in brief}{Mission, tracks and challenge updates}{5 min}
+    \agendarow{2}{Navigating the website}{Live demo: credits sign-up and the submission portal}{5 min}
+    \agendarow[lovableRed]{3}{Workshop: Rapid Prototyping with Lovable}{Dino Osmanagić, Lovable Ambassador}{30 min}
+    \agendarow[lovableRed]{4}{Q\&A: Prototyping with Lovable}{Questions for Dino}{5--10 min}
+    \agendarow{5}{Q\&A: The challenge}{Tracks, deliverables, evaluation, timeline}{5--10 min}
+  \end{minipage}\end{center}
+\end{frame}

@@ -1,0 +1,42 @@
+% Title: partner logos, CHARAL logo, both organizers (as in the website's chairs section)
+\begin{frame}[plain]
+  \begin{tikzpicture}[remember picture, overlay]
+    % partner logo band
+    \node[anchor=north west, inner sep=0] (smia) at ([xshift=7mm, yshift=-5mm]current page.north west)
+      {\includegraphics[height=9mm]{logo_SMIA_blanco}};
+    \draw[white!70, line width=0.5pt] ([xshift=3mm]smia.north east) -- ([xshift=3mm]smia.south east);
+    \node[anchor=west, inner sep=0] (micai) at ([xshift=6mm]smia.east)
+      {\includegraphics[height=8mm]{logo-micai-25years}};
+    \node[anchor=west, inner sep=0] (alx) at ([xshift=5mm]micai.east)
+      {\includegraphics[height=9mm]{alexandria-logo-trim}};
+    \node[anchor=west, inner sep=0] at ([xshift=4mm]alx.east)
+      {\includegraphics[height=4mm]{lovable-logo-trim}};
+
+    % left block: logo + title
+    \node[anchor=north, inner sep=0] (logo) at ([xshift=-36mm, yshift=-21mm]current page.north)
+      {\includegraphics[height=27mm]{logo-charal-2-b}};
+    \node[below=4mm of logo, align=center, text width=72mm, inner sep=0] (title)
+      {{\headingfont\Large\color{white}THE AI AUGMENTED\\[0.5mm] LEARNER CHALLENGE}\\[2.5mm]
+       {\normalsize\color{charalMint}\bfseries Live Event \textperiodcentered{} Keynotes \& Finalist Showcase}\\[1.5mm]
+       {\footnotesize\color{charalMuted}Thursday, November 5, 2026 \textperiodcentered{} 9:00 AM--1:00 PM CST\\ Online \textperiodcentered{} MICAI 2026}};
+
+    % right block: organizers
+    \node[anchor=north west, inner sep=0] at ([xshift=12mm, yshift=-29mm]current page.north)
+      {\begin{tabular}{@{}c@{\hspace{4mm}}l@{}}
+        \charalphoto{eugenio-photo}{19mm}{-4mm} &
+        \begin{minipage}{44mm}\raggedright
+          {\headingfont\small\color{white}Eugenio Salas Iturriaga}\\[0.8mm]
+          {\scriptsize\color{charalMint}Founder \& CEO, Alexandr.ia}\\
+          {\scriptsize\color{charalMuted}Demo Showcase Chair}\\[0.6mm]
+          {\scriptsize\color{charalText}eugenio@alexandriads.com}
+        \end{minipage}\\[13mm]
+        \charalphoto{arturo-photo}{19mm}{0mm} &
+        \begin{minipage}{44mm}\raggedright
+          {\headingfont\small\color{white}Dr. Arturo Gómez Chavez}\\[0.8mm]
+          {\scriptsize\color{charalMint}Founder, CHARAL Challenge}\\
+          {\scriptsize\color{charalMuted}Demo Showcase Chair}\\[0.6mm]
+          {\scriptsize\color{charalText}arturo.gomez-chavez@explearn.io}
+        \end{minipage}
+      \end{tabular}};
+  \end{tikzpicture}
+\end{frame}

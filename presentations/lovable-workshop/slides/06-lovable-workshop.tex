@@ -1,0 +1,14 @@
+% Workshop hand-off: Dino Osmanagić poster
+\begin{frame}[plain]
+  \begin{tikzpicture}[remember picture, overlay]
+    \node[anchor=center, inner sep=0] (poster) at ([xshift=-30mm]current page.center)
+      {\includegraphics[height=78mm]{workshop-dino}};
+    \draw[lovableRed!70, line width=0.6pt, rounded corners=1mm] (poster.south west) rectangle (poster.north east);
+    \node[anchor=west, align=left, text width=62mm, inner sep=0] at ([xshift=8mm]poster.east)
+      {\includegraphics[height=7mm]{lovable-logo-trim}\\[5mm]
+       {\headingfont\Large\color{white}Rapid Prototyping for\\AI-Augmented Learning}\\[4mm]
+       {\normalsize\color{lovableRed}\bfseries Dino Osmanagić}\\[0.5mm]
+       {\small\color{charalMuted}Lovable Ambassador}\\[5mm]
+       \charalpill[lovableRed]{Live workshop \textperiodcentered{} 30 min}};
+  \end{tikzpicture}
+\end{frame}

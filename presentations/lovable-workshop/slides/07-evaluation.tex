@@ -1,0 +1,31 @@
+% Extra info: how prototypes are evaluated (website #submission, #presentation, #review)
+\newcommand{\critrow}[2]{% {percent}{criterion}
+  \noindent\makebox[35mm][l]{#2}%
+  \tikz[baseline=-0.7ex]{\fill[charalMint!20!charalCard] (0,-0.9mm) rectangle (16mm,0.9mm);
+                         \fill[charalMint] (0,-0.9mm) rectangle (#1*0.64mm,0.9mm);}%
+  \hfill{\color{charalMint}\bfseries #1\%}\par\vskip1.4mm}
+\newcommand{\deliv}[2]{% {num}{text}
+  \noindent\charalnum{#1}\hspace{2mm}\begin{minipage}[t]{\dimexpr\linewidth-8mm\relax}\raggedright #2\end{minipage}\par\vskip1.6mm}
+
+\begin{frame}{How Prototypes Are Evaluated}
+  \vspace{1mm}
+  \begin{columns}[T, onlytextwidth]
+    \column{0.48\textwidth}
+    \begin{charalcard}{Peer-review criteria}
+      \critrow{25}{Originality \& innovation}
+      \critrow{25}{Pedagogical impact}
+      \critrow{20}{AI \& ethical governance}
+      \critrow{15}{Technical maturity}
+      \critrow{15}{Presentation \& docs}
+      \vskip0.5mm
+      {\scriptsize\color{charalMuted}Judges also use each system hands-on, following Alexandr.ia's interaction protocol.}
+    \end{charalcard}
+    \column{0.48\textwidth}
+    \begin{charalcard}{Four required deliverables}
+      \deliv{1}{\textbf{Live prototype}: a public, working web URL}
+      \deliv{2}{\textbf{GitHub repo}: code, architecture, setup instructions}
+      \deliv{3}{\textbf{5-min demo video} and a short pitch deck}
+      \deliv{4}{\textbf{Governance document} (3--5 page PDF): prompts, guardrails, human-in-the-loop, PII and bias mitigation}
+    \end{charalcard}
+  \end{columns}
+\end{frame}

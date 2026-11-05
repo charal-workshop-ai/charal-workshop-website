@@ -1,0 +1,40 @@
+% Section divider ("bookmark") slide: \sectionslide{kicker}{title}{subtitle}
+\newcommand{\sectionslide}[3]{%
+  \begin{frame}[plain]
+    \begin{tikzpicture}[remember picture, overlay]
+      \node[anchor=center, inner sep=0] (logo) at ([yshift=21mm]current page.center)
+        {\includegraphics[height=22mm]{logo-charal-2-b}};
+      \node[below=8mm of logo, inner sep=0] (k) {\charalpill{#1}};
+      \node[below=4mm of k, inner sep=0, align=center] (t) {\headingfont\Huge\color{white}#2};
+      \node[below=3mm of t, inner sep=0, align=center] {\small\color{charalMuted}#3};
+    \end{tikzpicture}
+  \end{frame}}
+
+% Finalist slots (index.name.time), in presentation order
+\newcommand{\finalistlist}{1/AgoraMX/11:30, 2/TIP Reasoning/11:45, 3/Cognita/12:00, 4/CognitiveFlow/12:15, 5/Zeedodo/12:30}
+
+% One slide per finalist: \finalistslide{index}{name}{slot}
+\newcommand{\finalistslide}[3]{%
+  \begin{frame}{Finalist Showcase}
+    \begin{tikzpicture}[remember picture, overlay]
+      \node[anchor=center, inner sep=0] (n) at ([yshift=12mm]current page.center)
+        {\small\color{charalMuted}Finalist #1 of 5};
+      \node[below=3mm of n, inner sep=0] (name) {\headingfont\fontsize{40}{44}\selectfont\color{white}#2};
+      \node[below=5mm of name, inner sep=0] (slot) {\charalpill{#3 CST}};
+      \node[below=3mm of slot, inner sep=0]
+        {\footnotesize\color{charalMuted}10 min presentation \& live demo \textperiodcentered{} 5 min Q\&A};
+      % progress strip of all five slots
+      \foreach \i/\nm/\t [count=\c from 0] in \finalistlist {
+        \ifnum\i=#1\relax
+          \node[anchor=center, rounded corners=1.6mm, fill=charalMint!25!charalCard, draw=charalMint,
+                line width=0.6pt, minimum width=25mm, minimum height=9mm, align=center,
+                font=\scriptsize\bfseries, text=charalMint]
+            at ([xshift=(\c-2)*28mm, yshift=13mm]current page.south) {\nm\\[-0.3mm]{\tiny\t}};
+        \else
+          \node[anchor=center, rounded corners=1.6mm, fill=charalCard!70!black, draw=charalMuted!40!charalCard,
+                line width=0.4pt, minimum width=25mm, minimum height=9mm, align=center,
+                font=\scriptsize, text=charalMuted, opacity=0.9, text opacity=1]
+            at ([xshift=(\c-2)*28mm, yshift=13mm]current page.south) {\nm\\[-0.3mm]{\tiny\t}};
+        \fi}
+    \end{tikzpicture}
+  \end{frame}}

@@ -896,6 +896,72 @@
                 border-bottom: 1px solid rgba(255,255,255,0.1);
             }
         }
+
+        /* Live event banner (top of hero) */
+        .live-banner {
+            max-width: 760px;
+            margin: 0 auto 32px;
+            padding: 20px 24px;
+            border-radius: 20px;
+            border: 1px solid rgba(239, 68, 68, 0.45);
+            background: rgba(239, 68, 68, 0.08);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 0 30px rgba(239, 68, 68, 0.15);
+        }
+        .live-banner-title {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-family: var(--font-heading);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+        .live-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #ef4444;
+            box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+            animation: live-pulse 1.6s infinite;
+        }
+        @keyframes live-pulse {
+            0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+        }
+        .live-banner-sub {
+            color: var(--text-secondary);
+            font-size: 0.92rem;
+            margin-bottom: 16px;
+        }
+        .live-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+        .live-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            background: rgba(255, 255, 255, 0.06);
+            color: #fff;
+            font-weight: 600;
+            font-size: 0.92rem;
+            text-decoration: none;
+            transition: background 0.2s ease, border-color 0.2s ease;
+        }
+        .live-link:hover {
+            background: rgba(239, 68, 68, 0.18);
+            border-color: rgba(239, 68, 68, 0.6);
+        }
+        .live-link svg { width: 18px; height: 18px; }
     </style>
 </head>
 <body id="top">
@@ -938,6 +1004,26 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
+            <!-- Live event banner (Nov 5, 2026) -->
+            <div class="live-banner" id="live">
+                <div class="live-banner-title">
+                    <span class="live-dot"></span>
+                    Live Event Today
+                </div>
+                <div class="live-banner-sub">Thursday, November 5, 2026 · 9:00 AM – 1:00 PM CST · Keynotes &amp; Finalist Showcase</div>
+                <div class="live-links">
+                    <a href="https://lnkd.in/evmBwytp" target="_blank" rel="noopener" class="live-link">
+                        <i data-lucide="circle-play"></i><span>YouTube</span>
+                    </a>
+                    <a href="https://lnkd.in/e592qp-H" target="_blank" rel="noopener" class="live-link">
+                        <i data-lucide="briefcase"></i><span>LinkedIn</span>
+                    </a>
+                    <a href="https://streamyard.com/watch/VJB7ktSK4i7b" target="_blank" rel="noopener" class="live-link">
+                        <i data-lucide="monitor-play"></i><span>StreamYard</span>
+                    </a>
+                </div>
+            </div>
+
             <div style="margin-bottom: 12px;">
                 <a href="https://smia.mx/" target="_blank" title="Sociedad Mexicana de Inteligencia Artificial (SMIA)" style="display: inline-block; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
                     <img src="assets/images/logo_SMIA_blanco.png" alt="SMIA Logo" style="height: 54px; object-fit: contain; filter: drop-shadow(0 0 15px rgba(255,255,255,0.4));">
@@ -992,17 +1078,6 @@
             <div style="background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.35); border-radius: 16px; padding: 12px 24px; max-width: 760px; margin: 20px auto 16px; backdrop-filter: blur(12px); display: flex; align-items: center; justify-content: center; gap: 10px; color: #4ade80; font-size: 0.92rem; font-weight: 600; text-align: center; box-shadow: 0 0 25px rgba(16, 185, 129, 0.15);">
                 <i data-lucide="book-open" style="width: 18px; height: 18px; flex-shrink: 0; color: var(--accent-cyan);"></i>
                 <span><strong>Award Confirmed:</strong> Top-performing AI systems secure publication inside <strong>Research in Computing Science (RCS - IPN)</strong></span>
-            </div>
-
-            <!-- CTA Buttons -->
-            <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-top: 12px; align-items: flex-start;">
-                <div style="display: flex; flex-direction: column; align-items: center;">
-                    <a href="submit.html" class="cta-btn">
-                        <i data-lucide="file-up"></i>
-                        <span>Submit Prototype</span>
-                        <i data-lucide="arrow-right"></i>
-                    </a>
-                </div>
             </div>
         </div>
     </section>
@@ -1352,16 +1427,6 @@
                     <p>A 3–5 page PDF detailing prompts, guardrails, human-in-the-loop controls, PII privacy, and bias mitigation.</p>
                 </div>
             </div>
-
-            <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-top: 36px; align-items: flex-start;">
-                <div style="display: flex; flex-direction: column; align-items: center;">
-                    <a href="submit.html" class="cta-btn">
-                        <i data-lucide="file-up"></i>
-                        <span>Submit Your Prototype</span>
-                        <i data-lucide="arrow-right"></i>
-                    </a>
-                </div>
-            </div>
         </div>
     </section>
 
@@ -1447,11 +1512,6 @@
                                 IPN - Instituto Politécnico Nacional
                             </span>
                         </div>
-                        <a href="submit.html" class="cta-btn" style="padding: 12px 24px; font-size: 0.95rem;">
-                            <i data-lucide="file-up"></i>
-                            <span>Submit Your Prototype for Review</span>
-                            <i data-lucide="arrow-right"></i>
-                        </a>
                     </div>
                 </div>
             </div>

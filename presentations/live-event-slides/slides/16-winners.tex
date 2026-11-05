@@ -1,0 +1,23 @@
+\usetikzlibrary{shapes.geometric}
+% Winners (award names from index.html #awards)
+\newcommand{\winnercard}[3]{% {award kicker}{award name}{project}
+  \begin{charalcard}{#1}
+    \centering
+    {\footnotesize\color{charalMuted}#2}\\[5mm]
+    \tikz\node[star, star points=5, star point ratio=2.2, draw=charalMint, line width=0.8pt,
+               fill=charalMint!20!charalCard, minimum size=13mm, inner sep=0]{};\\[4mm]
+    {\headingfont\Large\color{white}#3}\par\vskip2mm
+  \end{charalcard}}
+
+\begin{frame}{Challenge Winners}
+  \vspace{2mm}
+  \begin{columns}[T, onlytextwidth]
+    \column{0.315\textwidth}\winnercard{Track 1 Winner}{Best Reviewer Tool}{Cognita}
+    \column{0.315\textwidth}\winnercard{Track 2 Winner}{Best Learning Companion}{Zeedodo}
+    \column{0.315\textwidth}\winnercard{Ethics Distinction}{Best AI Governance}{CognitiveFlow}
+  \end{columns}
+  \vspace{4mm}
+  \begin{center}
+    {\normalsize\color{white}Congratulations to all five finalist teams!}
+  \end{center}
+\end{frame}

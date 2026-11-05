@@ -1,0 +1,39 @@
+% \speakerslide{portrait}{name}{role}{time}{talk title}{bullets}
+\newcommand{\speakerslide}[6]{%
+  \begin{frame}{Invited Speaker}
+    \vspace{-1mm}
+    \begin{columns}[c, onlytextwidth]
+      \column{0.36\textwidth}\centering #1
+      \column{0.6\textwidth}
+      {\headingfont\Large\color{white}#2}\\[1.5mm]
+      {\small\color{charalMint}\bfseries #3}\\[2.5mm]
+      {\normalsize\color{white}\itshape ``#5''}\\[2.5mm]
+      \charalpill{#4}\\[2mm]
+      {\scriptsize\begin{itemize}\setlength{\itemsep}{1.1mm}#6\end{itemize}}
+    \end{columns}
+  \end{frame}}
+
+% \qaslide{face}{name}{affiliation}
+\newcommand{\qaslide}[3]{%
+  \begin{frame}[plain]
+    \begin{tikzpicture}[remember picture, overlay]
+      % speech bubble with a question mark
+      \node[anchor=center, fill=charalCard!85!black, draw=charalMint, line width=1pt,
+            rounded corners=5mm, minimum width=36mm, minimum height=28mm, opacity=0.9, text opacity=1]
+            (bubble) at ([yshift=14mm]current page.center)
+            {\headingfont\fontsize{54}{54}\selectfont\color{charalMint}?};
+      \fill[charalCard!85!black, draw=charalMint, line width=1pt]
+        ([xshift=-9mm, yshift=0.5pt]bubble.south) -- ([xshift=-14mm, yshift=-7mm]bubble.south)
+        -- ([xshift=-1mm, yshift=0.5pt]bubble.south);
+      \draw[charalCard!85!black, line width=1.6pt]
+        ([xshift=-8.6mm]bubble.south) -- ([xshift=-1.4mm]bubble.south);
+      \node[below=10mm of bubble, inner sep=0] (q) {\headingfont\Huge\color{white}Q\&A};
+      \node[below=3mm of q, inner sep=0] {\small\color{charalMuted}Post your questions in the livestream chat};
+      % speaker tag
+      \node[anchor=south west, inner sep=0] (f) at ([xshift=8mm, yshift=7mm]current page.south west) {#1};
+      \node[anchor=west, align=left, inner sep=0] at ([xshift=3mm]f.east)
+        {{\headingfont\small\color{white}#2}\\[0.5mm]{\scriptsize\color{charalMint}#3}};
+      \node[anchor=south east, inner sep=0] at ([xshift=-6mm, yshift=6mm]current page.south east)
+        {\includegraphics[height=12mm]{logo-charal-2-b}};
+    \end{tikzpicture}
+  \end{frame}}

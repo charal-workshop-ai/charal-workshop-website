@@ -1,0 +1,32 @@
+% Challenge updates: Lovable credits, RCS publication award, timeline
+\newcommand{\tlrow}[3][charalMint]{% [color]{date}{event}
+  \noindent\begin{minipage}[t]{18mm}\tikz[baseline=-0.6ex]\fill[#1] (0,0) circle (0.7mm);\hspace{1.2mm}{\color{#1}\bfseries #2}\end{minipage}%
+  \begin{minipage}[t]{\dimexpr\linewidth-18mm\relax}\raggedright #3\end{minipage}\par\vskip1.4mm}
+
+\begin{frame}{Challenge Updates}
+  \vspace{1mm}
+  \begin{columns}[T, onlytextwidth]
+    \column{0.285\textwidth}
+    \begin{charalcard}[lovableRed]{Lovable credits}
+      \begin{center}\includegraphics[height=4.5mm]{lovable-logo-trim}\end{center}
+      \vskip-1mm
+      Free \lovable{Lovable AI credits} for registered participants. \lovable{One code per team.}\par\vskip1.5mm
+      Codes are sent \lovable{Tue--Wed, Oct 13--14}.\par\vskip1.5mm
+      {\color{charalMuted}Apply at charal-workshop-ai.com\linebreak/lovable-credits.html}
+    \end{charalcard}
+    \column{0.285\textwidth}
+    \begin{charalcard}{Publication award}
+      Top-performing AI systems will be invited to publish an article in
+      \hl{Research in Computing Science} (RCS), the indexed journal of IPN.\par\vskip1.5mm
+      {\color{charalMuted}This adds to the track winners, Best AI Governance and Best Social Impact.}
+    \end{charalcard}
+    \column{0.4\textwidth}
+    \begin{charalcard}{Timeline update}
+      \tlrow[lovableRed]{Oct 12}{Lovable workshop (today)}
+      \tlrow[lovableRed]{Oct 13--14}{Lovable credit codes sent}
+      \tlrow{Oct 31}{\textbf{Submission deadline}}
+      \tlrow{Nov 1--4}{Submission reviews \& feedback}
+      \tlrow{Nov 5}{\textbf{9:00 AM CST, online}: finalists \& winners announced; keynote by Dr.~Enrique Cortés Rello}
+    \end{charalcard}
+  \end{columns}
+\end{frame}

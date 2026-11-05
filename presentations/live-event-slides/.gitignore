@@ -1,0 +1,13 @@
+# LaTeX build artifacts (keep the PDF)
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.nav
+*.out
+*.snm
+*.toc
+*.xdv
+
+# Source material (schedule email, bios, certificate PDF): kept local, not published
+references/

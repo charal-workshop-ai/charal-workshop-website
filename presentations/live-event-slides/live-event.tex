@@ -1,0 +1,62 @@
+% CHARAL 2026 live event: keynotes & finalist showcase (Thursday, November 5, 2026)
+% Build (from this folder):  latexmk -xelatex live-event.tex
+% Each slide lives in slides/; reorder or drop slides by editing the \input list.
+% Same theme as ../lovable-workshop (beamerthemecharal.sty is a copy).
+\documentclass[aspectratio=169, 10pt]{beamer}
+\usetheme{charal}
+
+\title{The AI Augmented Learner Challenge}
+\subtitle{Live Event: Keynotes \& Finalist Showcase}
+\date{Thursday, November 5, 2026}
+
+% ---------------------------------------------------------------- deck helpers
+% Circular photo that always fills the circle:
+%   \charalface{file}{diameter}{includegraphics opts}{x offset}{y offset}
+\newcommand{\charalface}[5]{%
+  \tikz[baseline=(c.center)]{
+    \begin{scope}
+      \clip (0,0) circle (#2/2);
+      \node[anchor=center, inner sep=0] at (#4,#5) {\includegraphics[#3]{#1}};
+    \end{scope}
+    \draw[charalMint, line width=0.8pt] (0,0) circle (#2/2);
+    \coordinate (c) at (0,0);}}
+
+% Rounded portrait: \charalportrait{file}{width}{height}{includegraphics opts}{x offset}{y offset}
+\newcommand{\charalportrait}[6]{%
+  \tikz[baseline=(c.center)]{
+    \begin{scope}
+      \clip[rounded corners=3mm] (-#2/2,-#3/2) rectangle (#2/2,#3/2);
+      \node[anchor=center, inner sep=0] at (#5,#6) {\includegraphics[#4]{#1}};
+    \end{scope}
+    \draw[charalMint, line width=0.8pt, rounded corners=3mm] (-#2/2,-#3/2) rectangle (#2/2,#3/2);
+    \coordinate (c) at (0,0);}}
+
+% Per-speaker photo framing (used on the overview, bio and Q&A slides)
+\newcommand{\faceEnrique}[1]{\charalface{enrique-cortes}{#1}{height=\dimexpr#1*3/2\relax}{0.02*#1}{-0.12*#1}}
+\newcommand{\faceAnne}[1]{\charalface{anne-kjaer-bathel}{#1}{width=\dimexpr#1*19/10\relax}{0}{-0.45*#1}}
+\newcommand{\faceRoser}[1]{\charalface{roser-almenar}{#1}{height=\dimexpr#1*16/10\relax}{0}{-0.2*#1}}
+
+\begin{document}
+
+\input{slides/01-title}
+\input{slides/01b-website}
+\input{slides/02-agenda}
+\input{slides/03-goal}
+\input{slides/04-tracks}
+\input{slides/05-certificate}
+\input{slides/06-speakers}
+\input{slides/07-enrique-cortes}
+\input{slides/08-enrique-cortes-qa}
+\input{slides/09-anne-kjaer-bathel}
+\input{slides/10-anne-kjaer-bathel-qa}
+\input{slides/11-roser-almenar}
+\input{slides/12-roser-almenar-qa}
+\input{slides/05-certificate}  % reminder before the showcase
+\input{slides/13-showcase-divider}
+\input{slides/14-finalists}
+\input{slides/15-winners-divider}
+\input{slides/16-winners}
+\input{slides/17-publication}
+\input{slides/18-thank-you}
+
+\end{document}

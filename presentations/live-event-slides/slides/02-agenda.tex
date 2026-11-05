@@ -1,0 +1,16 @@
+% Agenda: event schedule from references/Event-Schedule-charal.docx (times in CST)
+\newcommand{\agendarow}[4][charalMint]{% [accent]{time}{title}{detail}
+  \noindent\makebox[27mm][l]{\charalpill[#1]{#2}}{\headingfont\small\color{white}#3}\par\vskip-0.6mm
+  \noindent\hspace*{27mm}{\scriptsize\color{charalMuted}#4}\par\vskip1.8mm}
+
+\begin{frame}{Agenda}{Thursday, November 5, 2026 \textperiodcentered{} all times CST}
+  \vspace{-1mm}
+  \hspace*{8mm}\begin{minipage}{132mm}
+    \agendarow{9:00--9:15}{Welcome \& Opening Remarks}{The challenge, tracks and certificate of participation}
+    \agendarow{9:15--10:00}{Dr.~Enrique Cortés Rello}{Keynote: ``The Intersection of AI in Education and Building AI Learning Systems''}
+    \agendarow{10:00--10:45}{Anne Kjær Bathel}{``Win-Win-Win: Building the Best Tech Education for the World''}
+    \agendarow{10:45--11:30}{Roser Almenar}{``EU AI Act and GDPR Applied to Educational Environments''}
+    \agendarow{11:30--12:45}{CHARAL 2026 Finalist Showcase}{Five finalists \textperiodcentered{} 10-min demo + 5-min Q\&A each}
+    \agendarow{12:45--1:00}{Closing Remarks}{Track winners \& publication announcements}
+  \end{minipage}
+\end{frame}

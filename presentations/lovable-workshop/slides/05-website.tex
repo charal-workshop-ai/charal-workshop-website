@@ -1,0 +1,19 @@
+% Website tour / live registration demo
+\newcommand{\qrtile}[4][charalMint]{% [color]{url}{label}{path shown}
+  \begin{minipage}[t]{0.3\textwidth}\centering
+    \charalqr{25mm}{#2}\\[2.5mm]
+    {\headingfont\small\color{#1}#3}\\[0.3mm]
+    {\scriptsize\color{charalMuted}#4}
+  \end{minipage}}
+
+\begin{frame}{Navigating the Website}
+  \begin{center}
+    {\small\color{charalMuted}Live demo: how to register and submit}
+  \end{center}
+  \vspace{2mm}
+  \begin{center}
+    \qrtile{https://charal-workshop-ai.com}{Challenge website}{charal-workshop-ai.com}\hfill
+    \qrtile[lovableRed]{https://charal-workshop-ai.com/lovable-credits.html}{Apply for Lovable credits}{/lovable-credits.html}\hfill
+    \qrtile{https://charal-workshop-ai.com/submit.html}{Submit your prototype}{/submit.html}
+  \end{center}
+\end{frame}
