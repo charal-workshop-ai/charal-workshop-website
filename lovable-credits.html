@@ -374,118 +374,48 @@
     <main>
         <div class="container">
             <div class="form-header">
-                <div class="badge">
-                    <i data-lucide="heart" style="width: 14px; height: 14px;"></i>
-                    Sponsor Credits Program
+                <div class="badge" style="background: rgba(16, 185, 129, 0.2); border-color: rgba(16, 185, 129, 0.5); color: #4ade80;">
+                    <i data-lucide="check-circle-2" style="width: 14px; height: 14px;"></i>
+                    Convocatoria Concluida · Evento Finalizado
                 </div>
-                <h1 class="form-title">Lovable AI Credits Application</h1>
+                <h1 class="form-title">Lovable AI Credits Program Concluded</h1>
                 <p class="form-subtitle">
-                    Apply for free <strong>Lovable AI prototyping credits</strong> to build, iterate, and deploy your Cognition-First AI Challenge entry.
+                    El periodo de solicitud de créditos de prototipado Lovable AI para el <strong>CHARAL 2026 Challenge</strong> ha concluido con el cierre del evento.
+                    ¡Muchas gracias a todos los participantes y a Lovable AI por apoyar la investigación!
                 </p>
-                <div style="margin-top: 10px; display: inline-flex; align-items: center; gap: 8px; background: rgba(255, 107, 107, 0.15); border: 1px solid rgba(255, 107, 107, 0.4); border-radius: 30px; padding: 6px 18px; color: #ff8e53; font-weight: 600; font-size: 0.92rem;">
-                    <i data-lucide="bell" style="width: 16px; height: 16px;"></i>
-                    <span>Lovable credits are sent on demand to registered participants (1 code per team)</span>
-                </div>
-                <div class="lovable-sponsor-banner">
+                <div class="lovable-sponsor-banner" style="margin-top: 20px;">
                     <span style="font-size: 0.85rem; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em;">Powered By</span>
                     <img src="assets/images/logo-lovable-white.png" alt="Lovable Logo">
                 </div>
-
-                <!-- Important Credit Policy Notice -->
-                <div style="background: rgba(255, 107, 107, 0.1); border: 1px solid rgba(255, 107, 107, 0.35); border-radius: 16px; padding: 18px 24px; margin-top: 24px; backdrop-filter: blur(12px); text-align: left;">
-                    <div style="display: flex; align-items: center; gap: 10px; color: #ff7676; font-weight: 700; font-size: 1rem; margin-bottom: 8px;">
-                        <i data-lucide="info" style="width: 20px; height: 20px;"></i>
-                        Credit Distribution Policy &amp; Timeline
-                    </div>
-                    <ul style="color: var(--text-secondary); font-size: 0.92rem; line-height: 1.6; margin-left: 20px; list-style-type: disc;">
-                        <li><strong>Distribution:</strong> Lovable credit codes are sent via email <strong>on demand</strong> to registered participants.</li>
-                        <li><strong>Team Limit:</strong> Exactly <strong>1 code per team</strong> will be granted. If registering as a team, select "Team Registration" and provide your team members' email addresses below.</li>
-                    </ul>
-                </div>
             </div>
 
-            <div class="form-card">
-                <form id="lovable-credits-form">
-                    <input type="hidden" name="formType" value="Lovable Credits Application">
+            <div class="form-card" style="text-align: center; padding: 50px 32px; border: 1px solid rgba(16, 185, 129, 0.45); background: linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(255, 107, 107, 0.08) 50%, rgba(12, 18, 34, 0.95) 100%);">
+                <div style="width: 76px; height: 76px; border-radius: 50%; background: rgba(16, 185, 129, 0.2); border: 2px solid rgba(16, 185, 129, 0.5); display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; color: #4ade80; box-shadow: 0 0 30px rgba(16, 185, 129, 0.3);">
+                    <i data-lucide="award" style="width: 40px; height: 40px;"></i>
+                </div>
+                
+                <h2 style="font-family: var(--font-heading); font-size: 2rem; font-weight: 700; color: #ffffff; margin-bottom: 12px; line-height: 1.3;">
+                    ¡Gracias a todos los equipos participantes!
+                </h2>
+                
+                <p style="color: #4ade80; font-size: 1.15rem; font-weight: 600; margin-bottom: 18px;">
+                    Programa de Créditos Lovable AI Oficialmente Concluido
+                </p>
+                
+                <p style="color: var(--text-secondary); font-size: 1rem; line-height: 1.7; max-width: 680px; margin: 0 auto 28px;">
+                    El soporte de créditos otorgado por <strong>Lovable AI</strong> ha finalizado tras la entrega de prototipos el <strong>31 de octubre</strong> y la presentación final de ponentes y proyectos en <strong>MICAI 2026</strong> el <strong>5 de noviembre</strong>. Agradecemos enormemente su entusiasmo por construir tecnologías cognitivas de vanguardia.
+                </p>
 
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label for="fullName">Lead Submitter Name <span class="required">*</span></label>
-                            <input type="text" id="fullName" name="fullName" placeholder="e.g. Dr. Alex Morgan" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="email">Institutional / Contact Email <span class="required">*</span></label>
-                            <input type="email" id="email" name="email" placeholder="alex.morgan@university.edu" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="institution">Institution / Organization <span class="required">*</span></label>
-                            <input type="text" id="institution" name="institution" placeholder="e.g. Tec de Monterrey / Research Lab" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="role">Role / Position <span class="required">*</span></label>
-                            <select id="role" name="role" required>
-                                <option value="" disabled selected>Select your role...</option>
-                                <option value="Researcher / Professor">Researcher / Professor</option>
-                                <option value="Graduate / Student">Graduate / Undergraduate Student</option>
-                                <option value="EdTech Developer / Engineer">EdTech Developer / Engineer</option>
-                                <option value="Industry Innovator">Industry Innovator</option>
-                                <option value="Other">Other</option>
-                            </select>
-                        </div>
-
-                        <!-- Team Registration Selection -->
-                        <div class="form-group-full">
-                            <label style="margin-bottom: 8px;">Registration Format <span class="required">*</span></label>
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
-                                <label style="background: rgba(5, 11, 20, 0.6); border: 1px solid rgba(255,255,255,0.15); padding: 14px 18px; border-radius: 12px; cursor: pointer; display: flex; align-items: center; gap: 10px; color: #fff; font-weight: 600;">
-                                    <input type="radio" name="isTeam" value="Individual" checked onclick="toggleTeamFields(false)" style="accent-color: #ff7676; width: 18px; height: 18px;">
-                                    <span>Individual Entry</span>
-                                </label>
-                                <label style="background: rgba(5, 11, 20, 0.6); border: 1px solid rgba(255,255,255,0.15); padding: 14px 18px; border-radius: 12px; cursor: pointer; display: flex; align-items: center; gap: 10px; color: #fff; font-weight: 600;">
-                                    <input type="radio" name="isTeam" value="Team" onclick="toggleTeamFields(true)" style="accent-color: #ff7676; width: 18px; height: 18px;">
-                                    <span>Team Entry (1 Code / Team)</span>
-                                </label>
-                            </div>
-                        </div>
-
-                        <!-- Team Members Emails (shown when Team is selected) -->
-                        <div class="form-group-full" id="team-emails-container" style="display: none;">
-                            <label for="teamEmails">Team Members' Emails <span class="required">*</span> <span class="hint">(Separate multiple emails with commas)</span></label>
-                            <textarea id="teamEmails" name="teamEmails" placeholder="member1@university.edu, member2@university.edu..."></textarea>
-                        </div>
-
-                        <div class="form-group-full">
-                            <label style="margin-bottom: 8px;">Challenge Track Focus <span class="required">*</span></label>
-                            <div class="track-options">
-                                <div class="track-radio-card active" onclick="selectTrack('track1', this)">
-                                    <input type="radio" id="track1" name="track" value="Track 1: AI Systems for Reviewers" checked>
-                                    <div class="track-radio-title">Track 1: AI Systems for Reviewers</div>
-                                    <div class="track-radio-desc">Auditing human cognition and assisting educational / paper reviewers.</div>
-                                </div>
-                                <div class="track-radio-card" onclick="selectTrack('track2', this)">
-                                    <input type="radio" id="track2" name="track" value="Track 2: AI Systems to Stimulate Cognition">
-                                    <div class="track-radio-title">Track 2: AI Systems to Stimulate Cognition</div>
-                                    <div class="track-radio-desc">Demanding real-time reflection, synthesis, and critical thinking.</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group-full" style="margin-top: 24px; margin-bottom: 24px;">
-                        <label for="terms" style="display: flex; align-items: flex-start; gap: 12px; cursor: pointer; font-size: 0.9rem; color: var(--text-secondary); font-weight: 400; line-height: 1.5;">
-                            <input type="checkbox" id="terms" name="terms" required style="margin-top: 3px; accent-color: #ff7676; width: 18px; height: 18px; cursor: pointer; flex-shrink: 0;">
-                            <span>I accept the <a href="privacy-policy.html" target="_blank" style="color: #ff7676; text-decoration: underline;">Privacy Notice</a> and agree to use the requested Lovable AI credits for the CHARAL 2026 Challenge. <span class="required">*</span></span>
-                        </label>
-                    </div>
-
-                    <button type="submit" class="submit-btn" id="submit-btn">
-                        <span>Submit Credits Application</span>
-                        <i data-lucide="arrow-right"></i>
-                    </button>
-                </form>
+                <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+                    <a href="index.html" class="submit-btn" style="text-decoration: none; width: auto; padding: 14px 32px; font-size: 1rem;">
+                        <i data-lucide="arrow-left"></i>
+                        <span>Volver a la Página Principal</span>
+                    </a>
+                    <a href="index.html#events" class="submit-btn" style="text-decoration: none; width: auto; padding: 14px 32px; font-size: 1rem; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.25); color: #fff; box-shadow: none;">
+                        <i data-lucide="sparkles"></i>
+                        <span>Ver Sesiones y Keynote</span>
+                    </a>
+                </div>
             </div>
         </div>
     </main>
@@ -522,47 +452,49 @@
         const form = document.getElementById('lovable-credits-form');
         const submitBtn = document.getElementById('submit-btn');
 
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = `<span>Processing Request...</span> <i data-lucide="loader" class="spin"></i>`;
-            lucide.createIcons();
+        if (form && submitBtn) {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = `<span>Processing Request...</span> <i data-lucide="loader" class="spin"></i>`;
+                lucide.createIcons();
 
-            const formData = new FormData(form);
-            const submissionId = 'LOV2026-' + Math.random().toString(36).substring(2, 8).toUpperCase();
-            
-            const submissionDetails = {
-                id: submissionId,
-                formType: 'Lovable Credits Application',
-                timestamp: new Date().toLocaleString(),
-                fullName: formData.get('fullName'),
-                email: formData.get('email'),
-                institution: formData.get('institution'),
-                role: formData.get('role'),
-                track: formData.get('track'),
-                isTeam: formData.get('isTeam') || 'Individual',
-                teamEmails: formData.get('teamEmails') || 'N/A (Individual)'
-            };
+                const formData = new FormData(form);
+                const submissionId = 'LOV2026-' + Math.random().toString(36).substring(2, 8).toUpperCase();
+                
+                const submissionDetails = {
+                    id: submissionId,
+                    formType: 'Lovable Credits Application',
+                    timestamp: new Date().toLocaleString(),
+                    fullName: formData.get('fullName'),
+                    email: formData.get('email'),
+                    institution: formData.get('institution'),
+                    role: formData.get('role'),
+                    track: formData.get('track'),
+                    isTeam: formData.get('isTeam') || 'Individual',
+                    teamEmails: formData.get('teamEmails') || 'N/A (Individual)'
+                };
 
-            const params = new URLSearchParams();
-            for (const key in submissionDetails) {
-                params.append(key, submissionDetails[key]);
-            }
+                const params = new URLSearchParams();
+                for (const key in submissionDetails) {
+                    params.append(key, submissionDetails[key]);
+                }
 
-            fetch(GOOGLE_SCRIPT_URL, {
-                method: 'POST',
-                mode: 'no-cors',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: params.toString()
-            }).then(() => {
-                alert('Your Lovable AI credits application has been submitted successfully! Credit codes are sent on demand to registered participants by email.');
-                window.location.href = 'index.html';
-            }).catch(err => {
-                console.error("Google Sheets Error:", err);
-                alert('Your Lovable AI credits application has been submitted successfully! Credit codes are sent on demand to registered participants by email.');
-                window.location.href = 'index.html';
+                fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: params.toString()
+                }).then(() => {
+                    alert('Your Lovable AI credits application has been submitted successfully! Credit codes are sent on demand to registered participants by email.');
+                    window.location.href = 'index.html';
+                }).catch(err => {
+                    console.error("Google Sheets Error:", err);
+                    alert('Your Lovable AI credits application has been submitted successfully! Credit codes are sent on demand to registered participants by email.');
+                    window.location.href = 'index.html';
+                });
             });
-        });
+        }
     </script>
 </body>
 </html>

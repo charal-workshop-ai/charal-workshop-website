@@ -452,137 +452,55 @@
 
         <!-- Form Hero Header -->
         <div class="form-header">
-            <div class="badge">
-                <i data-lucide="file-up" style="width: 14px; height: 14px;"></i>
-                Official Submission Portal
+            <div class="badge" style="background: rgba(16, 185, 129, 0.2); border-color: rgba(16, 185, 129, 0.5); color: #4ade80;">
+                <i data-lucide="check-circle-2" style="width: 14px; height: 14px;"></i>
+                Convocatoria Concluida · Evento Finalizado
             </div>
-            <h1 class="form-title">Prototype Submission Portal</h1>
+            <h1 class="form-title">Convocatoria Cerrada</h1>
             <p class="form-subtitle">
-                Submit your official entry package for the <strong>Cognition First: AI Augmented Learner Challenge</strong>.
-                Fill out the required information and provide all 4 mandatory project deliverables.
+                El periodo oficial de entrega de prototipos para el <strong>Cognition First: AI Augmented Learner Challenge</strong> ha concluido.
+                ¡Muchas gracias a todos los investigadores, estudiantes y desarrolladores por su participación!
             </p>
         </div>
 
-        <!-- Submission Form Card -->
-        <div class="form-card">
-            <form id="prototype-form">
+        <!-- Submission Closed Card -->
+        <div class="form-card" style="text-align: center; padding: 50px 32px; border: 1px solid rgba(16, 185, 129, 0.45); background: linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(14, 165, 233, 0.08) 50%, rgba(12, 18, 34, 0.95) 100%);">
+            <div style="width: 76px; height: 76px; border-radius: 50%; background: rgba(16, 185, 129, 0.2); border: 2px solid rgba(16, 185, 129, 0.5); display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; color: #4ade80; box-shadow: 0 0 30px rgba(16, 185, 129, 0.3);">
+                <i data-lucide="award" style="width: 40px; height: 40px;"></i>
+            </div>
+            
+            <h2 style="font-family: var(--font-heading); font-size: 2rem; font-weight: 700; color: #ffffff; margin-bottom: 12px; line-height: 1.3;">
+                ¡Gracias por ser parte de CHARAL 2026!
+            </h2>
+            
+            <p style="color: #4ade80; font-size: 1.15rem; font-weight: 600; margin-bottom: 18px;">
+                Recepción de Prototipos Oficialmente Cerrada
+            </p>
+            
+            <p style="color: var(--text-secondary); font-size: 1rem; line-height: 1.7; max-width: 680px; margin: 0 auto 28px;">
+                La fecha límite de recepción de proyectos concluyó el <strong>31 de octubre de 2026</strong> y las presentaciones finales en <strong>MICAI 2026</strong> se llevaron a cabo el <strong>5 de noviembre de 2026</strong>. Nuestro sincero reconocimiento a todos los equipos que presentaron propuestas innovadoras para potenciar el pensamiento crítico asistido por inteligencia artificial.
+            </p>
 
-                <!-- Section 1: Lead Submitter Information -->
-                <div class="form-section-header">
-                    <i data-lucide="user"></i>
-                    <h3 class="form-section-title">1. Submitter &amp; Team Lead Info</h3>
+            <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 16px; padding: 20px 24px; max-width: 600px; margin: 0 auto 32px; text-align: left;">
+                <div style="display: flex; align-items: center; gap: 10px; color: #4ade80; font-weight: 700; font-size: 0.95rem; margin-bottom: 8px;">
+                    <i data-lucide="book-open" style="width: 18px; height: 18px;"></i>
+                    Publicación en Research in Computing Science (RCS - IPN)
                 </div>
+                <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; margin: 0;">
+                    Los sistemas de aprendizaje y prototipos seleccionados por el comité de pares continúan en el proceso de revisión editorial para su publicación oficial indexada.
+                </p>
+            </div>
 
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label for="fullName">Full Name <span class="required">*</span></label>
-                        <input type="text" id="fullName" name="fullName" placeholder="e.g. Dr. Alex Morgan" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="email">Institutional / Contact Email <span class="required">*</span></label>
-                        <input type="email" id="email" name="email" placeholder="alex.morgan@university.edu" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="institution">Institution / Organization <span class="required">*</span></label>
-                        <input type="text" id="institution" name="institution" placeholder="e.g. Stanford University / Tech Corp" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="role">Role / Position <span class="required">*</span></label>
-                        <select id="role" name="role" required>
-                            <option value="" disabled selected>Select your role...</option>
-                            <option value="Researcher / Professor">Researcher / Professor</option>
-                            <option value="Graduate / Student">Graduate / Undergraduate Student</option>
-                            <option value="EdTech Developer / Engineer">EdTech Developer / Engineer</option>
-                            <option value="Industry Innovator">Industry Innovator</option>
-                            <option value="Other">Other</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- Section 2: Project Overview & Track Selection -->
-                <div class="form-section-header" style="margin-top: 32px;">
-                    <i data-lucide="layers"></i>
-                    <h3 class="form-section-title">2. Project Overview &amp; Track Selection</h3>
-                </div>
-
-                <div class="form-grid">
-                    <div class="form-group-full">
-                        <label for="projectTitle">Official Prototype Title <span class="required">*</span></label>
-                        <input type="text" id="projectTitle" name="projectTitle" placeholder="e.g. SocraticAI: Dialectic Reasoning Auditor" required>
-                    </div>
-
-                    <div class="form-group-full">
-                        <label for="abstract">Executive Abstract &amp; Cognitive Focus <span class="required">*</span> <span class="hint">Max 300 words</span></label>
-                        <textarea id="abstract" name="abstract" placeholder="Describe how your system demands higher-order critical thinking, active reflection, or reasoning auditing..." required></textarea>
-                    </div>
-
-                    <div class="form-group-full">
-                        <label style="margin-bottom: 8px;">Select Challenge Track <span class="required">*</span></label>
-                        <div class="track-options">
-                            <div class="track-radio-card active" onclick="selectTrack('track1', this)">
-                                <input type="radio" id="track1" name="track" value="Track 1: AI Systems for Reviewers" checked>
-                                <span class="track-badge-tag">Track 1</span>
-                                <div class="track-radio-title">AI Systems for Reviewers</div>
-                                <div class="track-radio-desc">Evaluating human cognition, auditing thought methodology, and assisting reviewers.</div>
-                            </div>
-                            <div class="track-radio-card" onclick="selectTrack('track2', this)">
-                                <input type="radio" id="track2" name="track" value="Track 2: AI Systems to Stimulate Cognition">
-                                <span class="track-badge-tag">Track 2</span>
-                                <div class="track-radio-title">AI Systems to Stimulate Cognition</div>
-                                <div class="track-radio-desc">Empowering learners by demanding real-time reflection, synthesis, and deep reasoning.</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Section 3: Mandatory Deliverable Artifacts -->
-                <div class="form-section-header" style="margin-top: 32px;">
-                    <i data-lucide="package-check"></i>
-                    <h3 class="form-section-title">3. Mandatory Deliverables</h3>
-                </div>
-
-                <div class="form-grid">
-                    <div class="form-group-full">
-                        <label for="liveUrl">1. Live Functional Prototype URL <span class="required">*</span></label>
-                        <input type="url" id="liveUrl" name="liveUrl" placeholder="https://your-prototype-demo.com" required>
-                    </div>
-
-                    <div class="form-group-full">
-                        <label for="githubUrl">2. GitHub Codebase Repository URL <span class="required">*</span></label>
-                        <input type="url" id="githubUrl" name="githubUrl" placeholder="https://github.com/username/your-repository" required>
-                    </div>
-
-                    <div class="form-group-full">
-                        <label for="demoUrl">3. Demo Video (5-min) &amp; Pitch Deck Link <span class="required">*</span> <span class="hint">(Google Drive, YouTube, or Loom)</span></label>
-                        <input type="url" id="demoUrl" name="demoUrl" placeholder="https://drive.google.com/file/d/... or https://youtube.com/watch?v=..." required>
-                    </div>
-
-                    <div class="form-group-full">
-                        <label for="governanceUrl">4. AI Governance &amp; Ethics Document Link (PDF) <span class="required">*</span></label>
-                        <input type="url" id="governanceUrl" name="governanceUrl" placeholder="https://drive.google.com/... or PDF document link" required>
-                    </div>
-                </div>
-
-                <!-- Privacy Notice & Terms Checkbox -->
-                <div class="form-group-full" style="margin-top: 28px; margin-bottom: 24px;">
-                    <label for="terms" style="display: flex; align-items: flex-start; gap: 12px; cursor: pointer; font-size: 0.9rem; color: var(--text-secondary); font-weight: 400; line-height: 1.5;">
-                        <input type="checkbox" id="terms" name="terms" required style="margin-top: 3px; accent-color: var(--accent-cyan); width: 18px; height: 18px; cursor: pointer; flex-shrink: 0;">
-                        <span>I confirm that all provided links and artifacts are accurate and complete, and accept the <a href="privacy-policy.html" target="_blank" style="color: var(--accent-cyan); text-decoration: underline;">Privacy Notice</a> for CHARAL 2026. <span class="required">*</span></span>
-                    </label>
-                </div>
-
-                <!-- Submit Button -->
-                <div class="submit-btn-wrapper">
-                    <button type="submit" class="submit-btn" id="submit-btn">
-                        <span>Submit Final Prototype Package</span>
-                        <i data-lucide="arrow-right"></i>
-                    </button>
-                </div>
-
-            </form>
+            <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+                <a href="index.html" class="submit-btn" style="text-decoration: none; width: auto; padding: 14px 32px; font-size: 1rem;">
+                    <i data-lucide="arrow-left"></i>
+                    <span>Volver a la Página Principal</span>
+                </a>
+                <a href="index.html#events" class="submit-btn" style="text-decoration: none; width: auto; padding: 14px 32px; font-size: 1rem; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.25); color: #fff; box-shadow: none;">
+                    <i data-lucide="sparkles"></i>
+                    <span>Ver Sesiones y Keynote</span>
+                </a>
+            </div>
         </div>
 
     </main>
@@ -701,73 +619,73 @@
         const form = document.getElementById('prototype-form');
         const submitBtn = document.getElementById('submit-btn');
 
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
+        if (form && submitBtn) {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
 
-            // Disable button & show spinner state
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = `<span>Processing Submission...</span> <i data-lucide="loader" class="spin"></i>`;
-            lucide.createIcons();
+                // Disable button & show spinner state
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = `<span>Processing Submission...</span> <i data-lucide="loader" class="spin"></i>`;
+                lucide.createIcons();
 
-            // Collect Form Data
-            const formData = new FormData(form);
-            const submissionId = 'REG2026-' + Math.random().toString(36).substring(2, 8).toUpperCase();
-            
-            const submissionDetails = {
-                id: submissionId,
-                formType: 'Official Prototype Submission',
-                timestamp: new Date().toLocaleString(),
-                fullName: formData.get('fullName'),
-                email: formData.get('email'),
-                institution: formData.get('institution'),
-                role: formData.get('role'),
-                projectTitle: formData.get('projectTitle'),
-                abstract: formData.get('abstract'),
-                track: formData.get('track'),
-                liveUrl: formData.get('liveUrl'),
-                githubUrl: formData.get('githubUrl'),
-                demoUrl: formData.get('demoUrl'),
-                governanceUrl: formData.get('governanceUrl')
-            };
+                // Collect Form Data
+                const formData = new FormData(form);
+                const submissionId = 'REG2026-' + Math.random().toString(36).substring(2, 8).toUpperCase();
+                
+                const submissionDetails = {
+                    id: submissionId,
+                    formType: 'Official Prototype Submission',
+                    timestamp: new Date().toLocaleString(),
+                    fullName: formData.get('fullName'),
+                    email: formData.get('email'),
+                    institution: formData.get('institution'),
+                    role: formData.get('role'),
+                    projectTitle: formData.get('projectTitle'),
+                    abstract: formData.get('abstract'),
+                    track: formData.get('track'),
+                    liveUrl: formData.get('liveUrl'),
+                    githubUrl: formData.get('githubUrl'),
+                    demoUrl: formData.get('demoUrl'),
+                    governanceUrl: formData.get('governanceUrl')
+                };
 
-            // 1. Save to localStorage
-            try {
-                let existingSubmissions = JSON.parse(localStorage.getItem('charal2026_submissions') || '[]');
-                existingSubmissions.unshift(submissionDetails);
-                localStorage.setItem('charal2026_submissions', JSON.stringify(existingSubmissions));
-                localStorage.setItem('charal2026_latest_submission', JSON.stringify(submissionDetails));
-            } catch (err) {
-                console.error("Storage error:", err);
-            }
-
-            // 2. Send to Google Sheets if Web App URL is provided
-            const sendToGoogleSheets = GOOGLE_SCRIPT_URL && !GOOGLE_SCRIPT_URL.includes("YOUR_GOOGLE_APPS_SCRIPT");
-            
-            if (sendToGoogleSheets) {
-                // Format payload as URLSearchParams for bulletproof Google Apps Script e.parameter parsing
-                const params = new URLSearchParams();
-                for (const key in submissionDetails) {
-                    params.append(key, submissionDetails[key]);
+                // 1. Save to localStorage
+                try {
+                    let existingSubmissions = JSON.parse(localStorage.getItem('charal2026_submissions') || '[]');
+                    existingSubmissions.unshift(submissionDetails);
+                    localStorage.setItem('charal2026_submissions', JSON.stringify(existingSubmissions));
+                    localStorage.setItem('charal2026_latest_submission', JSON.stringify(submissionDetails));
+                } catch (err) {
+                    console.error("Storage error:", err);
                 }
 
-                fetch(GOOGLE_SCRIPT_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: params.toString()
-                }).then(() => {
-                    window.location.href = `submission-success.html?id=${submissionId}`;
-                }).catch(err => {
-                    console.error("Google Sheets Submission Error:", err);
-                    window.location.href = `submission-success.html?id=${submissionId}`;
-                });
-            } else {
-                // Redirect directly to Confirmation Page
-                setTimeout(() => {
-                    window.location.href = `submission-success.html?id=${submissionId}`;
-                }, 800);
-            }
-        });
+                // 2. Send to Google Sheets if Web App URL is provided
+                const sendToGoogleSheets = GOOGLE_SCRIPT_URL && !GOOGLE_SCRIPT_URL.includes("YOUR_GOOGLE_APPS_SCRIPT");
+                
+                if (sendToGoogleSheets) {
+                    const params = new URLSearchParams();
+                    for (const key in submissionDetails) {
+                        params.append(key, submissionDetails[key]);
+                    }
+
+                    fetch(GOOGLE_SCRIPT_URL, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        body: params.toString()
+                    }).then(() => {
+                        window.location.href = `submission-success.html?id=${submissionId}`;
+                    }).catch(err => {
+                        console.error("Google Sheets Submission Error:", err);
+                        window.location.href = `submission-success.html?id=${submissionId}`;
+                    });
+                } else {
+                    setTimeout(() => {
+                        window.location.href = `submission-success.html?id=${submissionId}`;
+                    }, 800);
+                }
+            });
+        }
     </script>
 </body>
 </html>
