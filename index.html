@@ -452,6 +452,138 @@
             border: 0;
         }
 
+        /* Video Preview Card */
+        .video-preview-wrapper {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            border-radius: 18px;
+            overflow: hidden;
+            background: #000;
+            display: block;
+            text-decoration: none;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+        }
+
+        .video-preview-wrapper:hover {
+            transform: translateY(-4px) scale(1.01);
+            border-color: rgba(239, 68, 68, 0.65);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(239, 68, 68, 0.35);
+        }
+
+        .video-preview-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), filter 0.4s ease;
+            filter: brightness(0.92);
+        }
+
+        .video-preview-wrapper:hover .video-preview-img {
+            transform: scale(1.04);
+            filter: brightness(1);
+        }
+
+        .video-preview-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(5, 11, 20, 0.35) 0%, rgba(5, 11, 20, 0.45) 50%, rgba(5, 11, 20, 0.9) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 24px 28px;
+            z-index: 2;
+            transition: background 0.3s ease;
+        }
+
+        .video-preview-wrapper:hover .video-preview-overlay {
+            background: linear-gradient(180deg, rgba(5, 11, 20, 0.2) 0%, rgba(5, 11, 20, 0.35) 50%, rgba(5, 11, 20, 0.82) 100%);
+        }
+
+        .video-preview-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 3;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+            text-align: center;
+            pointer-events: none;
+        }
+
+        .video-play-btn-circle {
+            width: 82px;
+            height: 82px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            box-shadow: 0 0 35px rgba(239, 68, 68, 0.7), 0 10px 25px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+        }
+
+        .video-preview-wrapper:hover .video-play-btn-circle {
+            transform: scale(1.14);
+            box-shadow: 0 0 55px rgba(239, 68, 68, 0.95), 0 15px 35px rgba(0, 0, 0, 0.6);
+        }
+
+        .video-play-btn-circle svg {
+            width: 36px;
+            height: 36px;
+            margin-left: 4px;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+        }
+
+        .video-play-label {
+            background: rgba(12, 18, 34, 0.92);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(12px);
+            padding: 10px 22px;
+            border-radius: 30px;
+            color: #ffffff;
+            font-family: var(--font-heading);
+            font-size: 1.05rem;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            transition: background 0.3s ease, border-color 0.3s ease;
+        }
+
+        .video-preview-wrapper:hover .video-play-label {
+            background: rgba(239, 68, 68, 0.95);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        @media (max-width: 640px) {
+            .video-play-btn-circle {
+                width: 60px;
+                height: 60px;
+            }
+            .video-play-btn-circle svg {
+                width: 26px;
+                height: 26px;
+            }
+            .video-play-label {
+                font-size: 0.88rem;
+                padding: 8px 16px;
+            }
+            .video-preview-overlay {
+                padding: 16px;
+            }
+        }
+
         /* Timeline Section */
         .timeline-grid {
             display: grid;
@@ -1332,13 +1464,51 @@
                     </div>
                 </div>
 
-                <div class="video-responsive">
-                    <iframe 
-                        src="https://www.youtube-nocookie.com/embed/2kbjrPhoxK4?rel=0" 
-                        title="CHARAL 2026: The AI Augmented Learner Challenge - Final Conference" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                        allowfullscreen>
-                    </iframe>
+                <!-- Interactive High-Def Video Preview Card -->
+                <a href="https://www.youtube.com/watch?v=2kbjrPhoxK4" target="_blank" rel="noopener" class="video-preview-wrapper" title="Ver Conferencia Final en YouTube">
+                    <img src="assets/images/thumbnail-final-conference.jpg" alt="CHARAL 2026: Conferencia Final en MICAI 2026" class="video-preview-img" loading="lazy">
+                    <div class="video-preview-overlay">
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 10px;">
+                            <span class="badge" style="background: rgba(239, 68, 68, 0.9); color: #fff; border-color: rgba(255, 255, 255, 0.3); backdrop-filter: blur(8px); margin: 0; font-weight: 700; font-size: 0.8rem; letter-spacing: 0.04em;">
+                                <i data-lucide="youtube" style="width: 14px; height: 14px;"></i>
+                                YouTube Official Recording
+                            </span>
+                            <span style="background: rgba(0,0,0,0.7); color: #e2e8f0; font-size: 0.82rem; font-weight: 600; padding: 4px 12px; border-radius: 20px; backdrop-filter: blur(6px); border: 1px solid rgba(255,255,255,0.15);">
+                                MICAI 2026 · Nov 5, 2026
+                            </span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 12px;">
+                            <div>
+                                <h3 style="font-family: var(--font-heading); font-size: 1.35rem; font-weight: 700; color: #ffffff; margin-bottom: 4px; text-shadow: 0 2px 10px rgba(0,0,0,0.85);">
+                                    CHARAL 2026: The AI Augmented Learner Challenge
+                                </h3>
+                                <p style="color: #cbd5e1; font-size: 0.92rem; margin: 0; text-shadow: 0 2px 8px rgba(0,0,0,0.85);">
+                                    Conferencia Magistral, Ponencias de Finalistas y Sesión de Clausura
+                                </p>
+                            </div>
+                            <span style="color: #4ade80; font-size: 0.88rem; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; background: rgba(16, 185, 129, 0.25); border: 1px solid rgba(16, 185, 129, 0.5); padding: 7px 16px; border-radius: 20px; backdrop-filter: blur(8px);">
+                                <i data-lucide="external-link" style="width: 14px; height: 14px;"></i>
+                                Ver en YouTube
+                            </span>
+                        </div>
+                    </div>
+                    <div class="video-preview-center">
+                        <div class="video-play-btn-circle">
+                            <i data-lucide="play"></i>
+                        </div>
+                        <div class="video-play-label">
+                            <i data-lucide="circle-play" style="width: 18px; height: 18px;"></i>
+                            <span>Ver Conferencia Final en YouTube</span>
+                        </div>
+                    </div>
+                </a>
+
+                <div style="margin-top: 18px; display: flex; justify-content: center;">
+                    <a href="https://www.youtube.com/watch?v=2kbjrPhoxK4" target="_blank" rel="noopener" class="cta-btn" style="background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%); color: #fff; padding: 14px 34px; font-size: 1.05rem; box-shadow: 0 0 30px rgba(239, 68, 68, 0.45); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 30px; display: inline-flex; align-items: center; gap: 10px; font-weight: 700; text-decoration: none; transition: transform 0.25s ease, box-shadow 0.25s ease;" onmouseover="this.style.transform='scale(1.03)';" onmouseout="this.style.transform='scale(1)';">
+                        <i data-lucide="circle-play" style="width: 22px; height: 22px;"></i>
+                        <span>▶ Ver Conferencia Final en YouTube</span>
+                        <i data-lucide="external-link" style="width: 16px; height: 16px;"></i>
+                    </a>
                 </div>
 
                 <div style="margin-top: 16px; padding: 12px 14px 4px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; border-top: 1px solid rgba(255, 255, 255, 0.08);">
