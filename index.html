@@ -14,9 +14,9 @@
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <!-- Favicon (CHARAL Logo) -->
-    <link rel="icon" type="image/png" href="assets/images/logo-charal-2-b.png">
-    <link rel="shortcut icon" type="image/png" href="assets/images/logo-charal-2-b.png">
-    <link rel="apple-touch-icon" href="assets/images/logo-charal-2-b.png">
+    <link rel="icon" type="image/png" href="assets/shared/logo-charal-2-b.png">
+    <link rel="shortcut icon" type="image/png" href="assets/shared/logo-charal-2-b.png">
+    <link rel="apple-touch-icon" href="assets/shared/logo-charal-2-b.png">
 
     <style>
         :root {
@@ -1303,7 +1303,7 @@
     <header>
         <nav class="container">
             <a href="#top" class="logo">
-                <img src="assets/images/logo-charal-2-b.png" alt="CHARAL Logo" class="logo-image">
+                <img src="assets/shared/logo-charal-2-b.png" alt="CHARAL Logo" class="logo-image">
                 <span class="logo-text">CHARAL 2026</span>
             </a>
             <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu">
@@ -1335,7 +1335,7 @@
         <div class="container">
             <div style="margin-bottom: 12px;">
                 <a href="https://smia.mx/" target="_blank" title="Sociedad Mexicana de Inteligencia Artificial (SMIA)" style="display: inline-block; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-                    <img src="assets/images/logo_SMIA_blanco.png" alt="SMIA Logo" style="height: 54px; object-fit: contain; filter: drop-shadow(0 0 15px rgba(255,255,255,0.4));">
+                    <img src="assets/shared/logo_SMIA_blanco.png" alt="SMIA Logo" style="height: 54px; object-fit: contain; filter: drop-shadow(0 0 15px rgba(255,255,255,0.4));">
                 </a>
             </div>
             <!-- Title & Subtitle -->
@@ -1348,7 +1348,7 @@
             <!-- Powered by Alexandr.ia AI Learning Systems (Above Card) -->
             <a href="https://www.alexandriamx.com/" target="_blank" style="text-decoration: none; margin-bottom: 28px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
                 <span style="font-size: 0.9rem; color: #78c8aa; text-transform: uppercase; letter-spacing: 0.15em; font-weight: 700; text-shadow: 0 0 15px rgba(120,200,170,0.6);">Powered by Alexandr.ia AI Learning Systems</span>
-                <img src="assets/images/alexandria-logo.png" alt="Alexandr.ia Logo" style="height: 140px; filter: drop-shadow(0 0 25px rgba(120,200,170,0.45));">
+                <img src="assets/shared/alexandria-logo.png" alt="Alexandr.ia Logo" style="height: 140px; filter: drop-shadow(0 0 25px rgba(120,200,170,0.45));">
             </a>
 
             <!-- Final Conference Replays Banner (Nov 5, 2026) -->
@@ -1425,7 +1425,7 @@
         <div class="container">
             <div class="about-grid">
                 <div class="about-image-wrapper">
-                    <img src="assets/images/logo-charal-2-b.png" alt="CHARAL Logo" class="about-logo">
+                    <img src="assets/shared/logo-charal-2-b.png" alt="CHARAL Logo" class="about-logo">
                 </div>
                 <div class="about-text-content">
                     <div class="badge">
@@ -1512,24 +1512,19 @@
                 <h2 class="section-title">Keynotes</h2>
             </div>
 
-            <!-- Poster reel. Missing posters are mockups: replace each .reel-placeholder with
-                 <a class="reel-item poster" href="IMG" target="_blank" rel="noopener"><img src="IMG" alt="..." loading="lazy"></a> -->
+            <!-- Poster reel (4:5 images in assets/2026/) -->
             <div class="reel" data-reel>
                 <button class="reel-nav reel-prev" type="button" aria-label="Previous poster"><i data-lucide="chevron-left"></i></button>
                 <div class="reel-track">
-                    <a class="reel-item poster" href="assets/images/keynote-enrique-cortes.jpg" target="_blank" rel="noopener" title="Open poster">
-                        <img src="assets/images/keynote-enrique-cortes.jpg" alt="Keynote poster: Dr. Enrique Cortés Rello, Director AI Hub, Tec de Monterrey" loading="lazy">
+                    <a class="reel-item poster" href="assets/2026/enrique-cortes-keynote-speaker.jpeg" target="_blank" rel="noopener" title="Open poster">
+                        <img src="assets/2026/enrique-cortes-keynote-speaker.jpeg" alt="Keynote poster: Dr. Enrique Cortés Rello, Director AI Hub, Tec de Monterrey" loading="lazy">
                     </a>
-                    <div class="reel-item poster reel-placeholder">
-                        <i data-lucide="image"></i>
-                        <span class="ph-name">Anne Kjær Bathel</span>
-                        <span class="ph-note">Poster coming soon</span>
-                    </div>
-                    <div class="reel-item poster reel-placeholder">
-                        <i data-lucide="image"></i>
-                        <span class="ph-name">Roser Almenar</span>
-                        <span class="ph-note">Poster coming soon</span>
-                    </div>
+                    <a class="reel-item poster" href="assets/2026/anne-bathel-keynote-speaker.jpeg" target="_blank" rel="noopener" title="Open poster">
+                        <img src="assets/2026/anne-bathel-keynote-speaker.jpeg" alt="Keynote poster: Anne Kjær Bathel, Founder &amp; Director, ReDI School of Digital Integration" loading="lazy">
+                    </a>
+                    <a class="reel-item poster" href="assets/2026/roser-almenar-keynote-speaker.jpeg" target="_blank" rel="noopener" title="Open poster">
+                        <img src="assets/2026/roser-almenar-keynote-speaker.jpeg" alt="Keynote poster: Roser Almenar, PhD Candidate in AI Law, University of Valencia" loading="lazy">
+                    </a>
                 </div>
                 <button class="reel-nav reel-next" type="button" aria-label="Next poster"><i data-lucide="chevron-right"></i></button>
             </div>
@@ -1549,7 +1544,7 @@
             </div>
 
             <!-- Winners reel. Screenshots are mockups: replace each .reel-placeholder
-                 with <img src="assets/images/winners/<project>.jpg" alt="..."> -->
+                 with <img src="assets/2026/<project>-winner.jpg" alt="..."> -->
             <div class="reel" data-reel>
                 <button class="reel-nav reel-prev" type="button" aria-label="Previous winner"><i data-lucide="chevron-left"></i></button>
                 <div class="reel-track">
@@ -1594,7 +1589,7 @@
             <div class="glass-card" style="margin-top: 32px; border: 1px solid rgba(120, 200, 170, 0.4); background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(12, 18, 34, 0.95) 100%); border-radius: 24px; padding: 36px; backdrop-filter: blur(16px); box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(120, 200, 170, 0.15);">
                 <div class="rcs-grid">
                     <div style="text-align: center;">
-                        <img src="assets/images/rcs-award-publication.jpg" alt="RCS Journal Publication Award" style="width: 100%; max-width: 320px; border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.2); box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6); object-fit: cover;">
+                        <img src="assets/2026/rcs-award-publication.jpg" alt="RCS Journal Publication Award" style="width: 100%; max-width: 320px; border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.2); box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6); object-fit: cover;">
                     </div>
                     <div>
                         <div class="badge" style="background: rgba(16, 185, 129, 0.15); border-color: rgba(16, 185, 129, 0.4); color: #4ade80; margin-bottom: 12px;">
@@ -1634,7 +1629,7 @@
 
             <div class="video-embed-card" style="border-color: rgba(16, 185, 129, 0.45); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 35px rgba(16, 185, 129, 0.18);">
                 <a href="https://www.youtube.com/watch?v=dCQA4ubma8A" target="_blank" rel="noopener" class="video-preview-wrapper" title="Watch the Final Conference on YouTube">
-                    <img src="assets/images/thumbnail-final-conference.jpg" alt="CHARAL 2026 Final Conference at MICAI 2026" class="video-preview-img" loading="lazy">
+                    <img src="assets/2026/thumbnail-final-conference.jpg" alt="CHARAL 2026 Final Conference at MICAI 2026" class="video-preview-img" loading="lazy">
                     <div class="video-preview-overlay">
                         <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 10px;">
                             <span class="badge" style="background: rgba(239, 68, 68, 0.9); color: #fff; border-color: rgba(255, 255, 255, 0.3); backdrop-filter: blur(8px); margin: 0; font-weight: 700; font-size: 0.8rem; letter-spacing: 0.04em;">
@@ -1857,7 +1852,7 @@
 
             <div class="chairs-grid">
                 <div class="glass-card chair-card">
-                    <img src="assets/images/eugenio-photo.jpg" alt="Eugenio Salas Iturriaga" class="chair-avatar" style="object-fit: cover; object-position: center 15%;">
+                    <img src="assets/2026/eugenio-photo.jpg" alt="Eugenio Salas Iturriaga" class="chair-avatar" style="object-fit: cover; object-position: center 15%;">
                     <h4>Eugenio Salas Iturriaga</h4>
                     <div class="chair-role">Demo Showcase Chair</div>
                     <a href="mailto:eugenio@alexandriads.com" class="chair-email">
@@ -1871,7 +1866,7 @@
                 </div>
 
                 <div class="glass-card chair-card">
-                    <img src="assets/images/arturo-photo.jpg" alt="Arturo Gomez Chavez, PhD" class="chair-avatar" style="object-fit: cover;">
+                    <img src="assets/2026/arturo-photo.jpg" alt="Arturo Gomez Chavez, PhD" class="chair-avatar" style="object-fit: cover;">
                     <h4>Arturo Gomez Chavez, PhD</h4>
                     <div class="chair-role">Demo Showcase Chair</div>
                     <a href="mailto:arturo.gomez-chavez@explearn.io" class="chair-email">
@@ -1902,17 +1897,17 @@
             <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 32px; max-width: 950px; margin: 0 auto;">
                 <!-- Lovable Sponsor Card -->
                 <a href="https://lovable.dev/" target="_blank" title="Lovable AI" class="glass-card" style="display: flex; align-items: center; justify-content: center; padding: 22px 36px; border-radius: 20px; text-decoration: none; transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease; background: rgba(12, 18, 34, 0.85); border: 1px solid var(--border-glow); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);" onmouseover="this.style.transform='translateY(-4px) scale(1.03)'; this.style.borderColor='rgba(255, 107, 107, 0.6)';" onmouseout="this.style.transform='none'; this.style.borderColor='var(--border-glow)';">
-                    <img src="assets/images/logo-lovable-white.png" alt="Lovable Logo" style="height: 42px; object-fit: contain; filter: drop-shadow(0 0 15px rgba(255, 107, 107, 0.4));">
+                    <img src="assets/shared/logo-lovable-white.png" alt="Lovable Logo" style="height: 42px; object-fit: contain; filter: drop-shadow(0 0 15px rgba(255, 107, 107, 0.4));">
                 </a>
 
                 <!-- Alexandr.ia Partner Card -->
                 <a href="https://www.alexandriamx.com/" target="_blank" title="Alexandr.ia AI Learning Systems" class="glass-card" style="display: flex; align-items: center; justify-content: center; padding: 22px 36px; border-radius: 20px; text-decoration: none; transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease; background: rgba(12, 18, 34, 0.85); border: 1px solid var(--border-glow); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);" onmouseover="this.style.transform='translateY(-4px) scale(1.03)'; this.style.borderColor='rgba(120, 200, 170, 0.6)';" onmouseout="this.style.transform='none'; this.style.borderColor='var(--border-glow)';">
-                    <img src="assets/images/alexandria-logo.png" alt="Alexandr.ia Logo" style="height: 50px; object-fit: contain; filter: drop-shadow(0 0 15px rgba(120,200,170,0.5));">
+                    <img src="assets/shared/alexandria-logo.png" alt="Alexandr.ia Logo" style="height: 50px; object-fit: contain; filter: drop-shadow(0 0 15px rgba(120,200,170,0.5));">
                 </a>
 
                 <!-- SMIA Partner Card -->
                 <a href="https://smia.mx/" target="_blank" title="Sociedad Mexicana de Inteligencia Artificial (SMIA)" class="glass-card" style="display: flex; align-items: center; justify-content: center; padding: 22px 36px; border-radius: 20px; text-decoration: none; transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease; background: rgba(12, 18, 34, 0.85); border: 1px solid var(--border-glow); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);" onmouseover="this.style.transform='translateY(-4px) scale(1.03)'; this.style.borderColor='rgba(255, 255, 255, 0.4)';" onmouseout="this.style.transform='none'; this.style.borderColor='var(--border-glow)';">
-                    <img src="assets/images/logo_SMIA_blanco.png" alt="SMIA Logo" style="height: 42px; object-fit: contain; filter: drop-shadow(0 0 15px rgba(255,255,255,0.4));">
+                    <img src="assets/shared/logo_SMIA_blanco.png" alt="SMIA Logo" style="height: 42px; object-fit: contain; filter: drop-shadow(0 0 15px rgba(255,255,255,0.4));">
                 </a>
             </div>
         </div>
@@ -1947,7 +1942,7 @@
 
     <!-- Fixed Bottom-Left MICAI 25 Years Badge -->
     <a href="https://micai.org/2026/" target="_blank" title="MICAI 2026 Official Site" style="position: fixed; bottom: 24px; left: 24px; z-index: 999; display: flex; align-items: center; gap: 10px; padding: 10px 16px; border-radius: 14px; background: rgba(5, 11, 20, 0.8); border: 1px solid rgba(255,255,255,0.18); backdrop-filter: blur(12px); box-shadow: 0 10px 30px rgba(0,0,0,0.5); text-decoration: none; transition: transform 0.3s ease, border-color 0.3s ease;" onmouseover="this.style.transform='translateY(-3px) scale(1.03)'; this.style.borderColor='rgba(255,255,255,0.4)';" onmouseout="this.style.transform='none'; this.style.borderColor='rgba(255,255,255,0.18)';">
-        <img src="assets/images/logo-micai-25years.png" alt="MICAI 25 Years Logo" style="height: 38px; object-fit: contain; filter: drop-shadow(0 0 10px rgba(255,255,255,0.3));">
+        <img src="assets/2026/logo-micai-25years.png" alt="MICAI 25 Years Logo" style="height: 38px; object-fit: contain; filter: drop-shadow(0 0 10px rgba(255,255,255,0.3));">
     </a>
 
     <!-- Interactive Scripts & Canvas Engine -->
