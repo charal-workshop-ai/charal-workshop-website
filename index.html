@@ -434,24 +434,6 @@
             padding: 16px;
         }
 
-        .video-responsive {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            overflow: hidden;
-            border-radius: 16px;
-            background: #000;
-        }
-
-        .video-responsive iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: 0;
-        }
-
         /* Video Preview Card */
         .video-preview-wrapper {
             position: relative;
@@ -609,6 +591,24 @@
             border-color: rgba(120, 200, 170, 0.6);
         }
 
+        .timeline-card-main.is-done {
+            border-color: rgba(248, 113, 113, 0.4);
+            background: rgba(248, 113, 113, 0.07);
+        }
+
+        .timeline-card-main.is-done:hover {
+            border-color: rgba(248, 113, 113, 0.7);
+        }
+
+        .timeline-card-main.is-final {
+            border-color: rgba(16, 185, 129, 0.45);
+            background: rgba(16, 185, 129, 0.08);
+        }
+
+        .timeline-card-main.is-final:hover {
+            border-color: rgba(16, 185, 129, 0.75);
+        }
+
         .timeline-badge-tag {
             font-size: 0.78rem;
             font-weight: 700;
@@ -631,6 +631,35 @@
             font-size: 0.92rem;
             color: var(--text-secondary);
             line-height: 1.6;
+        }
+
+        .timeline-card-main.is-done .timeline-badge-tag {
+            color: #f87171;
+        }
+
+        .timeline-card-main.is-final .timeline-badge-tag {
+            color: #4ade80;
+        }
+
+        .timeline-badge-tag svg {
+            width: 12px;
+            height: 12px;
+            vertical-align: -1px;
+        }
+
+        .timeline-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 10px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-decoration: underline;
+        }
+
+        .timeline-link svg {
+            width: 14px;
+            height: 14px;
         }
 
         /* Tracks Grid */
@@ -823,43 +852,6 @@
             font-size: 0.9rem;
         }
 
-        /* Awards Grid */
-        .awards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 24px;
-        }
-
-        .award-card {
-            text-align: center;
-            border-top: 3px solid var(--accent-cyan);
-        }
-
-        .award-icon-box {
-            width: 60px;
-            height: 60px;
-            margin: 0 auto 16px;
-            background: rgba(6, 182, 212, 0.12);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--accent-cyan);
-        }
-
-        .award-card h4 {
-            font-family: var(--font-heading);
-            font-size: 1.3rem;
-            margin-bottom: 8px;
-            color: var(--text-primary);
-        }
-
-        .award-card p {
-            color: var(--accent-cyan);
-            font-weight: 600;
-            font-size: 0.95rem;
-        }
-
         /* Chairs / Contact */
         .chairs-grid {
             display: grid;
@@ -982,21 +974,9 @@
             cursor: pointer;
         }
 
-        .event-card-grid {
-            display: grid;
-            grid-template-columns: 1fr 1.2fr;
-            gap: 40px;
-            align-items: center;
-        }
-
         @media (max-width: 900px) {
             .conference-info-hero {
                 grid-template-columns: repeat(2, 1fr);
-            }
-
-            .event-card-grid {
-                grid-template-columns: 1fr;
-                gap: 28px;
             }
 
             .hero h1 {
@@ -1081,6 +1061,229 @@
             border-color: rgba(16, 185, 129, 0.6);
         }
         .live-link svg { width: 18px; height: 18px; }
+
+        /* Reels: horizontal, swipeable galleries (keynote posters, winners) */
+        .reel {
+            position: relative;
+        }
+
+        .reel-track {
+            display: flex;
+            gap: 24px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding: 10px 4px 22px;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(120, 200, 170, 0.35) transparent;
+        }
+
+        .reel-track::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .reel-track::-webkit-scrollbar-thumb {
+            background: rgba(120, 200, 170, 0.35);
+            border-radius: 3px;
+        }
+
+        .reel-item {
+            flex: 0 0 auto;
+            scroll-snap-align: center;
+        }
+
+        /* Center the items while they fit; the auto margins collapse to 0 once the track overflows */
+        .reel-item:first-child {
+            margin-left: auto;
+        }
+
+        .reel-item:last-child {
+            margin-right: auto;
+        }
+
+        .reel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 3;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(7, 9, 19, 0.85);
+            backdrop-filter: blur(10px);
+            color: #ffffff;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
+        }
+
+        .reel-nav:hover {
+            background: rgba(16, 185, 129, 0.25);
+            border-color: rgba(16, 185, 129, 0.6);
+        }
+
+        .reel-nav:disabled {
+            opacity: 0.3;
+            cursor: default;
+        }
+
+        .reel-prev {
+            left: -8px;
+        }
+
+        .reel-next {
+            right: -8px;
+        }
+
+        .reel.is-scrollable .reel-nav {
+            display: inline-flex;
+        }
+
+        .poster {
+            display: block;
+            width: min(320px, 78vw);
+            aspect-ratio: 4 / 5;
+            border-radius: 18px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: var(--bg-card);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.55);
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        a.poster:hover {
+            transform: translateY(-6px);
+            border-color: var(--border-active);
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6), 0 0 30px rgba(120, 200, 170, 0.2);
+        }
+
+        .poster img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Mockup placeholder: swap for the real image when it is available */
+        .reel-placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 24px;
+            text-align: center;
+            border: 1px dashed rgba(120, 200, 170, 0.45);
+            background: linear-gradient(160deg, rgba(16, 185, 129, 0.12) 0%, rgba(12, 18, 34, 0.92) 65%);
+            color: var(--text-muted);
+        }
+
+        .reel-placeholder svg {
+            width: 36px;
+            height: 36px;
+            color: var(--accent-cyan);
+            opacity: 0.75;
+        }
+
+        .ph-name {
+            font-family: var(--font-heading);
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .ph-note {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .winner-card {
+            width: min(340px, 80vw);
+            border-radius: 18px;
+            overflow: hidden;
+            background: var(--bg-card);
+            border: 1px solid var(--border-glow);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.45);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .winner-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--border-active);
+        }
+
+        .winner-shot {
+            aspect-ratio: 16 / 10;
+            background: rgba(0, 0, 0, 0.35);
+        }
+
+        .winner-shot.reel-placeholder {
+            border: 0;
+            border-bottom: 1px dashed rgba(120, 200, 170, 0.35);
+        }
+
+        .winner-shot img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .winner-body {
+            padding: 20px 22px 24px;
+        }
+
+        .winner-award {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #4ade80;
+        }
+
+        .winner-award svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        .winner-body h3 {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin: 6px 0 2px;
+        }
+
+        .winner-body p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .rcs-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.3fr;
+            gap: 36px;
+            align-items: center;
+        }
+
+        @media (max-width: 900px) {
+            .rcs-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .reel.is-scrollable .reel-nav {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body id="top">
@@ -1102,14 +1305,14 @@
             <ul id="nav-menu">
                 <li><a href="#about">About</a></li>
                 <li><a href="#timeline">Timeline</a></li>
-                <li><a href="#events">Events</a></li>
+                <li><a href="#keynotes">Keynotes</a></li>
+                <li><a href="#awards">Winners</a></li>
                 <li><a href="#recording">Recording</a></li>
                 <li><a href="#tracks">Tracks</a></li>
                 <li><a href="#presentation">Evaluation</a></li>
                 <li><a href="#submission">Submission</a></li>
-                <li><a href="#awards">Awards</a></li>
-                <li><a href="#sponsors">Sponsors</a></li>
                 <li><a href="#contact">Contact</a></li>
+                <li><a href="#sponsors">Sponsors</a></li>
                 <li>
                     <a href="/archive/2025/" class="nav-btn" title="CHARAL 2025 Workshop Archive">
                         <i data-lucide="archive" style="width: 12px; height: 12px; opacity: 0.8;"></i>
@@ -1123,29 +1326,6 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <!-- Event Recordings & Replays Banner (Nov 5, 2026) -->
-            <div class="live-banner" id="live">
-                <div class="live-banner-title">
-                    <i data-lucide="video" style="width: 20px; height: 20px;"></i>
-                    Grabaciones y Replays de la Conferencia Final
-                </div>
-                <div class="live-banner-sub">Sesión oficial presentada el 5 de noviembre de 2026 en MICAI · Revive la transmisión en:</div>
-                <div class="live-links">
-                    <a href="https://www.youtube.com/watch?v=2kbjrPhoxK4" target="_blank" rel="noopener" class="live-link" style="background: rgba(239, 68, 68, 0.15); border-color: rgba(239, 68, 68, 0.45); color: #fff;">
-                        <i data-lucide="circle-play" style="color: #f87171;"></i><span>YouTube (Conferencia Final)</span>
-                    </a>
-                    <a href="https://lnkd.in/e592qp-H" target="_blank" rel="noopener" class="live-link">
-                        <i data-lucide="briefcase"></i><span>LinkedIn Replay</span>
-                    </a>
-                    <a href="https://streamyard.com/watch/VJB7ktSK4i7b" target="_blank" rel="noopener" class="live-link">
-                        <i data-lucide="monitor-play"></i><span>StreamYard Replay</span>
-                    </a>
-                    <a href="#recording" class="live-link" style="background: rgba(16, 185, 129, 0.18); border-color: rgba(16, 185, 129, 0.5); color: #4ade80;">
-                        <i data-lucide="tv"></i><span>Ver en el Sitio</span>
-                    </a>
-                </div>
-            </div>
-
             <div style="margin-bottom: 12px;">
                 <a href="https://smia.mx/" target="_blank" title="Sociedad Mexicana de Inteligencia Artificial (SMIA)" style="display: inline-block; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
                     <img src="assets/images/logo_SMIA_blanco.png" alt="SMIA Logo" style="height: 54px; object-fit: contain; filter: drop-shadow(0 0 15px rgba(255,255,255,0.4));">
@@ -1163,6 +1343,26 @@
                 <span style="font-size: 0.9rem; color: #78c8aa; text-transform: uppercase; letter-spacing: 0.15em; font-weight: 700; text-shadow: 0 0 15px rgba(120,200,170,0.6);">Powered by Alexandr.ia AI Learning Systems</span>
                 <img src="assets/images/alexandria-logo.png" alt="Alexandr.ia Logo" style="height: 140px; filter: drop-shadow(0 0 25px rgba(120,200,170,0.45));">
             </a>
+
+            <!-- Final Conference Replays Banner (Nov 5, 2026) -->
+            <div class="live-banner" id="replays">
+                <div class="live-banner-title">
+                    <i data-lucide="video" style="width: 20px; height: 20px;"></i>
+                    Final Conference Replays
+                </div>
+                <div class="live-banner-sub">Official session held on November 5, 2026 at MICAI 2026. Watch the replay on:</div>
+                <div class="live-links">
+                    <a href="https://www.youtube.com/watch?v=2kbjrPhoxK4" target="_blank" rel="noopener" class="live-link" style="background: rgba(239, 68, 68, 0.15); border-color: rgba(239, 68, 68, 0.45); color: #fff;">
+                        <i data-lucide="circle-play" style="color: #f87171;"></i><span>YouTube</span>
+                    </a>
+                    <a href="https://lnkd.in/e592qp-H" target="_blank" rel="noopener" class="live-link">
+                        <i data-lucide="briefcase"></i><span>LinkedIn</span>
+                    </a>
+                    <a href="https://streamyard.com/watch/VJB7ktSK4i7b" target="_blank" rel="noopener" class="live-link">
+                        <i data-lucide="monitor-play"></i><span>StreamYard</span>
+                    </a>
+                </div>
+            </div>
 
             <!-- Event Context Info Card -->
             <div class="glass-card conference-info-hero">
@@ -1196,39 +1396,20 @@
                 </div>
             </div>
 
-            <!-- Event Concluded & Gratitude Callout Banner -->
-            <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.16) 0%, rgba(6, 182, 212, 0.1) 50%, rgba(12, 18, 34, 0.95) 100%); border: 1px solid rgba(16, 185, 129, 0.45); border-radius: 20px; padding: 22px 28px; max-width: 820px; margin: 20px auto 20px; backdrop-filter: blur(14px); text-align: center; box-shadow: 0 10px 35px rgba(0, 0, 0, 0.4), 0 0 30px rgba(16, 185, 129, 0.15);">
+            <!-- Event Concluded & Thank-You Banner -->
+            <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.16) 0%, rgba(6, 182, 212, 0.1) 50%, rgba(12, 18, 34, 0.95) 100%); border: 1px solid rgba(16, 185, 129, 0.45); border-radius: 20px; padding: 22px 28px; max-width: 820px; margin: 20px auto 0; backdrop-filter: blur(14px); text-align: center; box-shadow: 0 10px 35px rgba(0, 0, 0, 0.4), 0 0 30px rgba(16, 185, 129, 0.15);">
                 <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(16, 185, 129, 0.22); border: 1px solid rgba(16, 185, 129, 0.5); padding: 5px 16px; border-radius: 20px; color: #4ade80; font-size: 0.85rem; font-weight: 700; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.06em;">
                     <i data-lucide="check-circle-2" style="width: 16px; height: 16px;"></i>
-                    Convocatoria Concluida · Evento Finalizado
+                    Submissions Closed · Event Concluded
                 </div>
                 <h3 style="font-family: var(--font-heading); font-size: 1.45rem; font-weight: 700; color: #ffffff; margin-bottom: 8px; line-height: 1.3;">
-                    ¡Gracias a todos por participar en CHARAL 2026!
+                    Thank you for taking part in CHARAL 2026!
                 </h3>
                 <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; max-width: 720px; margin: 0 auto;">
-                    La convocatoria de prototipos y la jornada oficial del evento en <strong>MICAI 2026</strong> han finalizado con gran éxito. Nuestro más sincero agradecimiento a los investigadores, estudiantes, conferencistas, evaluadores y equipos que hicieron posible esta edición dedicada a elevar el pensamiento crítico mediante inteligencia artificial.
+                    The call for prototypes and the official event day at <strong>MICAI 2026</strong> have come to a successful close. Our sincere thanks to the researchers, students, speakers, reviewers and teams who made this edition possible, an edition dedicated to strengthening critical thinking through artificial intelligence.
                 </p>
             </div>
 
-            <!-- RCS Journal Publication Award Callout Banner -->
-            <div style="background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.35); border-radius: 16px; padding: 12px 24px; max-width: 760px; margin: 0 auto 20px; backdrop-filter: blur(12px); display: flex; align-items: center; justify-content: center; gap: 10px; color: #4ade80; font-size: 0.92rem; font-weight: 600; text-align: center; box-shadow: 0 0 25px rgba(16, 185, 129, 0.15);">
-                <i data-lucide="book-open" style="width: 18px; height: 18px; flex-shrink: 0; color: var(--accent-cyan);"></i>
-                <span><strong>Award Confirmed:</strong> Top-performing AI systems secure publication inside <strong>Research in Computing Science (RCS - IPN)</strong></span>
-            </div>
-            <!-- CTA Buttons -->
-            <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-top: 12px; align-items: center;">
-                <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap; justify-content: center;">
-                    <div style="background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.18); border-radius: 30px; padding: 10px 20px; color: #94a3b8; font-weight: 600; font-size: 0.92rem; display: inline-flex; align-items: center; gap: 8px;">
-                        <i data-lucide="lock" style="width: 15px; height: 15px; color: #f87171;"></i>
-                        <span>Convocatoria Cerrada</span>
-                    </div>
-                    <a href="#events" class="cta-btn" style="background: linear-gradient(135deg, #10b981 0%, #06b6d4 100%); box-shadow: 0 0 25px rgba(16, 185, 129, 0.35);">
-                        <i data-lucide="mic"></i>
-                        <span>Ver Sesiones y Keynote</span>
-                        <i data-lucide="arrow-down"></i>
-                    </a>
-                </div>
-            </div>
         </div>
     </section>
 
@@ -1272,163 +1453,167 @@
             </div>
 
             <div class="timeline-grid">
-                <div class="timeline-card-main">
-                    <span class="timeline-badge-tag" style="color: #94a3b8;"><i data-lucide="check" style="width: 12px; height: 12px; display: inline;"></i> Step 1 • Sep 8 · Completed</span>
+                <div class="timeline-card-main is-done">
+                    <span class="timeline-badge-tag"><i data-lucide="check"></i> Step 1 • Sep 8 · Completed</span>
                     <div class="timeline-title-text">Intro Workshop</div>
                     <div class="timeline-desc-text">Challenge Brief &amp; AI Governance overview.</div>
                 </div>
 
-                <div class="timeline-card-main" style="border: 1px solid rgba(255, 107, 107, 0.4); background: rgba(255, 107, 107, 0.08);">
-                    <span class="timeline-badge-tag" style="color: #ff7676;"><i data-lucide="check" style="width: 12px; height: 12px; display: inline;"></i> Step 2 • Oct 12 · Completed</span>
+                <div class="timeline-card-main is-done">
+                    <span class="timeline-badge-tag"><i data-lucide="check"></i> Step 2 • Oct 12 · Completed</span>
                     <div class="timeline-title-text">Lovable AI Workshop</div>
-                    <div class="timeline-desc-text">Live prototyping workshop by Dino Osmanagić. Sesión realizada con éxito.</div>
-                    <a href="https://luma.com/loqupv5b" target="_blank" style="display: inline-flex; align-items: center; gap: 6px; margin-top: 10px; color: #ff7676; font-size: 0.85rem; font-weight: 700; text-decoration: underline;">
-                        <span>Ver en Luma</span>
-                        <i data-lucide="external-link" style="width: 14px; height: 14px;"></i>
+                    <div class="timeline-desc-text">Live prototyping workshop by Dino Osmanagić.</div>
+                    <a href="https://luma.com/loqupv5b" target="_blank" rel="noopener" class="timeline-link" style="color: #f87171;">
+                        <span>View on Luma</span>
+                        <i data-lucide="external-link"></i>
                     </a>
                 </div>
 
-                <div class="timeline-card-main" style="border: 1px solid rgba(248, 113, 113, 0.3); background: rgba(248, 113, 113, 0.05);">
-                    <span class="timeline-badge-tag" style="color: #f87171;"><i data-lucide="lock" style="width: 12px; height: 12px; display: inline;"></i> Step 3 • Oct 31 · Concluded</span>
+                <div class="timeline-card-main is-done">
+                    <span class="timeline-badge-tag"><i data-lucide="lock"></i> Step 3 • Oct 31 · Closed</span>
                     <div class="timeline-title-text">Submission Deadline</div>
-                    <div class="timeline-desc-text">Final deadline to submit live URLs, GitHub code, demo video, and governance docs. <strong>(Convocatoria Cerrada)</strong></div>
+                    <div class="timeline-desc-text">Final deadline to submit live URLs, GitHub code, demo video, and governance docs.</div>
                 </div>
 
-                <div class="timeline-card-main">
-                    <span class="timeline-badge-tag" style="color: #94a3b8;"><i data-lucide="check" style="width: 12px; height: 12px; display: inline;"></i> Step 4 • Nov 1–4 · Completed</span>
+                <div class="timeline-card-main is-done">
+                    <span class="timeline-badge-tag"><i data-lucide="check"></i> Step 4 • Nov 1–4 · Completed</span>
                     <div class="timeline-title-text">Submission Reviews &amp; Feedback</div>
                     <div class="timeline-desc-text">Showcase chairs audited live URLs, GitHub code, and governance docs, and shared feedback.</div>
                 </div>
 
-                <div class="timeline-card-main" style="border: 1px solid rgba(16, 185, 129, 0.4); background: rgba(16, 185, 129, 0.08);">
-                    <span class="timeline-badge-tag" style="color: #4ade80;"><i data-lucide="check-circle-2" style="width: 12px; height: 12px; display: inline;"></i> Step 5 • Nov 5 · Event Concluded</span>
-                    <div class="timeline-title-text">Finalists, Winners &amp; Keynote</div>
-                    <div class="timeline-desc-text">Online event successfully concluded: finalists and winners announced, plus keynote by <strong>Dr. Enrique Cortés Rello</strong>.</div>
-                    <a href="https://luma.com/giclnbum" target="_blank" style="display: inline-flex; align-items: center; gap: 6px; margin-top: 10px; color: #4ade80; font-size: 0.85rem; font-weight: 700; text-decoration: underline;">
-                        <span>Ver en Luma</span>
-                        <i data-lucide="external-link" style="width: 14px; height: 14px;"></i>
+                <div class="timeline-card-main is-final">
+                    <span class="timeline-badge-tag"><i data-lucide="check-circle-2"></i> Step 5 • Nov 5 · Event Concluded</span>
+                    <div class="timeline-title-text">Finalists, Winners &amp; Keynotes</div>
+                    <div class="timeline-desc-text">Online event: talks by <strong>Dr. Enrique Cortés Rello</strong>, <strong>Anne Kjær Bathel</strong> and <strong>Roser Almenar</strong>, the five-finalist showcase, and the winners announcement.</div>
+                    <a href="https://luma.com/giclnbum" target="_blank" rel="noopener" class="timeline-link" style="color: #4ade80;">
+                        <span>View on Luma</span>
+                        <i data-lucide="external-link"></i>
                     </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Featured Events & Keynote Section -->
-    <section id="events" style="padding: 40px 0;">
+    <!-- Keynote Speakers Section (poster reel) -->
+    <section id="keynotes" style="padding: 60px 0;">
         <div class="container">
-            <div class="section-header" style="margin-bottom: 36px;">
+            <div class="section-header" style="margin-bottom: 40px;">
                 <div class="badge">
-                    <i data-lucide="sparkles" style="width: 14px; height: 14px;"></i>
-                    Official Events &amp; Sessions
+                    <i data-lucide="mic" style="width: 14px; height: 14px;"></i>
+                    Invited Speakers
                 </div>
-                <h2 class="section-title">Keynote &amp; Workshops</h2>
-                <p class="section-desc">Sesiones en vivo, talleres de prototipado y conferencias magistrales realizadas en CHARAL 2026.</p>
+                <h2 class="section-title">Keynotes</h2>
             </div>
 
-            <!-- Event Card 1: Keynote Speaker Dr. Enrique Cortés Rello -->
-            <div id="keynote" class="glass-card" style="border: 1px solid rgba(16, 185, 129, 0.45); background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(14, 165, 233, 0.08) 50%, rgba(12, 18, 34, 0.96) 100%); border-radius: 24px; padding: 36px; backdrop-filter: blur(16px); box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 35px rgba(16, 185, 129, 0.18); margin-bottom: 36px;">
-                <div class="event-card-grid">
+            <!-- Poster reel. Missing posters are mockups: replace each .reel-placeholder with
+                 <a class="reel-item poster" href="IMG" target="_blank" rel="noopener"><img src="IMG" alt="..." loading="lazy"></a> -->
+            <div class="reel" data-reel>
+                <button class="reel-nav reel-prev" type="button" aria-label="Previous poster"><i data-lucide="chevron-left"></i></button>
+                <div class="reel-track">
+                    <a class="reel-item poster" href="assets/images/keynote-enrique-cortes.jpg" target="_blank" rel="noopener" title="Open poster">
+                        <img src="assets/images/keynote-enrique-cortes.jpg" alt="Keynote poster: Dr. Enrique Cortés Rello, Director AI Hub, Tec de Monterrey" loading="lazy">
+                    </a>
+                    <div class="reel-item poster reel-placeholder">
+                        <i data-lucide="image"></i>
+                        <span class="ph-name">Anne Kjær Bathel</span>
+                        <span class="ph-note">Poster coming soon</span>
+                    </div>
+                    <div class="reel-item poster reel-placeholder">
+                        <i data-lucide="image"></i>
+                        <span class="ph-name">Roser Almenar</span>
+                        <span class="ph-note">Poster coming soon</span>
+                    </div>
+                </div>
+                <button class="reel-nav reel-next" type="button" aria-label="Next poster"><i data-lucide="chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Awards Section -->
+    <section id="awards" style="padding: 60px 0;">
+        <div class="container">
+            <div class="section-header">
+                <div class="badge">
+                    <i data-lucide="trophy" style="width: 14px; height: 14px;"></i>
+                    Awards
+                </div>
+                <h2 class="section-title">Challenge Winners</h2>
+                <p class="section-desc">Congratulations to the winning teams and to all five finalists.</p>
+            </div>
+
+            <!-- Winners reel. Screenshots are mockups: replace each .reel-placeholder
+                 with <img src="assets/images/winners/<project>.jpg" alt="..."> -->
+            <div class="reel" data-reel>
+                <button class="reel-nav reel-prev" type="button" aria-label="Previous winner"><i data-lucide="chevron-left"></i></button>
+                <div class="reel-track">
+                    <article class="reel-item winner-card">
+                        <div class="winner-shot reel-placeholder">
+                            <i data-lucide="monitor"></i>
+                            <span class="ph-note">Screenshot coming soon</span>
+                        </div>
+                        <div class="winner-body">
+                            <span class="winner-award"><i data-lucide="trophy"></i> Track 1 Winner</span>
+                            <h3>Cognita</h3>
+                            <p>Best Reviewer Tool</p>
+                        </div>
+                    </article>
+                    <article class="reel-item winner-card">
+                        <div class="winner-shot reel-placeholder">
+                            <i data-lucide="monitor"></i>
+                            <span class="ph-note">Screenshot coming soon</span>
+                        </div>
+                        <div class="winner-body">
+                            <span class="winner-award"><i data-lucide="trophy"></i> Track 2 Winner</span>
+                            <h3>Zeedodo</h3>
+                            <p>Best Learning Companion</p>
+                        </div>
+                    </article>
+                    <article class="reel-item winner-card">
+                        <div class="winner-shot reel-placeholder">
+                            <i data-lucide="monitor"></i>
+                            <span class="ph-note">Screenshot coming soon</span>
+                        </div>
+                        <div class="winner-body">
+                            <span class="winner-award"><i data-lucide="shield"></i> Ethics Distinction</span>
+                            <h3>CognitiveFlow</h3>
+                            <p>Best AI Governance</p>
+                        </div>
+                    </article>
+                </div>
+                <button class="reel-nav reel-next" type="button" aria-label="Next winner"><i data-lucide="chevron-right"></i></button>
+            </div>
+
+            <!-- RCS Publication Award Highlight Banner -->
+            <div class="glass-card" style="margin-top: 32px; border: 1px solid rgba(120, 200, 170, 0.4); background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(12, 18, 34, 0.95) 100%); border-radius: 24px; padding: 36px; backdrop-filter: blur(16px); box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(120, 200, 170, 0.15);">
+                <div class="rcs-grid">
                     <div style="text-align: center;">
-                        <img src="assets/images/keynote-enrique-cortes.jpg" alt="Keynote Speaker Dr. Enrique Cortés Rello" style="width: 100%; max-width: 340px; border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.2); box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6); object-fit: cover;">
+                        <img src="assets/images/rcs-award-publication.jpg" alt="RCS Journal Publication Award" style="width: 100%; max-width: 320px; border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.2); box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6); object-fit: cover;">
                     </div>
                     <div>
-                        <div class="badge" style="background: rgba(16, 185, 129, 0.2); border-color: rgba(16, 185, 129, 0.5); color: #4ade80; margin-bottom: 12px;">
-                            <i data-lucide="check-circle-2" style="width: 14px; height: 14px;"></i>
-                            Official Keynote Speaker · Sesión Realizada
+                        <div class="badge" style="background: rgba(16, 185, 129, 0.15); border-color: rgba(16, 185, 129, 0.4); color: #4ade80; margin-bottom: 12px;">
+                            <i data-lucide="book-open" style="width: 14px; height: 14px;"></i>
+                            Confirmed Publication Award
                         </div>
-                        <h2 style="font-family: var(--font-heading); font-size: 1.8rem; font-weight: 700; color: #fff; margin-bottom: 10px; line-height: 1.3;">
-                            Keynote: The AI Augmented Learner Challenge
-                        </h2>
-                        <div style="color: #4ade80; font-family: var(--font-heading); font-weight: 700; font-size: 1.25rem; margin-bottom: 4px; display: flex; align-items: center; gap: 8px;">
-                            <i data-lucide="user-check" style="width: 18px; height: 18px; color: var(--accent-cyan);"></i>
-                            Dr. Enrique Cortés Rello
-                        </div>
-                        <div style="margin-bottom: 16px; line-height: 1.5;">
-                            <div style="color: var(--accent-cyan); font-weight: 600; font-size: 0.95rem;">Director AI Hub (Tec de Monterrey)</div>
-                            <div style="color: #94a3b8; font-size: 0.9rem;">AI Top Business Leader (MIT Technology Review)</div>
-                        </div>
-                        <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 18px; line-height: 1.6;">
-                            Join visionary AI leader Dr. Enrique Cortés Rello as he addresses higher-order critical thinking, ethical cognition-first design, and the paradigm shift in artificial intelligence learning systems.
+                        <h3 style="font-family: var(--font-heading); font-size: 1.8rem; font-weight: 700; color: #fff; margin-bottom: 12px; line-height: 1.3;">
+                            Publication in <span style="color: var(--accent-cyan);">Research in Computing Science (RCS)</span>
+                        </h3>
+                        <p style="color: var(--text-secondary); font-size: 0.98rem; margin-bottom: 16px; line-height: 1.6;">
+                            Top-performing AI Learning Systems and outstanding research prototypes secure official academic publication inside the indexed journal <strong>Research in Computing Science (RCS - IPN)</strong>.
                         </p>
-                        <div style="display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 24px; color: var(--text-muted); font-size: 0.9rem; font-weight: 600;">
-                            <span style="display: flex; align-items: center; gap: 6px; color: #e2e8f0;">
-                                <i data-lucide="calendar" style="color: #4ade80; width: 16px; height: 16px;"></i>
-                                Thursday, November 5, 2026
-                            </span>
-                            <span style="display: flex; align-items: center; gap: 6px; color: #4ade80;">
-                                <i data-lucide="clock" style="color: #4ade80; width: 16px; height: 16px;"></i>
-                                09:00 – 09:50 AM CST
-                            </span>
-                            <span style="display: flex; align-items: center; gap: 6px; color: #e2e8f0;">
-                                <i data-lucide="video" style="color: #4ade80; width: 16px; height: 16px;"></i>
-                                Format: 100% Virtual
+                        <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; font-size: 0.85rem; color: #cbd5e1; font-weight: 600;">
+                            <span style="background: rgba(255,255,255,0.06); padding: 6px 14px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; gap: 6px;">
+                                <i data-lucide="award" style="color: #4ade80; width: 14px; height: 14px;"></i>
+                                IPN - Instituto Politécnico Nacional
                             </span>
                         </div>
-                        <div style="display: flex; gap: 14px; flex-wrap: wrap; align-items: center;">
-                            <a href="https://www.youtube.com/watch?v=2kbjrPhoxK4" target="_blank" rel="noopener" class="cta-btn" style="background: linear-gradient(135deg, rgba(239, 68, 68, 0.25) 0%, rgba(220, 38, 38, 0.35) 100%); border: 1px solid rgba(239, 68, 68, 0.6); color: #fff; box-shadow: 0 0 20px rgba(239, 68, 68, 0.25);">
-                                <i data-lucide="circle-play"></i>
-                                <span>Ver Conferencia en YouTube</span>
-                                <i data-lucide="external-link"></i>
-                            </a>
-                            <a href="https://luma.com/giclnbum" target="_blank" class="cta-btn" style="background: rgba(16, 185, 129, 0.2); border: 1px solid rgba(16, 185, 129, 0.45); color: #4ade80;">
-                                <i data-lucide="check-circle-2"></i>
-                                <span>Ver Evento en Luma</span>
-                                <i data-lucide="external-link"></i>
-                            </a>
-                            <span style="color: var(--text-muted); font-size: 0.85rem; display: flex; align-items: center; gap: 6px;">
-                                <i data-lucide="zap" style="color: var(--accent-cyan); width: 14px; height: 14px;"></i>
-                                Powered by alexandr.ia AI Learning Systems®
-                            </span>
+                        <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.4); padding: 10px 22px; border-radius: 30px; color: #4ade80; font-size: 0.92rem; font-weight: 600;">
+                            <i data-lucide="award" style="width: 16px; height: 16px;"></i>
+                            <span>Review &amp; Publication Process Underway (RCS - IPN)</span>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Event Card 2: Dino Osmanagic Live Prototyping Workshop -->
-            <div id="workshop" class="glass-card" style="border: 1px solid rgba(255, 107, 107, 0.4); background: linear-gradient(135deg, rgba(255, 107, 107, 0.08) 0%, rgba(12, 18, 34, 0.95) 100%); border-radius: 24px; padding: 36px; backdrop-filter: blur(16px); box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 107, 107, 0.15);">
-                <div class="event-card-grid">
-                    <div style="text-align: center;">
-                        <img src="assets/images/workshop-dino.jpg" alt="Workshop with Dino Osmanagić - Lovable Ambassador" style="width: 100%; max-width: 340px; border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.2); box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6); object-fit: cover;">
-                    </div>
-                    <div>
-                        <div class="badge" style="background: rgba(255, 107, 107, 0.2); border-color: rgba(255, 107, 107, 0.5); color: #ff7676; margin-bottom: 12px;">
-                            <i data-lucide="check-circle-2" style="width: 14px; height: 14px;"></i>
-                            Live Prototyping Workshop · Sesión Realizada
-                        </div>
-                        <h2 style="font-family: var(--font-heading); font-size: 1.8rem; font-weight: 700; color: #fff; margin-bottom: 12px; line-height: 1.3;">
-                            Rapid Prototyping for AI-Augmented Learning with Lovable
-                        </h2>
-                        <p style="color: var(--accent-cyan); font-weight: 700; font-size: 1.05rem; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
-                            <i data-lucide="user-check" style="width: 18px; height: 18px; color: #ff7676;"></i>
-                            Dino Osmanagić · Lovable Ambassador
-                        </p>
-                        <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 18px; line-height: 1.6;">
-                            Hands-on workshop focused on rapid prototyping and technical deployment for AI-augmented learning architectures. Sesión concluida con éxito.
-                        </p>
-                        <div style="display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 24px; color: var(--text-muted); font-size: 0.9rem; font-weight: 600;">
-                            <span style="display: flex; align-items: center; gap: 6px; color: #e2e8f0;">
-                                <i data-lucide="calendar" style="color: #ff7676; width: 16px; height: 16px;"></i>
-                                Monday, Oct 12
-                            </span>
-                            <span style="display: flex; align-items: center; gap: 6px; color: #e2e8f0;">
-                                <i data-lucide="clock" style="color: #ff7676; width: 16px; height: 16px;"></i>
-                                19:00 CEST / 11:00 AM CST
-                            </span>
-                            <span style="display: flex; align-items: center; gap: 6px; color: #e2e8f0;">
-                                <i data-lucide="video" style="color: #ff7676; width: 16px; height: 16px;"></i>
-                                Online Session
-                            </span>
-                        </div>
-                        <div style="display: flex; gap: 14px; flex-wrap: wrap;">
-                            <a href="https://luma.com/loqupv5b" target="_blank" class="cta-btn" style="background: rgba(255, 107, 107, 0.2); border: 1px solid rgba(255, 107, 107, 0.4); color: #ff7676;">
-                                <i data-lucide="check-circle-2"></i>
-                                <span>Ver en Luma</span>
-                                <i data-lucide="external-link"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
 
@@ -1436,60 +1621,30 @@
     <section id="recording" style="padding: 60px 0;">
         <div class="container">
             <div class="section-header">
-                <div class="badge">
-                    <i data-lucide="video" style="width: 14px; height: 14px;"></i>
-                    Recorded Sessions &amp; Conferences
-                </div>
-                <h2 class="section-title">Final Conference &amp; Event Showcase</h2>
-                <p class="section-desc">Watch the complete official conference and live presentations from CHARAL 2026 held at MICAI 2026, featuring the keynote address, finalist prototype demos, and announcements.</p>
+                <h2 class="section-title">Recorded Session &amp; Conference</h2>
+                <p class="section-desc">The full official final conference of CHARAL 2026 at MICAI 2026: keynotes, finalist demos and the winners announcement.</p>
             </div>
 
-            <!-- Primary Featured Video: Final Conference (Nov 5, 2026) -->
-            <div class="video-embed-card" style="margin-bottom: 36px; border-color: rgba(16, 185, 129, 0.45); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 35px rgba(16, 185, 129, 0.18);">
-                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 14px; padding: 4px 8px;">
-                    <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
-                        <span class="badge" style="background: rgba(16, 185, 129, 0.2); border-color: rgba(16, 185, 129, 0.5); color: #4ade80; margin: 0;">
-                            <i data-lucide="award" style="width: 14px; height: 14px;"></i>
-                            Official Final Conference · MICAI 2026
-                        </span>
-                        <span style="color: var(--text-muted); font-size: 0.88rem; font-weight: 500;">
-                            Thursday, November 5, 2026
-                        </span>
-                    </div>
-                    <div style="display: flex; gap: 10px; align-items: center;">
-                        <a href="https://www.youtube.com/watch?v=2kbjrPhoxK4" target="_blank" rel="noopener" style="color: #f87171; text-decoration: none; font-size: 0.88rem; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; background: rgba(239, 68, 68, 0.12); border: 1px solid rgba(239, 68, 68, 0.35); padding: 6px 14px; border-radius: 20px; transition: all 0.2s ease;">
-                            <i data-lucide="external-link" style="width: 14px; height: 14px;"></i>
-                            <span>Abrir en YouTube</span>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Interactive High-Def Video Preview Card -->
-                <a href="https://www.youtube.com/watch?v=2kbjrPhoxK4" target="_blank" rel="noopener" class="video-preview-wrapper" title="Ver Conferencia Final en YouTube">
-                    <img src="assets/images/thumbnail-final-conference.jpg" alt="CHARAL 2026: Conferencia Final en MICAI 2026" class="video-preview-img" loading="lazy">
+            <div class="video-embed-card" style="border-color: rgba(16, 185, 129, 0.45); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 35px rgba(16, 185, 129, 0.18);">
+                <a href="https://www.youtube.com/watch?v=2kbjrPhoxK4" target="_blank" rel="noopener" class="video-preview-wrapper" title="Watch the Final Conference on YouTube">
+                    <img src="assets/images/thumbnail-final-conference.jpg" alt="CHARAL 2026 Final Conference at MICAI 2026" class="video-preview-img" loading="lazy">
                     <div class="video-preview-overlay">
                         <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 10px;">
                             <span class="badge" style="background: rgba(239, 68, 68, 0.9); color: #fff; border-color: rgba(255, 255, 255, 0.3); backdrop-filter: blur(8px); margin: 0; font-weight: 700; font-size: 0.8rem; letter-spacing: 0.04em;">
                                 <i data-lucide="youtube" style="width: 14px; height: 14px;"></i>
-                                YouTube Official Recording
+                                YouTube
                             </span>
                             <span style="background: rgba(0,0,0,0.7); color: #e2e8f0; font-size: 0.82rem; font-weight: 600; padding: 4px 12px; border-radius: 20px; backdrop-filter: blur(6px); border: 1px solid rgba(255,255,255,0.15);">
                                 MICAI 2026 · Nov 5, 2026
                             </span>
                         </div>
-                        <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 12px;">
-                            <div>
-                                <h3 style="font-family: var(--font-heading); font-size: 1.35rem; font-weight: 700; color: #ffffff; margin-bottom: 4px; text-shadow: 0 2px 10px rgba(0,0,0,0.85);">
-                                    CHARAL 2026: The AI Augmented Learner Challenge
-                                </h3>
-                                <p style="color: #cbd5e1; font-size: 0.92rem; margin: 0; text-shadow: 0 2px 8px rgba(0,0,0,0.85);">
-                                    Conferencia Magistral, Ponencias de Finalistas y Sesión de Clausura
-                                </p>
-                            </div>
-                            <span style="color: #4ade80; font-size: 0.88rem; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; background: rgba(16, 185, 129, 0.25); border: 1px solid rgba(16, 185, 129, 0.5); padding: 7px 16px; border-radius: 20px; backdrop-filter: blur(8px);">
-                                <i data-lucide="external-link" style="width: 14px; height: 14px;"></i>
-                                Ver en YouTube
-                            </span>
+                        <div>
+                            <h3 style="font-family: var(--font-heading); font-size: 1.35rem; font-weight: 700; color: #ffffff; margin-bottom: 4px; text-shadow: 0 2px 10px rgba(0,0,0,0.85);">
+                                CHARAL 2026: The AI Augmented Learner Challenge
+                            </h3>
+                            <p style="color: #cbd5e1; font-size: 0.92rem; margin: 0; text-shadow: 0 2px 8px rgba(0,0,0,0.85);">
+                                Keynotes, finalist showcase and closing ceremony
+                            </p>
                         </div>
                     </div>
                     <div class="video-preview-center">
@@ -1498,61 +1653,10 @@
                         </div>
                         <div class="video-play-label">
                             <i data-lucide="circle-play" style="width: 18px; height: 18px;"></i>
-                            <span>Ver Conferencia Final en YouTube</span>
+                            <span>Watch the Final Conference</span>
                         </div>
                     </div>
                 </a>
-
-                <div style="margin-top: 18px; display: flex; justify-content: center;">
-                    <a href="https://www.youtube.com/watch?v=2kbjrPhoxK4" target="_blank" rel="noopener" class="cta-btn" style="background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%); color: #fff; padding: 14px 34px; font-size: 1.05rem; box-shadow: 0 0 30px rgba(239, 68, 68, 0.45); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 30px; display: inline-flex; align-items: center; gap: 10px; font-weight: 700; text-decoration: none; transition: transform 0.25s ease, box-shadow 0.25s ease;" onmouseover="this.style.transform='scale(1.03)';" onmouseout="this.style.transform='scale(1)';">
-                        <i data-lucide="circle-play" style="width: 22px; height: 22px;"></i>
-                        <span>▶ Ver Conferencia Final en YouTube</span>
-                        <i data-lucide="external-link" style="width: 16px; height: 16px;"></i>
-                    </a>
-                </div>
-
-                <div style="margin-top: 16px; padding: 12px 14px 4px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; border-top: 1px solid rgba(255, 255, 255, 0.08);">
-                    <div style="color: var(--text-secondary); font-size: 0.92rem; line-height: 1.5;">
-                        <strong style="color: #fff;">Featured Highlights:</strong> Keynote por el <strong>Dr. Enrique Cortés Rello</strong> (Director AI Hub Tec de Monterrey), demostraciones de prototipos finalistas, evaluación de pares y anuncios oficiales.
-                    </div>
-                    <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
-                        <a href="https://streamyard.com/watch/VJB7ktSK4i7b" target="_blank" rel="noopener" style="color: var(--text-muted); font-size: 0.84rem; text-decoration: none; display: flex; align-items: center; gap: 5px;">
-                            <i data-lucide="monitor-play" style="width: 14px; height: 14px;"></i> StreamYard
-                        </a>
-                        <span style="color: rgba(255,255,255,0.2);">•</span>
-                        <a href="https://lnkd.in/e592qp-H" target="_blank" rel="noopener" style="color: var(--text-muted); font-size: 0.84rem; text-decoration: none; display: flex; align-items: center; gap: 5px;">
-                            <i data-lucide="briefcase" style="width: 14px; height: 14px;"></i> LinkedIn
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Secondary Video: Workshop Presentation & Briefing -->
-            <div class="video-embed-card" style="background: rgba(12, 16, 30, 0.65); border: 1px solid rgba(255, 255, 255, 0.12); box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);">
-                <div style="margin-bottom: 12px; padding: 4px 8px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
-                    <div>
-                        <span class="badge" style="background: rgba(6, 182, 212, 0.15); border-color: rgba(6, 182, 212, 0.4); color: var(--accent-cyan); margin: 0 0 6px 0;">
-                            <i data-lucide="info" style="width: 13px; height: 13px;"></i>
-                            Kickoff &amp; Challenge Briefing
-                        </span>
-                        <h4 style="font-family: var(--font-heading); font-size: 1.15rem; color: #fff; margin: 4px 0 0;">
-                            Workshop Presentation &amp; Rules Overview
-                        </h4>
-                    </div>
-                    <a href="https://www.youtube.com/watch?v=QEOzzR29kGk" target="_blank" rel="noopener" style="color: var(--text-secondary); text-decoration: none; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 6px;">
-                        <span>Ver en YouTube</span>
-                        <i data-lucide="external-link" style="width: 13px; height: 13px;"></i>
-                    </a>
-                </div>
-
-                <div class="video-responsive">
-                    <iframe 
-                        src="https://www.youtube-nocookie.com/embed/QEOzzR29kGk?rel=0" 
-                        title="CHARAL 2026 Workshop Recording" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                        allowfullscreen>
-                    </iframe>
-                </div>
             </div>
         </div>
     </section>
@@ -1658,10 +1762,10 @@
             <div class="section-header">
                 <div class="badge" style="background: rgba(248, 113, 113, 0.15); border-color: rgba(248, 113, 113, 0.4); color: #f87171;">
                     <i data-lucide="lock" style="width: 14px; height: 14px;"></i>
-                    Convocatoria Concluida / Closed
+                    Submissions Closed
                 </div>
                 <h2 class="section-title">Submission Requirements</h2>
-                <p class="section-desc">La convocatoria oficial para entrega de prototipos cerró el 31 de octubre de 2026. Agradecemos profundamente a todos los equipos, investigadores e instituciones que enviaron sus propuestas técnicas y documentación de gobernanza.</p>
+                <p class="section-desc">Submissions closed on October 31, 2026. Every entry had to include these four artifacts.</p>
             </div>
 
             <div class="submission-grid">
@@ -1681,13 +1785,6 @@
                     <h4>4. Governance Document</h4>
                     <p>A 3–5 page PDF detailing prompts, guardrails, human-in-the-loop controls, PII privacy, and bias mitigation.</p>
                 </div>
-            </div>
-            <div style="display: flex; flex-direction: column; align-items: center; gap: 10px; margin-top: 36px;">
-                <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.18); border-radius: 30px; padding: 12px 28px; color: #94a3b8; font-weight: 600; font-size: 0.95rem; display: inline-flex; align-items: center; gap: 8px;">
-                    <i data-lucide="lock" style="width: 16px; height: 16px; color: #f87171;"></i>
-                    <span>Recepción de Prototipos Concluida</span>
-                </div>
-                <span style="font-size: 0.9rem; color: #4ade80; font-weight: 600;">¡Muchas gracias a todos los participantes por sus extraordinarios proyectos!</span>
             </div>
         </div>
     </section>
@@ -1735,74 +1832,6 @@
                         </tr>
                     </tbody>
                 </table>
-            </div>
-        </div>
-    </section>
-
-    <!-- Awards Section -->
-    <section id="awards">
-        <div class="container">
-            <div class="section-header">
-                <div class="badge">
-                    <i data-lucide="trophy" style="width: 14px; height: 14px;"></i>
-                    Recognition
-                </div>
-                <h2 class="section-title">Challenge Awards</h2>
-                <p class="section-desc">Distinction and recognition awarded to top-performing research prototypes.</p>
-            </div>
-
-            <!-- RCS Publication Award Highlight Banner -->
-            <div class="glass-card" style="margin-bottom: 40px; border: 1px solid rgba(120, 200, 170, 0.4); background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(12, 18, 34, 0.95) 100%); border-radius: 24px; padding: 36px; backdrop-filter: blur(16px); box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(120, 200, 170, 0.15);">
-                <div style="display: grid; grid-template-columns: 1fr 1.3fr; gap: 36px; align-items: center;">
-                    <div style="text-align: center;">
-                        <img src="assets/images/rcs-award-publication.jpg" alt="RCS Journal Publication Award" style="width: 100%; max-width: 320px; border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.2); box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6); object-fit: cover;">
-                    </div>
-                    <div>
-                        <div class="badge" style="background: rgba(16, 185, 129, 0.15); border-color: rgba(16, 185, 129, 0.4); color: #4ade80; margin-bottom: 12px;">
-                            <i data-lucide="book-open" style="width: 14px; height: 14px;"></i>
-                            Confirmed Publication Award
-                        </div>
-                        <h3 style="font-family: var(--font-heading); font-size: 1.8rem; font-weight: 700; color: #fff; margin-bottom: 12px; line-height: 1.3;">
-                            Publication in <span style="color: var(--accent-cyan);">Research in Computing Science (RCS)</span>
-                        </h3>
-                        <p style="color: var(--text-secondary); font-size: 0.98rem; margin-bottom: 16px; line-height: 1.6;">
-                            Top-performing AI Learning Systems and outstanding research prototypes secure official academic publication inside the indexed journal <strong>Research in Computing Science (RCS - IPN)</strong>.
-                        </p>
-                        <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; font-size: 0.85rem; color: #cbd5e1; font-weight: 600;">
-                            <span style="background: rgba(255,255,255,0.06); padding: 6px 14px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; gap: 6px;">
-                                <i data-lucide="award" style="color: #4ade80; width: 14px; height: 14px;"></i>
-                                IPN - Instituto Politécnico Nacional
-                            </span>
-                        </div>
-                        <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.4); padding: 10px 22px; border-radius: 30px; color: #4ade80; font-size: 0.92rem; font-weight: 600;">
-                            <i data-lucide="award" style="width: 16px; height: 16px;"></i>
-                            <span>Evaluación y Publicación en Proceso (RCS - IPN)</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="awards-grid">
-                <div class="glass-card award-card">
-                    <div class="award-icon-box"><i data-lucide="award"></i></div>
-                    <h4>Track 1 Winner</h4>
-                    <p>Best Reviewer Tool</p>
-                </div>
-                <div class="glass-card award-card">
-                    <div class="award-icon-box"><i data-lucide="award"></i></div>
-                    <h4>Track 2 Winner</h4>
-                    <p>Best Learning Companion</p>
-                </div>
-                <div class="glass-card award-card">
-                    <div class="award-icon-box"><i data-lucide="shield"></i></div>
-                    <h4>Ethics Distinction</h4>
-                    <p>Best AI Governance</p>
-                </div>
-                <div class="glass-card award-card">
-                    <div class="award-icon-box"><i data-lucide="heart"></i></div>
-                    <h4>Impact Distinction</h4>
-                    <p>Best Social Impact</p>
-                </div>
             </div>
         </div>
     </section>
@@ -1981,6 +2010,29 @@
         const glow = document.getElementById('glow-follower');
         window.addEventListener('mousemove', (e) => {
             glow.style.transform = `translate(${e.clientX - 300}px, ${e.clientY - 300}px)`;
+        });
+
+        // Reels: show the prev/next arrows only when the track overflows
+        document.querySelectorAll('[data-reel]').forEach((reel) => {
+            const track = reel.querySelector('.reel-track');
+            const prev = reel.querySelector('.reel-prev');
+            const next = reel.querySelector('.reel-next');
+            const update = () => {
+                const max = track.scrollWidth - track.clientWidth;
+                reel.classList.toggle('is-scrollable', max > 4);
+                prev.disabled = track.scrollLeft <= 4;
+                next.disabled = track.scrollLeft >= max - 4;
+            };
+            const step = () => {
+                const item = track.querySelector('.reel-item');
+                return item ? item.getBoundingClientRect().width + 24 : track.clientWidth * 0.8;
+            };
+            prev.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: 'smooth' }));
+            next.addEventListener('click', () => track.scrollBy({ left: step(), behavior: 'smooth' }));
+            track.addEventListener('scroll', update, { passive: true });
+            window.addEventListener('resize', update);
+            window.addEventListener('load', update);
+            update();
         });
 
         // Mobile Menu Toggle
