@@ -1166,43 +1166,21 @@
             display: block;
         }
 
-        /* Mockup placeholder: swap for the real image when it is available */
-        .reel-placeholder {
+        /* Winners & finalists: centered rows (3 winners on top, 2 finalists below) */
+        .finalists-row {
             display: flex;
-            flex-direction: column;
-            align-items: center;
+            flex-wrap: wrap;
             justify-content: center;
-            gap: 10px;
-            padding: 24px;
-            text-align: center;
-            border: 1px dashed rgba(120, 200, 170, 0.45);
-            background: linear-gradient(160deg, rgba(16, 185, 129, 0.12) 0%, rgba(12, 18, 34, 0.92) 65%);
-            color: var(--text-muted);
+            gap: 24px;
         }
 
-        .reel-placeholder svg {
-            width: 36px;
-            height: 36px;
-            color: var(--accent-cyan);
-            opacity: 0.75;
-        }
-
-        .ph-name {
-            font-family: var(--font-heading);
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--text-primary);
-        }
-
-        .ph-note {
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
+        .finalists-row + .finalists-row {
+            margin-top: 24px;
         }
 
         .winner-card {
-            width: min(340px, 80vw);
+            width: 100%;
+            max-width: 360px;
             border-radius: 18px;
             overflow: hidden;
             background: var(--bg-card);
@@ -1217,13 +1195,9 @@
         }
 
         .winner-shot {
-            aspect-ratio: 16 / 10;
+            aspect-ratio: 16 / 9;
             background: rgba(0, 0, 0, 0.35);
-        }
-
-        .winner-shot.reel-placeholder {
-            border: 0;
-            border-bottom: 1px dashed rgba(120, 200, 170, 0.35);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         .winner-shot img {
@@ -1253,6 +1227,10 @@
             height: 14px;
         }
 
+        .winner-award.is-finalist {
+            color: var(--accent-cyan);
+        }
+
         .winner-body h3 {
             font-family: var(--font-heading);
             font-size: 1.5rem;
@@ -1263,6 +1241,19 @@
         .winner-body p {
             color: var(--text-secondary);
             font-size: 0.95rem;
+        }
+
+        .rcs-invited {
+            margin: 0 0 20px 20px;
+            color: var(--text-primary);
+            font-family: var(--font-heading);
+            font-size: 1.05rem;
+            font-weight: 600;
+            line-height: 1.8;
+        }
+
+        .rcs-invited li::marker {
+            color: var(--accent-cyan);
         }
 
         .rcs-grid {
@@ -1539,50 +1530,54 @@
                     <i data-lucide="trophy" style="width: 14px; height: 14px;"></i>
                     Awards
                 </div>
-                <h2 class="section-title">Challenge Winners</h2>
+                <h2 class="section-title">Winners &amp; Finalists</h2>
                 <p class="section-desc">Congratulations to the winning teams and to all five finalists.</p>
             </div>
 
-            <!-- Winners reel. Screenshots are mockups: replace each .reel-placeholder
-                 with <img src="assets/2026/<project>-winner.jpg" alt="..."> -->
-            <div class="reel" data-reel>
-                <button class="reel-nav reel-prev" type="button" aria-label="Previous winner"><i data-lucide="chevron-left"></i></button>
-                <div class="reel-track">
-                    <article class="reel-item winner-card">
-                        <div class="winner-shot reel-placeholder">
-                            <i data-lucide="monitor"></i>
-                            <span class="ph-note">Screenshot coming soon</span>
-                        </div>
-                        <div class="winner-body">
-                            <span class="winner-award"><i data-lucide="trophy"></i> Track 1 Winner</span>
-                            <h3>Cognita</h3>
-                            <p>Best Reviewer Tool</p>
-                        </div>
-                    </article>
-                    <article class="reel-item winner-card">
-                        <div class="winner-shot reel-placeholder">
-                            <i data-lucide="monitor"></i>
-                            <span class="ph-note">Screenshot coming soon</span>
-                        </div>
-                        <div class="winner-body">
-                            <span class="winner-award"><i data-lucide="trophy"></i> Track 2 Winner</span>
-                            <h3>Zeedodo</h3>
-                            <p>Best Learning Companion</p>
-                        </div>
-                    </article>
-                    <article class="reel-item winner-card">
-                        <div class="winner-shot reel-placeholder">
-                            <i data-lucide="monitor"></i>
-                            <span class="ph-note">Screenshot coming soon</span>
-                        </div>
-                        <div class="winner-body">
-                            <span class="winner-award"><i data-lucide="shield"></i> Ethics Distinction</span>
-                            <h3>CognitiveFlow</h3>
-                            <p>Best AI Governance</p>
-                        </div>
-                    </article>
-                </div>
-                <button class="reel-nav reel-next" type="button" aria-label="Next winner"><i data-lucide="chevron-right"></i></button>
+            <!-- Winners (top row) -->
+            <div class="finalists-row">
+                <article class="winner-card">
+                    <div class="winner-shot"><img src="assets/2026/finalist-cognita.png" alt="Cognita prototype screenshot" loading="lazy"></div>
+                    <div class="winner-body">
+                        <span class="winner-award"><i data-lucide="trophy"></i> Track 1 Winner</span>
+                        <h3>Cognita</h3>
+                        <p>Best Reviewer Tool</p>
+                    </div>
+                </article>
+                <article class="winner-card">
+                    <div class="winner-shot"><img src="assets/2026/finalist-zeedodo.png" alt="Zeedodo prototype screenshot" loading="lazy"></div>
+                    <div class="winner-body">
+                        <span class="winner-award"><i data-lucide="trophy"></i> Track 2 Winner</span>
+                        <h3>Zeedodo</h3>
+                        <p>Best Learning Companion</p>
+                    </div>
+                </article>
+                <article class="winner-card">
+                    <div class="winner-shot"><img src="assets/2026/finalist-cognitive-flow-ai.png" alt="CognitiveFlow prototype screenshot" loading="lazy"></div>
+                    <div class="winner-body">
+                        <span class="winner-award"><i data-lucide="shield"></i> Ethics Distinction</span>
+                        <h3>CognitiveFlow</h3>
+                        <p>Best AI Governance</p>
+                    </div>
+                </article>
+            </div>
+
+            <!-- Other finalists (second row) -->
+            <div class="finalists-row">
+                <article class="winner-card">
+                    <div class="winner-shot"><img src="assets/2026/finalist-agoramx.png" alt="AgoraMX prototype screenshot" loading="lazy"></div>
+                    <div class="winner-body">
+                        <span class="winner-award is-finalist"><i data-lucide="star"></i> Finalist</span>
+                        <h3>AgoraMX</h3>
+                    </div>
+                </article>
+                <article class="winner-card">
+                    <div class="winner-shot"><img src="assets/2026/finalist-tip-reasoning.png" alt="TIP Reasoning prototype screenshot" loading="lazy"></div>
+                    <div class="winner-body">
+                        <span class="winner-award is-finalist"><i data-lucide="star"></i> Finalist</span>
+                        <h3>TIP Reasoning</h3>
+                    </div>
+                </article>
             </div>
 
             <!-- RCS Publication Award Highlight Banner -->
@@ -1602,6 +1597,12 @@
                         <p style="color: var(--text-secondary); font-size: 0.98rem; margin-bottom: 16px; line-height: 1.6;">
                             Top-performing AI Learning Systems and outstanding research prototypes secure official academic publication inside the indexed journal <strong>Research in Computing Science (RCS - IPN)</strong>.
                         </p>
+                        <p style="color: #e2e8f0; font-size: 0.98rem; font-weight: 600; margin-bottom: 8px;">Teams invited to submit a paper:</p>
+                        <ul class="rcs-invited">
+                            <li>Zeedodo</li>
+                            <li>CognitiveFlow</li>
+                            <li>AgoraMX</li>
+                        </ul>
                         <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; font-size: 0.85rem; color: #cbd5e1; font-weight: 600;">
                             <span style="background: rgba(255,255,255,0.06); padding: 6px 14px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; gap: 6px;">
                                 <i data-lucide="award" style="color: #4ade80; width: 14px; height: 14px;"></i>
